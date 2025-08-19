@@ -1,0 +1,108 @@
+C51 COMPILER V9.60.7.0   TMR                                                               08/18/2025 16:17:57 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TMR
+OBJECT MODULE PLACED IN .\Objects\tmr.obj
+COMPILER INVOKED BY: D:\keil5C51\C51\BIN\C51.EXE tmr.c ROM(COMPACT) OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\
+                    -Listings\tmr.lst) OBJECT(.\Objects\tmr.obj)
+
+line level    source
+
+   1          #include "SN8F5702.H"
+   2          #include "tmr.h"
+   3          
+   4          /*  T0 tmr  */
+   5          #define T0Mode0     0 << 0    //T0 mode0,13bit counter
+   6          #define T0Mode1     1 << 0    //T0 mode1,16bit counter
+   7          #define T0Mode2     2 << 0    //T0 mode2,8bit auto-reload counter
+   8          #define T0Mode3     3 << 0    //T0 mode3,T0 two 8bit counter / T1 no flag
+   9          #define T0Gate      8 << 0    //T0 gating clock by INT0
+  10          #define T0ClkFcpu   0 << 0    //T0 clock source from Fcpu / 12
+  11          #define T0ClkExt    4 << 0    //T0 clock source from Fosc or FRTC
+  12          #define T0ExtFosc   0 << 4    //T0 clock source from Fosc
+  13          #define T0ExtFRTC   8 << 4    //T0 clock source from FRTC
+  14          
+  15          
+  16          /*  T1 tmr  */
+  17          #define T1Mode0     0 << 4    //T1 mode0,13bit counter
+  18          #define T1Mode1     1 << 4    //T1 mode1,16bit counter
+  19          #define T1Mode2     2 << 4    //T1 mode2,8bit auto-reload counter
+  20          #define T1Mode3     3 << 4    //T1 mode3,T1 stop
+  21          #define T1Gate      8 << 4    //T1 gating clock by INT1
+  22          #define T1ClkFcpu   0 << 4    //T1 clock source from Fcpu / 12
+  23          #define T1ExtFosc   4 << 4    //T1 clock source from Fosc
+  24          
+  25          
+  26          void InitT0(void)
+  27          {
+  28   1              //T0 Initial 从0x00开始计数
+  29   1              TH0 = 0x00;
+  30   1              TL0 = 0x00;
+  31   1              
+  32   1              //T0 mode1,16bit counter & Fcpu/12
+  33   1              TMOD |= T0Mode1 | T0ClkFcpu;
+  34   1              
+  35   1              //T0 enable & Clear TF0
+  36   1              TR0 = 1;
+  37   1              TF0 = 0;
+  38   1              
+  39   1              //enable T0 interrupt
+  40   1              ET0 = 1;
+  41   1              //enable total interrupt
+  42   1              EAL = 1;
+  43   1              
+  44   1      }
+  45          
+  46          void InitT1(void)
+  47          {       
+  48   1              //T1 mode1,16bit counter & Fcpu/12
+  49   1              TMOD |= T1Mode1 | T1ClkFcpu;
+  50   1              
+  51   1              //T1 enable & Clear TF0
+  52   1              TR1 = 1;
+  53   1              TF1 = 0;
+  54   1      
+C51 COMPILER V9.60.7.0   TMR                                                               08/18/2025 16:17:57 PAGE 2   
+
+  55   1              //从初值55536开始计数
+  56   1              TH1 = (65536 - 10000) / 256;
+  57   1              TL1 = (65536 - 10000) % 256;
+  58   1      
+  59   1              //低优先级
+  60   1              IP0 &= ~(1 << 3);
+  61   1              IP1 &= ~(1 << 3);
+  62   1              
+  63   1              //enable T1 interrupt
+  64   1              ET1 = 1;
+  65   1              //enable total interrupt
+  66   1              EAL = 1;
+  67   1      }
+  68          
+  69          
+  70          
+  71          
+  72          void StartT0(void)
+  73          {
+  74   1              TR0 = 1;
+  75   1              ET0 = 1;
+  76   1      }
+  77          
+  78          void StopT0(void)
+  79          {
+  80   1              TR0 = 0;
+  81   1              ET0 = 0;
+  82   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     52    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

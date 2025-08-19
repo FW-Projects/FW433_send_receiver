@@ -1,0 +1,74 @@
+C51 COMPILER V9.60.7.0   ADZH_10                                                           05/16/2025 09:35:07 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE ADZH_10
+OBJECT MODULE PLACED IN .\Objects\adzh_10.obj
+COMPILER INVOKED BY: D:\keil5C51\C51\BIN\C51.EXE adzh_10.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\
+                    -adzh_10.lst) OBJECT(.\Objects\adzh_10.obj)
+
+line level    source
+
+   1          /*
+   2           ADC转换函数：10位AD转换精度，高8位，低2位，入口参数：uchar adio_asf为AD模拟功能控制脚位，
+   3                  
+   4          */
+   5          #include <stdio.h>
+   6          #include <SN8F5702.h>
+   7          #define ADCEn  0x80
+   8          #define EADC (0 << 3) //关闭ADC中断
+   9          #define ADCStart  0xc0
+  10          #define ad_flag 0x50
+  11          #define ClearEOC 0x8f
+  12          #define uchar unsigned char
+  13          #define uint unsigned int
+  14          ADC_S(void);
+  15          adc_value_10(uchar inp_n)//10次ＡＤ求平均值
+  16          {
+  17   1              uint adn=0;
+  18   1              uint sum=0;
+  19   1              uint min=0xffff;
+  20   1              uint max=0;
+  21   1              uint av_data=0;
+  22   1              uint ad10_data[10];//定义无符号整形数组
+  23   1        ADM= ADCEn | inp_n;
+  24   1        ADR= 0x50;    // 250K转换频率
+  25   1        VREFH = 0x07;/*IEN0 |= 0x80; //enable global interrupt*/
+  26   1        IEN2 |= EADC;     //关闭中断ad
+  27   1        for(adn=0;adn<10;adn++)
+  28   1              {
+  29   2                      ad10_data[adn]=ADC_S();         //调用AD转换并赋值
+  30   2                      if(max<ad10_data[adn]) max=ad10_data[adn];//求最大
+  31   2                      if(min>ad10_data[adn]) min=ad10_data[adn];//求最小
+  32   2                      sum+=ad10_data[adn];//求和
+  33   2              }       
+  34   1              ADM&= ClearEOC;
+  35   1        av_data=(sum-min-max)/8;//去掉最大值，去掉最小值，求平均
+  36   1              return(av_data);//返回平均值    
+  37   1      }
+  38          ADC_S(void)
+  39          {
+  40   1       uint ADCBuffer=0;
+  41   1       ADM |= ADCStart;  //转换开始
+  42   1       while(ADM&ad_flag);  //等待结束        
+  43   1       ADCBuffer = (ADB << 4) + (ADR &0x0F);
+  44   1       ADCBuffer>>=2;
+  45   1       ADM&= ClearEOC;
+  46   1       return (ADCBuffer);
+  47   1      }
+  48          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    206    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+C51 COMPILER V9.60.7.0   ADZH_10                                                           05/16/2025 09:35:07 PAGE 2   
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      30
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

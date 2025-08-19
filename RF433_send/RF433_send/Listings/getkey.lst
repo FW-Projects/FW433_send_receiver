@@ -1,0 +1,148 @@
+C51 COMPILER V9.60.7.0   GETKEY                                                            08/18/2025 16:17:57 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE GETKEY
+OBJECT MODULE PLACED IN .\Objects\getkey.obj
+COMPILER INVOKED BY: D:\keil5C51\C51\BIN\C51.EXE getkey.c ROM(COMPACT) OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT
+                    -(.\Listings\getkey.lst) OBJECT(.\Objects\getkey.obj)
+
+line level    source
+
+   1          #include <SN8F5702.H>
+   2          #include "getkey.h"
+   3          #define uchar unsigned char
+   4          #define uint unsigned int
+   5          sbit key_01 = P0 ^ 2;
+   6          sbit key_02 = P0 ^ 7;
+   7          sbit key_03 = P1 ^ 3;
+   8          sbit key_04 = P1 ^ 4;
+   9          sbit key_05 = P2 ^ 0;
+  10          sbit key_06 = P0 ^ 6;
+  11          sbit key_07 = P0 ^ 1;
+  12          sbit key_08 = P0 ^ 0;
+  13          sbit key_09 = P0 ^ 5;
+  14          uint8_t key_stat = 1;
+  15          
+  16          volatile uint8_t inkey_number = 0; // 保存按键代号值
+  17          volatile uint16_t key_time = 0, last_temp;
+  18          
+  19          uint8_t key_scan(void)
+  20          {
+  21   1              if(key_05 == 0 && key_08 == 0)
+  22   1                      return (key_clear);
+  23   1              if (key_01 == 0)
+  24   1                      return (key_air_up); 
+  25   1              if (key_02 == 0)
+  26   1                      return (key_temp_down);
+  27   1              if (key_03 == 0)
+  28   1                      return (key_temp_up);
+  29   1              if (key_04 == 0)
+  30   1                      return (key_ch3);
+  31   1              if (key_05 == 0)
+  32   1                      return (key_ch1); 
+  33   1              if (key_06 == 0)
+  34   1                      return (key_confirm);
+  35   1              if (key_07 == 0)
+  36   1                      return (key_ch4);
+  37   1              if (key_08 == 0)
+  38   1                      return (key_ch2);
+  39   1              if (key_09 == 0)
+  40   1                      return (key_air_down);
+  41   1              return (key_null); 
+  42   1      }                               
+  43          
+  44                  uint8_t key_temp = 0;  //
+  45          get_key(void) // 扫描键盘
+  46          {
+  47   1              key_temp = key_scan(); // 获取哪个键按下
+  48   1              switch (key_stat)
+  49   1              {
+  50   2              case (key_init):
+  51   2                      if (key_null != key_temp)
+  52   2                              key_stat = key_wobble;
+  53   2                      break;
+  54   2              case (key_wobble):
+C51 COMPILER V9.60.7.0   GETKEY                                                            08/18/2025 16:17:57 PAGE 2   
+
+  55   2                      key_stat = key_press;
+  56   2                      break;
+  57   2              case (key_press):
+  58   2              {
+  59   3                      if (key_null != key_temp)
+  60   3                      {
+  61   4                              inkey_number = key_temp; // 保存健值s
+  62   4                              last_temp = key_temp;
+  63   4                              key_temp = keydown_ent;  // 确认按按下
+  64   4                              key_stat = keylong_stat; // 定位到长键检测
+  65   4                      }
+  66   3                      else
+  67   3                              key_stat = key_period; // 否则定位到按键释放
+  68   3              }
+  69   2              break;
+  70   2              case (keylong_stat):
+  71   2              {
+  72   3                      if (key_null != key_temp)
+  73   3                      {
+  74   4                              if (key_time++ > keylong_pepione) // 检测长按键
+  75   4                              {
+  76   5                                      key_stat = key_long_on; // 定位到
+  77   5                                      key_temp = key_long;    // 连击标志
+  78   5                                      key_time = 0;
+  79   5                              }
+  80   4                              else
+  81   4                              {
+  82   5                                      if (last_temp != key_temp)
+  83   5                                              key_time = 0x00, key_stat = key_press;
+  84   5                                      key_temp = keydown_ent; // 否则确认按下
+  85   5                              }
+  86   4                      }
+  87   3                      else
+  88   3                              key_stat = key_period; // 否则定位到按键释放
+  89   3              }
+  90   2              break;
+  91   2              case (key_long_on): // 按键连发
+  92   2              {
+  93   3                      if (key_null != key_temp)
+  94   3                      {
+  95   4                              if (key_time++ > key_continue_period)
+  96   4                              {
+  97   5                                      key_time = 0;
+  98   5                                      key_temp = key_continue;
+  99   5                                      key_stat = key_long_on;
+ 100   5                              }
+ 101   4                              else
+ 102   4                                      key_temp = key_long;
+ 103   4                      }
+ 104   3                      else
+ 105   3                              key_stat = key_period;
+ 106   3              }
+ 107   2              break;
+ 108   2              case (key_period): //                确认按键释放
+ 109   2              {
+ 110   3                      key_time = 0;
+ 111   3                      key_stat = key_init;
+ 112   3                      key_temp = keyup_ent;
+ 113   3              }
+ 114   2              break;
+ 115   2              default:
+ 116   2                      inkey_number = key_null;
+C51 COMPILER V9.60.7.0   GETKEY                                                            08/18/2025 16:17:57 PAGE 3   
+
+ 117   2                      break; // 无键按下
+ 118   2              }
+ 119   1              return (key_temp);
+ 120   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    281    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      7    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

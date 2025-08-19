@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "asrpro_handle.h": "c",
+        "wk_system.h": "c",
+        "at32f421.h": "c",
+        "fw443_handle.h": "c",
+        "usart_send_handle.h": "c",
+        "fw433_handle.h": "c"
+    }
+}

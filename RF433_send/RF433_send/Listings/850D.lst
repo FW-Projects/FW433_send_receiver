@@ -1,0 +1,478 @@
+C51 COMPILER V9.60.7.0   850D                                                              08/11/2025 14:38:18 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE 850D
+OBJECT MODULE PLACED IN .\Objects\850D.obj
+COMPILER INVOKED BY: D:\keil5C51\C51\BIN\C51.EXE 850D.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\850
+                    -D.lst) OBJECT(.\Objects\850D.obj)
+
+line level    source
+
+   1          #include "SN8F5702.H"
+   2          #include "intrins.h"
+   3          #include "delayms.h"
+   4          #include "433send.h"
+   5          #include "getkey.h"
+   6          #include "ISP.h"
+   7          #include "gpio.h"
+   8          //#include "Definition.h"
+   9          #include "tmr.h"
+  10          
+  11          #define uint8_t unsigned char
+  12          #define uinttrue6_t unsigned int
+  13          
+  14          #define true 1
+  15          #define false 0
+  16          
+  17          #define KEY_NULL 0x00
+  18          #define KEY_AIR_UP 0x01
+  19          #define KEY_AIR_DOWN 0x02
+  20          #define KEY_AIR_LONG_UP 0x03
+  21          #define KEY_AIR_LONG_DOWN 0x04
+  22          #define KEY_TEMP_UP 0x05
+  23          #define KEY_TEMP_DOWN 0x06
+  24          #define KEY_TEMP_LONG_UP 0x07
+  25          #define KEY_TEMP_LONG_DOWN 0x08
+  26          #define KEY_CH1 0x09
+  27          #define KEY_CH2 0x0a
+  28          #define KEY_CH3 0x0b
+  29          #define KEY_CH4 0x0c
+  30          #define KEY_CONFIRM 0x0d
+  31          
+  32          volatile uint8_t key_out_time = 0, key_state = 0,key_n = 0,start_init_outtime = 0;
+  33          volatile uint8_t send_data = 0;
+  34          volatile uint16_t send_addr = 0;
+  35          volatile bit key_ent_flag = 0,longkey_flag = 0,tmr_stop_flag = 0,start_init_flag = 0;
+  36          volatile bit start_init_end_flag = 0,key_stop_tmr_flag = 0,first_get_addr_complete_flag = 0;
+  37          
+  38          void key_handle(void);
+  39          void fisrt_get_addr_handle(void);
+  40          void send_handle(void);
+  41          void Start_init_handle(void);
+  42          void Rom_write(uinttrue6_t in_data, uint8_t n);
+  43          void Rom_read(void);
+  44          uint16_t data_8bit_to_16bit(uint8_t n);
+  45          
+  46          
+  47          void T0Interrupt(void) interrupt ISRTimer0  
+  48          {
+  49   1              //TF0 clear
+  50   1              TF0 = 0;
+  51   1      }
+  52          
+  53          
+  54          void T1Interrupt(void) interrupt ISRTimer1
+C51 COMPILER V9.60.7.0   850D                                                              08/11/2025 14:38:18 PAGE 2   
+
+  55          {
+  56   1              if(key_n != 0x00)
+  57   1              {
+  58   2                      key_n --;
+  59   2              }
+  60   1              if(start_init_outtime != 0x00)
+  61   1              {
+  62   2                      start_init_outtime--;
+  63   2              }
+  64   1              if(key_out_time != 0x00)
+  65   1              {
+  66   2                      key_out_time--;
+  67   2              }
+  68   1              TH1 = (65536 - 10000) / 256;
+  69   1              TL1 = (65536 - 10000) % 256;
+  70   1              ET1 = 1; 
+  71   1              TR1 = 1; 
+  72   1              TF1 = 0;
+  73   1      }
+  74          
+  75          void main(void)
+  76          {
+  77   1              /* system clock */
+  78   1              CKCON = 0x70;
+  79   1              CLKSEL = 0x05; // Fcpu = 32M
+  80   1              CLKCMD = 0x69;
+  81   1              WDTR = 0x5A;
+  82   1      
+  83   1              gpio_init();
+  84   1      //      InitT0(); // 用于获取滚动码
+  85   1      //      InitT1();
+  86   1      //      Witty433_Init(set_433time_buf); // 433发送电平时间设置
+  87   1      //      Rom_read();
+  88   1              while (1)
+  89   1              {
+  90   2                      WDTR = 0x5A;
+  91   2                      if (start_init_flag == 0)
+  92   2                      {
+  93   3                              if (first_get_addr_complete_flag == false || key_stop_tmr_flag == true)
+  94   3                              {
+  95   4                                      // 出厂首次获取滚动码
+  96   4                                      first_get_addr_complete_flag = true; // 设置首次获取地址码完成标志位
+  97   4                                      key_stop_tmr_flag = false;                      
+  98   4                                      start_init_flag = true;                         // 设置开始标志位
+  99   4                                      fisrt_get_addr_handle();                                                                                        // 获取地址码   
+ 100   4                              }
+ 101   3                              else
+ 102   3                              {
+ 103   4                                      send_handle(); // 433发送处理
+ 104   4                              }
+ 105   3                      }
+ 106   2                      else
+ 107   2                              Start_init_handle(); // 初始化处理
+ 108   2      
+ 109   2                      if (key_n  == 0)
+ 110   2                      {
+ 111   3                              key_handle(); // 按键识别
+ 112   3                              key_n  = 0x05;
+ 113   3                      }
+ 114   2              }
+ 115   1      }
+ 116          
+C51 COMPILER V9.60.7.0   850D                                                              08/11/2025 14:38:18 PAGE 3   
+
+ 117          /*
+ 118           * 433发送处理
+ 119           * 起始码+地址码+控制码+结束码
+ 120           */
+ 121          void send_handle(void)
+ 122          {
+ 123   1      #if 0
+                      //发送一次信号
+                      StartSend_433(send_addr, send_data);
+              #endif
+ 127   1      
+ 128   1      #if 1
+ 129   1              // 发送多次信号
+ 130   1              send_data = key_state;
+ 131   1              StartSend_433_long(send_addr, send_data, 3);
+ 132   1      #endif
+ 133   1      }
+ 134          
+ 135          /*
+ 136           *出厂首次获取地址码
+ 137           *通过定时器计数获取计数时间
+ 138           *计数时间作为地址码存储到flash中
+ 139           *计数时间范围0~65535
+ 140           *计数暂停标志为确认键长按
+ 141           */
+ 142          void fisrt_get_addr_handle(void)
+ 143          {
+ 144   1              if (tmr_stop_flag == true)
+ 145   1              {
+ 146   2                      tmr_stop_flag = false;                                    // 复位标志位
+ 147   2                      StopT0();                                                                                                                                 // 停止计数
+ 148   2                      send_addr = TH0  << 8 | TL0;                              // 获取计数时间作为地址码
+ 149   2                      u8_data[2] = first_get_addr_complete_flag; // 地址码高位
+ 150   2                      Rom_write(send_addr, 0);                                          // 写入Flash
+ 151   2              }
+ 152   1      }
+ 153          void Start_init_handle(void)
+ 154          {
+ 155   1              if (start_init_flag == true && start_init_end_flag == 0)
+ 156   1              {
+ 157   2      
+ 158   2                      start_init_end_flag = true; // 设置结束标志位
+ 159   2                      start_init_outtime = 0x0A;
+ 160   2      
+ 161   2                      /* 读取ROM数据 */
+ 162   2                      send_addr = data_8bit_to_16bit(0); // ROM地址
+ 163   2      
+ 164   2                      first_get_addr_complete_flag = u8_data[2]; // 首次获取地址码完成标志位
+ 165   2                      if (first_get_addr_complete_flag == false)
+ 166   2                      {
+ 167   3                              // 出厂定时器开始计数
+ 168   3                              TH0 = 0x00; // 计数器清零
+ 169   3                              TL0 = 0x00;
+ 170   3                              StartT0(); // 启动计数
+ 171   3                      }
+ 172   2                      else
+ 173   2                              StopT0(); // 停止计数
+ 174   2              }
+ 175   1              else if (start_init_end_flag == true && start_init_outtime == 0x00)
+ 176   1              {
+ 177   2                      start_init_flag = false; // 复位标志位
+ 178   2                      start_init_end_flag = false;
+C51 COMPILER V9.60.7.0   850D                                                              08/11/2025 14:38:18 PAGE 4   
+
+ 179   2              }
+ 180   1      }
+ 181          
+ 182          void Rom_write(uinttrue6_t in_data, uint8_t n)
+ 183          {
+ 184   1              /* true6bit数据暂存数组 */
+ 185   1              u8_data[n] = in_data >> 8; // 高位
+ 186   1              u8_data[n + 1] = in_data;  // 低位
+ 187   1              ISPpagewrite(u8_data);
+ 188   1      }
+ 189          
+ 190          uint16_t data_8bit_to_16bit(uint8_t n)
+ 191          {
+ 192   1              uinttrue6_t out_data;
+ 193   1              out_data = (u8_data[n] << 8) | u8_data[n + 1]; // true6bit数据
+ 194   1              return out_data;
+ 195   1      }
+ 196          void Rom_read(void)
+ 197          {
+ 198   1      //      ISPpageread2();
+ 199   1              start_init_flag = true;
+ 200   1              start_init_end_flag = 0;
+ 201   1              start_init_outtime = 0x00;
+ 202   1      }
+ 203          
+ 204          void key_handle(void)
+ 205          {
+ 206   1              uint8_t key_value;
+ 207   1              key_value = get_key();
+ 208   1              key_value = keydown_ent;
+ 209   1              if (inkey_number == key_temp_up)
+ 210   1              {
+ 211   2                      switch (key_value)
+ 212   2                      {
+ 213   3                      case (keydown_ent):
+ 214   3                              break;
+ 215   3                      case (keyup_ent):
+ 216   3                      {
+ 217   4                              key_ent_flag = true;
+ 218   4                              key_state = KEY_TEMP_UP;
+ 219   4                              inkey_number = key_null;
+ 220   4                      }
+ 221   3                      break;
+ 222   3                      case (key_long):
+ 223   3                              break;
+ 224   3                      case (key_continue):
+ 225   3                      {
+ 226   4                              key_ent_flag = true;
+ 227   4                              key_state = KEY_TEMP_LONG_UP;
+ 228   4                              longkey_flag = true;
+ 229   4                      }
+ 230   3                      break;
+ 231   3                      default:
+ 232   3                              break;
+ 233   3                      }
+ 234   2              }
+ 235   1              else if (inkey_number == key_temp_down)
+ 236   1              {
+ 237   2                      switch (key_value)
+ 238   2                      {
+ 239   3                      case (keydown_ent):
+ 240   3                              break;
+C51 COMPILER V9.60.7.0   850D                                                              08/11/2025 14:38:18 PAGE 5   
+
+ 241   3                      case (keyup_ent):
+ 242   3                      {
+ 243   4                              key_ent_flag = true;
+ 244   4                              key_state = KEY_TEMP_DOWN;
+ 245   4                              inkey_number = key_null;
+ 246   4                      }
+ 247   3                      break;
+ 248   3                      case (key_long):
+ 249   3                              break;
+ 250   3                      case (key_continue):
+ 251   3                      {
+ 252   4                              key_ent_flag = true;
+ 253   4                              key_state = KEY_TEMP_LONG_DOWN;
+ 254   4                              longkey_flag = true;
+ 255   4                      }
+ 256   3                      break;
+ 257   3                      default:
+ 258   3                              break;
+ 259   3                      }
+ 260   2              }
+ 261   1              else if (inkey_number == key_air_up)
+ 262   1              {
+ 263   2                      switch (key_value)
+ 264   2                      {
+ 265   3                      case (keydown_ent):
+ 266   3                              break;
+ 267   3                      case (keyup_ent):
+ 268   3                      {
+ 269   4                              key_ent_flag = true;
+ 270   4                              key_state = KEY_AIR_UP;
+ 271   4                              inkey_number = key_null;
+ 272   4                      }
+ 273   3                      break;
+ 274   3                      case (key_long):
+ 275   3                              break;
+ 276   3                      case (key_continue):
+ 277   3                      {
+ 278   4                              key_ent_flag = true;
+ 279   4                              key_state = KEY_AIR_LONG_UP;
+ 280   4                              longkey_flag = true;
+ 281   4                      }
+ 282   3                      break;
+ 283   3                      default:
+ 284   3                              break;
+ 285   3                      }
+ 286   2              }
+ 287   1              else if (inkey_number == key_air_down)
+ 288   1              {
+ 289   2                      switch (key_value)
+ 290   2                      {
+ 291   3                      case (keydown_ent):
+ 292   3                              break;
+ 293   3                      case (keyup_ent):
+ 294   3                      {
+ 295   4                              key_ent_flag = true;
+ 296   4                              key_state = KEY_AIR_DOWN;
+ 297   4                              inkey_number = key_null;
+ 298   4                      }
+ 299   3                      break;
+ 300   3                      case (key_long):
+ 301   3                              break;
+ 302   3                      case (key_continue):
+C51 COMPILER V9.60.7.0   850D                                                              08/11/2025 14:38:18 PAGE 6   
+
+ 303   3                      {
+ 304   4                              key_ent_flag = true;
+ 305   4                              key_state = KEY_AIR_LONG_DOWN;
+ 306   4                              longkey_flag = true;
+ 307   4                      }
+ 308   3                      break;
+ 309   3                      default:
+ 310   3                              break;
+ 311   3                      }
+ 312   2              }
+ 313   1              else if (inkey_number == key_ch1)
+ 314   1              {
+ 315   2                      switch (key_value)
+ 316   2                      {
+ 317   3                      case (keydown_ent):
+ 318   3                              break;
+ 319   3                      case (keyup_ent):
+ 320   3                      {
+ 321   4                              key_ent_flag = true;
+ 322   4                              key_state = KEY_CH1;
+ 323   4                              inkey_number = key_null;
+ 324   4                      }
+ 325   3                      break;
+ 326   3                      case (key_long):
+ 327   3                              break;
+ 328   3                      case (key_continue):
+ 329   3                      {
+ 330   4                              key_ent_flag = true;
+ 331   4                              longkey_flag = true;
+ 332   4                      }
+ 333   3                      break;
+ 334   3                      default:
+ 335   3                              break;
+ 336   3                      }
+ 337   2              }
+ 338   1              else if (inkey_number == key_ch2)
+ 339   1              {
+ 340   2                      switch (key_value)
+ 341   2                      {
+ 342   3                      case (keydown_ent):
+ 343   3                              break;
+ 344   3                      case (keyup_ent):
+ 345   3                      {
+ 346   4                              key_ent_flag = true;
+ 347   4                              key_state = KEY_CH2;
+ 348   4                              inkey_number = key_null;
+ 349   4                      }
+ 350   3                      break;
+ 351   3                      case (key_long):
+ 352   3                              break;
+ 353   3                      case (key_continue):
+ 354   3                      {
+ 355   4                              key_ent_flag = true;
+ 356   4                              longkey_flag = true;
+ 357   4                      }
+ 358   3                      break;
+ 359   3                      default:
+ 360   3                              break;
+ 361   3                      }
+ 362   2              }
+ 363   1              else if (inkey_number == key_ch3)
+ 364   1              {
+C51 COMPILER V9.60.7.0   850D                                                              08/11/2025 14:38:18 PAGE 7   
+
+ 365   2                      switch (key_value)
+ 366   2                      {
+ 367   3                      case (keydown_ent):
+ 368   3                              break;
+ 369   3                      case (keyup_ent):
+ 370   3                      {
+ 371   4                              key_ent_flag = true;
+ 372   4                              key_state = KEY_CH3;
+ 373   4                              inkey_number = key_null;
+ 374   4                      }
+ 375   3                      break;
+ 376   3                      case (key_long):
+ 377   3                              break;
+ 378   3                      case (key_continue):
+ 379   3                      {
+ 380   4                              key_ent_flag = true;
+ 381   4                              longkey_flag = true;
+ 382   4                      }
+ 383   3                      break;
+ 384   3                      default:
+ 385   3                              break;
+ 386   3                      }
+ 387   2              }
+ 388   1              else if (inkey_number == key_ch4)
+ 389   1              {
+ 390   2                      switch (key_value)
+ 391   2                      {
+ 392   3                      case (keydown_ent):
+ 393   3                              break;
+ 394   3                      case (keyup_ent):
+ 395   3                      {
+ 396   4                              key_ent_flag = true;
+ 397   4                              key_state = KEY_CH4;
+ 398   4                              inkey_number = key_null;
+ 399   4                      }
+ 400   3                      break;
+ 401   3                      case (key_long):
+ 402   3                              break;
+ 403   3                      case (key_continue):
+ 404   3                      {
+ 405   4                              key_ent_flag = true;
+ 406   4                              longkey_flag = true;
+ 407   4                      }
+ 408   3                      break;
+ 409   3                      default:
+ 410   3                              break;
+ 411   3                      }
+ 412   2              }
+ 413   1              else if (inkey_number == key_confirm)
+ 414   1              {
+ 415   2                      /* 确认按键  &  滚动码
+ 416   2                       * 滚动码 ： 长按确认键 确定机器滚动码
+ 417   2                       */
+ 418   2                      switch (key_value)
+ 419   2                      {
+ 420   3                      case (keyup_ent):
+ 421   3                      {
+ 422   4                              key_ent_flag = true;
+ 423   4                              key_state = KEY_CONFIRM;
+ 424   4                              inkey_number = key_null;
+ 425   4                      }
+ 426   3                      break;
+C51 COMPILER V9.60.7.0   850D                                                              08/11/2025 14:38:18 PAGE 8   
+
+ 427   3                      case (key_continue):
+ 428   3                      {
+ 429   4                              key_ent_flag = true;
+ 430   4                              if(first_get_addr_complete_flag == false)
+ 431   4                                      tmr_stop_flag = true; // 停止计数
+ 432   4                              longkey_flag = true;
+ 433   4                              
+ 434   4                      }
+ 435   3                      break;
+ 436   3                      default:
+ 437   3                              break;
+ 438   3                      }
+ 439   2              }
+ 440   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    516    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      7    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      7    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

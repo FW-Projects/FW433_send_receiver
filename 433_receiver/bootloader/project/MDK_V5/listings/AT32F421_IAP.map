@@ -1,0 +1,1182 @@
+Component: Arm Compiler for Embedded 6.23 Tool: armlink [5f102400]
+
+==============================================================================
+
+Section Cross References
+
+    startup_at32f421.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_at32f421.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_at32f421.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_at32f421.o(RESET) refers to startup_at32f421.o(STACK) for __initial_sp
+    startup_at32f421.o(RESET) refers to startup_at32f421.o(.text) for Reset_Handler
+    startup_at32f421.o(RESET) refers to lto-llvm-a371a8.o(.text.NMI_Handler) for NMI_Handler
+    startup_at32f421.o(RESET) refers to lto-llvm-a371a8.o(.text.HardFault_Handler) for HardFault_Handler
+    startup_at32f421.o(RESET) refers to lto-llvm-a371a8.o(.text.MemManage_Handler) for MemManage_Handler
+    startup_at32f421.o(RESET) refers to lto-llvm-a371a8.o(.text.BusFault_Handler) for BusFault_Handler
+    startup_at32f421.o(RESET) refers to lto-llvm-a371a8.o(.text.UsageFault_Handler) for UsageFault_Handler
+    startup_at32f421.o(RESET) refers to lto-llvm-a371a8.o(.text.SVC_Handler) for SVC_Handler
+    startup_at32f421.o(RESET) refers to lto-llvm-a371a8.o(.text.DebugMon_Handler) for DebugMon_Handler
+    startup_at32f421.o(RESET) refers to lto-llvm-a371a8.o(.text.PendSV_Handler) for PendSV_Handler
+    startup_at32f421.o(RESET) refers to lto-llvm-a371a8.o(.text.SysTick_Handler) for SysTick_Handler
+    startup_at32f421.o(RESET) refers to lto-llvm-a371a8.o(.text.TMR3_GLOBAL_IRQHandler) for TMR3_GLOBAL_IRQHandler
+    startup_at32f421.o(RESET) refers to lto-llvm-a371a8.o(.text.USART1_IRQHandler) for USART1_IRQHandler
+    startup_at32f421.o(.text) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_at32f421.o(.text) refers to lto-llvm-a371a8.o(.text.SystemInit) for SystemInit
+    startup_at32f421.o(.text) refers to __main.o(!!!main) for __main
+    startup_at32f421.o(.text) refers to startup_at32f421.o(HEAP) for Heap_Mem
+    startup_at32f421.o(.text) refers to startup_at32f421.o(STACK) for Stack_Mem
+    __main.o(!!!main) refers to __rtentry.o(.ARM.Collect$$rtentry$$00000000) for __rt_entry
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$0000000A) for __rt_entry_li
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) for __rt_entry_main
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$0000000C) for __rt_entry_postli_1
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$00000009) for __rt_entry_postsh_1
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$00000002) for __rt_entry_presh_1
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry4.o(.ARM.Collect$$rtentry$$00000004) for __rt_entry_sh
+    __rtentry2.o(.ARM.Collect$$rtentry$$00000008) refers to boardinit2.o(.text) for _platform_post_stackheap_init
+    __rtentry2.o(.ARM.Collect$$rtentry$$0000000A) refers to libinit.o(.ARM.Collect$$libinit$$00000000) for __rt_lib_init
+    __rtentry2.o(.ARM.Collect$$rtentry$$0000000B) refers to boardinit3.o(.text) for _platform_post_lib_init
+    __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) refers to lto-llvm-a371a8.o(.text.main) for main
+    __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) refers to exit.o(.text) for exit
+    __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$00000001) for .ARM.Collect$$rtentry$$00000001
+    __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$00000008) for .ARM.Collect$$rtentry$$00000008
+    __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$0000000A) for .ARM.Collect$$rtentry$$0000000A
+    __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$0000000B) for .ARM.Collect$$rtentry$$0000000B
+    __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) for .ARM.Collect$$rtentry$$0000000D
+    __rtentry4.o(.ARM.Collect$$rtentry$$00000004) refers to sys_stackheap_outer.o(.text) for __user_setup_stackheap
+    __rtentry4.o(.ARM.exidx) refers to __rtentry4.o(.ARM.Collect$$rtentry$$00000004) for .ARM.Collect$$rtentry$$00000004
+    sys_stackheap_outer.o(.text) refers to libspace.o(.text) for __user_perproc_libspace
+    sys_stackheap_outer.o(.text) refers to startup_at32f421.o(.text) for __user_initial_stackheap
+    exit.o(.text) refers to rtexit.o(.ARM.Collect$$rtexit$$00000000) for __rt_exit
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000030) for __rt_lib_init_alloca_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000002E) for __rt_lib_init_argv_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001D) for __rt_lib_init_atexit_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000023) for __rt_lib_init_clock_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000034) for __rt_lib_init_cpp_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000032) for __rt_lib_init_exceptions_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000002) for __rt_lib_init_fp_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000021) for __rt_lib_init_fp_trap_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000025) for __rt_lib_init_getenv_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000C) for __rt_lib_init_heap_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000013) for __rt_lib_init_lc_collate_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000015) for __rt_lib_init_lc_ctype_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000017) for __rt_lib_init_lc_monetary_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000019) for __rt_lib_init_lc_numeric_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001B) for __rt_lib_init_lc_time_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000006) for __rt_lib_init_preinit_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000010) for __rt_lib_init_rand_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000004) for __rt_lib_init_relocate_pie_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000035) for __rt_lib_init_return
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001F) for __rt_lib_init_signal_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000027) for __rt_lib_init_stdio_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000E) for __rt_lib_init_user_alloc_1
+    libspace.o(.text) refers to libspace.o(.bss) for __libspace_start
+    rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000004) for __rt_exit_exit
+    rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000003) for __rt_exit_ls
+    rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000002) for __rt_exit_prels_1
+    rtexit.o(.ARM.exidx) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000004) for __rt_exit_exit
+    rtexit.o(.ARM.exidx) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000003) for __rt_exit_ls
+    rtexit.o(.ARM.exidx) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000002) for __rt_exit_prels_1
+    rtexit.o(.ARM.exidx) refers to rtexit.o(.ARM.Collect$$rtexit$$00000000) for .ARM.Collect$$rtexit$$00000000
+    libinit2.o(.ARM.Collect$$libinit$$00000012) refers to libinit2.o(.ARM.Collect$$libinit$$00000011) for .ARM.Collect$$libinit$$00000011
+    libinit2.o(.ARM.Collect$$libinit$$00000014) refers to libinit2.o(.ARM.Collect$$libinit$$00000011) for .ARM.Collect$$libinit$$00000011
+    libinit2.o(.ARM.Collect$$libinit$$00000016) refers to libinit2.o(.ARM.Collect$$libinit$$00000011) for .ARM.Collect$$libinit$$00000011
+    libinit2.o(.ARM.Collect$$libinit$$00000018) refers to libinit2.o(.ARM.Collect$$libinit$$00000011) for .ARM.Collect$$libinit$$00000011
+    libinit2.o(.ARM.Collect$$libinit$$0000001A) refers to libinit2.o(.ARM.Collect$$libinit$$00000011) for .ARM.Collect$$libinit$$00000011
+    libinit2.o(.ARM.Collect$$libinit$$00000028) refers to argv_veneer.o(.emb_text) for __ARM_argv_veneer
+    libinit2.o(.ARM.Collect$$libinit$$00000029) refers to argv_veneer.o(.emb_text) for __ARM_argv_veneer
+    rtexit2.o(.ARM.Collect$$rtexit$$00000003) refers to libshutdown.o(.ARM.Collect$$libshutdown$$00000000) for __rt_lib_shutdown
+    rtexit2.o(.ARM.Collect$$rtexit$$00000004) refers to sys_exit.o(.text) for _sys_exit
+    rtexit2.o(.ARM.exidx) refers to rtexit2.o(.ARM.Collect$$rtexit$$00000001) for .ARM.Collect$$rtexit$$00000001
+    rtexit2.o(.ARM.exidx) refers to rtexit2.o(.ARM.Collect$$rtexit$$00000003) for .ARM.Collect$$rtexit$$00000003
+    rtexit2.o(.ARM.exidx) refers to rtexit2.o(.ARM.Collect$$rtexit$$00000004) for .ARM.Collect$$rtexit$$00000004
+    argv_veneer.o(.emb_text) refers to no_argv.o(.text) for __ARM_get_argv
+    sys_exit.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_exit.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    sys_exit_hlt.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_exit_hlt.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    _get_argv_nomalloc.o(.text) refers (Special) to hrguard.o(.text) for __heap_region$guard
+    _get_argv_nomalloc.o(.text) refers to defsig_rtmem_outer.o(.text) for __rt_SIGRTMEM
+    _get_argv_nomalloc.o(.text) refers to sys_command.o(.text) for _sys_command_string
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000002) for __rt_lib_shutdown_cpp_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000007) for __rt_lib_shutdown_fp_trap_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F) for __rt_lib_shutdown_heap_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000010) for __rt_lib_shutdown_return
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A) for __rt_lib_shutdown_signal_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000004) for __rt_lib_shutdown_stdio_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C) for __rt_lib_shutdown_user_alloc_1
+    sys_command.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_command.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    sys_command_hlt.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_command_hlt.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    defsig_rtmem_outer.o(.text) refers to defsig_rtmem_inner.o(.text) for __rt_SIGRTMEM_inner
+    defsig_rtmem_outer.o(.text) refers to defsig_exit.o(.text) for __sig_exit
+    defsig_rtmem_formal.o(.text) refers to rt_raise.o(.text) for __rt_raise
+    rt_raise.o(.text) refers to __raise.o(.text) for __raise
+    rt_raise.o(.text) refers to sys_exit.o(.text) for _sys_exit
+    defsig_exit.o(.text) refers to sys_exit.o(.text) for _sys_exit
+    defsig_rtmem_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    __raise.o(.text) refers to defsig.o(CL$$defsig) for __default_signal_handler
+    defsig_general.o(.text) refers to sys_wrch.o(.text) for _ttywrch
+    sys_wrch.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_wrch.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    sys_wrch_hlt.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_wrch_hlt.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    defsig.o(CL$$defsig) refers to defsig_fpe_inner.o(.text) for __rt_SIGFPE_inner
+    defsig.o(CL$$defsig) refers to defsig_rtmem_inner.o(.text) for __rt_SIGRTMEM_inner
+    defsig_abrt_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_fpe_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_rtred_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_stak_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_pvfn_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_cppl_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_segv_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_other.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    lto-llvm-a371a8.o(.ARM.exidx.text.NMI_Handler) refers to lto-llvm-a371a8.o(.text.NMI_Handler) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.HardFault_Handler) refers to lto-llvm-a371a8.o(.text.HardFault_Handler) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.MemManage_Handler) refers to lto-llvm-a371a8.o(.text.MemManage_Handler) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.BusFault_Handler) refers to lto-llvm-a371a8.o(.text.BusFault_Handler) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.UsageFault_Handler) refers to lto-llvm-a371a8.o(.text.UsageFault_Handler) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.SVC_Handler) refers to lto-llvm-a371a8.o(.text.SVC_Handler) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.DebugMon_Handler) refers to lto-llvm-a371a8.o(.text.DebugMon_Handler) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.PendSV_Handler) refers to lto-llvm-a371a8.o(.text.PendSV_Handler) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.SysTick_Handler) refers to lto-llvm-a371a8.o(.text.SysTick_Handler) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.TMR3_GLOBAL_IRQHandler) refers to lto-llvm-a371a8.o(.text.tmr_interrupt_flag_get) for tmr_interrupt_flag_get
+    lto-llvm-a371a8.o(.text.TMR3_GLOBAL_IRQHandler) refers to lto-llvm-a371a8.o(.text.tmr_flag_clear) for tmr_flag_clear
+    lto-llvm-a371a8.o(.text.TMR3_GLOBAL_IRQHandler) refers to lto-llvm-a371a8.o(.bss.get_data_from_usart_flag) for get_data_from_usart_flag
+    lto-llvm-a371a8.o(.text.TMR3_GLOBAL_IRQHandler) refers to lto-llvm-a371a8.o(.bss.time_ira_cnt) for time_ira_cnt
+    lto-llvm-a371a8.o(.text.TMR3_GLOBAL_IRQHandler) refers to lto-llvm-a371a8.o(.text.back_err) for back_err
+    lto-llvm-a371a8.o(.ARM.exidx.text.TMR3_GLOBAL_IRQHandler) refers to lto-llvm-a371a8.o(.text.TMR3_GLOBAL_IRQHandler) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.USART1_IRQHandler) refers to lto-llvm-a371a8.o(.bss.time_ira_cnt) for time_ira_cnt
+    lto-llvm-a371a8.o(.text.USART1_IRQHandler) refers to lto-llvm-a371a8.o(.text.usart_interrupt_flag_get) for usart_interrupt_flag_get
+    lto-llvm-a371a8.o(.text.USART1_IRQHandler) refers to lto-llvm-a371a8.o(.text.usart_data_receive) for usart_data_receive
+    lto-llvm-a371a8.o(.text.USART1_IRQHandler) refers to lto-llvm-a371a8.o(.bss.usart_group_struct) for usart_group_struct
+    lto-llvm-a371a8.o(.ARM.exidx.text.USART1_IRQHandler) refers to lto-llvm-a371a8.o(.text.USART1_IRQHandler) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.wk_system_clock_config) refers to lto-llvm-a371a8.o(.text.crm_reset) for crm_reset
+    lto-llvm-a371a8.o(.text.wk_system_clock_config) refers to lto-llvm-a371a8.o(.text.crm_clock_source_enable) for crm_clock_source_enable
+    lto-llvm-a371a8.o(.text.wk_system_clock_config) refers to lto-llvm-a371a8.o(.text.crm_flag_get) for crm_flag_get
+    lto-llvm-a371a8.o(.text.wk_system_clock_config) refers to lto-llvm-a371a8.o(.text.crm_hext_stable_wait) for crm_hext_stable_wait
+    lto-llvm-a371a8.o(.text.wk_system_clock_config) refers to lto-llvm-a371a8.o(.text.crm_pll_config) for crm_pll_config
+    lto-llvm-a371a8.o(.text.wk_system_clock_config) refers to lto-llvm-a371a8.o(.text.crm_ahb_div_set) for crm_ahb_div_set
+    lto-llvm-a371a8.o(.text.wk_system_clock_config) refers to lto-llvm-a371a8.o(.text.crm_apb2_div_set) for crm_apb2_div_set
+    lto-llvm-a371a8.o(.text.wk_system_clock_config) refers to lto-llvm-a371a8.o(.text.crm_apb1_div_set) for crm_apb1_div_set
+    lto-llvm-a371a8.o(.text.wk_system_clock_config) refers to lto-llvm-a371a8.o(.text.crm_auto_step_mode_enable) for crm_auto_step_mode_enable
+    lto-llvm-a371a8.o(.text.wk_system_clock_config) refers to lto-llvm-a371a8.o(.text.crm_sysclk_switch) for crm_sysclk_switch
+    lto-llvm-a371a8.o(.text.wk_system_clock_config) refers to lto-llvm-a371a8.o(.text.crm_sysclk_switch_status_get) for crm_sysclk_switch_status_get
+    lto-llvm-a371a8.o(.text.wk_system_clock_config) refers to lto-llvm-a371a8.o(.text.system_core_clock_update) for system_core_clock_update
+    lto-llvm-a371a8.o(.ARM.exidx.text.wk_system_clock_config) refers to lto-llvm-a371a8.o(.text.wk_system_clock_config) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.wk_periph_clock_config) refers to lto-llvm-a371a8.o(.text.crm_periph_clock_enable) for crm_periph_clock_enable
+    lto-llvm-a371a8.o(.ARM.exidx.text.wk_periph_clock_config) refers to lto-llvm-a371a8.o(.text.wk_periph_clock_config) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.wk_nvic_config) refers to lto-llvm-a371a8.o(.text.nvic_priority_group_config) for nvic_priority_group_config
+    lto-llvm-a371a8.o(.text.wk_nvic_config) refers to lto-llvm-a371a8.o(.text.__NVIC_GetPriorityGrouping) for __NVIC_GetPriorityGrouping
+    lto-llvm-a371a8.o(.text.wk_nvic_config) refers to lto-llvm-a371a8.o(.text.NVIC_EncodePriority) for NVIC_EncodePriority
+    lto-llvm-a371a8.o(.text.wk_nvic_config) refers to lto-llvm-a371a8.o(.text.__NVIC_SetPriority) for __NVIC_SetPriority
+    lto-llvm-a371a8.o(.text.wk_nvic_config) refers to lto-llvm-a371a8.o(.text.nvic_irq_enable) for nvic_irq_enable
+    lto-llvm-a371a8.o(.ARM.exidx.text.wk_nvic_config) refers to lto-llvm-a371a8.o(.text.wk_nvic_config) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_GetPriorityGrouping) refers to lto-llvm-a371a8.o(.text.__NVIC_GetPriorityGrouping) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.NVIC_EncodePriority) refers to lto-llvm-a371a8.o(.text.NVIC_EncodePriority) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_SetPriority) refers to lto-llvm-a371a8.o(.text.__NVIC_SetPriority) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.main) refers to lto-llvm-a371a8.o(.text.wk_system_clock_config) for wk_system_clock_config
+    lto-llvm-a371a8.o(.text.main) refers to lto-llvm-a371a8.o(.text.wk_periph_clock_config) for wk_periph_clock_config
+    lto-llvm-a371a8.o(.text.main) refers to lto-llvm-a371a8.o(.text.wk_nvic_config) for wk_nvic_config
+    lto-llvm-a371a8.o(.text.main) refers to lto-llvm-a371a8.o(.text.wk_usart1_init) for wk_usart1_init
+    lto-llvm-a371a8.o(.text.main) refers to lto-llvm-a371a8.o(.text.wk_tmr3_init) for wk_tmr3_init
+    lto-llvm-a371a8.o(.text.main) refers to lto-llvm-a371a8.o(.text.flash_upgrade_flag_read) for flash_upgrade_flag_read
+    lto-llvm-a371a8.o(.text.main) refers to lto-llvm-a371a8.o(.text.app_load) for app_load
+    lto-llvm-a371a8.o(.text.main) refers to lto-llvm-a371a8.o(.text.back_ok) for back_ok
+    lto-llvm-a371a8.o(.text.main) refers to lto-llvm-a371a8.o(.text.iap_upgrade_app_handle) for iap_upgrade_app_handle
+    lto-llvm-a371a8.o(.ARM.exidx.text.main) refers to lto-llvm-a371a8.o(.text.main) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.wk_tmr3_init) refers to lto-llvm-a371a8.o(.text.tmr_cnt_dir_set) for tmr_cnt_dir_set
+    lto-llvm-a371a8.o(.text.wk_tmr3_init) refers to lto-llvm-a371a8.o(.text.tmr_clock_source_div_set) for tmr_clock_source_div_set
+    lto-llvm-a371a8.o(.text.wk_tmr3_init) refers to lto-llvm-a371a8.o(.text.tmr_period_buffer_enable) for tmr_period_buffer_enable
+    lto-llvm-a371a8.o(.text.wk_tmr3_init) refers to lto-llvm-a371a8.o(.text.tmr_base_init) for tmr_base_init
+    lto-llvm-a371a8.o(.text.wk_tmr3_init) refers to lto-llvm-a371a8.o(.text.tmr_sub_sync_mode_set) for tmr_sub_sync_mode_set
+    lto-llvm-a371a8.o(.text.wk_tmr3_init) refers to lto-llvm-a371a8.o(.text.tmr_primary_mode_select) for tmr_primary_mode_select
+    lto-llvm-a371a8.o(.text.wk_tmr3_init) refers to lto-llvm-a371a8.o(.text.tmr_counter_enable) for tmr_counter_enable
+    lto-llvm-a371a8.o(.ARM.exidx.text.wk_tmr3_init) refers to lto-llvm-a371a8.o(.text.wk_tmr3_init) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.wk_usart1_init) refers to lto-llvm-a371a8.o(.text.gpio_default_para_init) for gpio_default_para_init
+    lto-llvm-a371a8.o(.text.wk_usart1_init) refers to lto-llvm-a371a8.o(.text.gpio_pin_mux_config) for gpio_pin_mux_config
+    lto-llvm-a371a8.o(.text.wk_usart1_init) refers to lto-llvm-a371a8.o(.text.gpio_init) for gpio_init
+    lto-llvm-a371a8.o(.text.wk_usart1_init) refers to lto-llvm-a371a8.o(.text.usart_init) for usart_init
+    lto-llvm-a371a8.o(.text.wk_usart1_init) refers to lto-llvm-a371a8.o(.text.usart_transmitter_enable) for usart_transmitter_enable
+    lto-llvm-a371a8.o(.text.wk_usart1_init) refers to lto-llvm-a371a8.o(.text.usart_receiver_enable) for usart_receiver_enable
+    lto-llvm-a371a8.o(.text.wk_usart1_init) refers to lto-llvm-a371a8.o(.text.usart_parity_selection_config) for usart_parity_selection_config
+    lto-llvm-a371a8.o(.text.wk_usart1_init) refers to lto-llvm-a371a8.o(.text.usart_hardware_flow_control_set) for usart_hardware_flow_control_set
+    lto-llvm-a371a8.o(.text.wk_usart1_init) refers to lto-llvm-a371a8.o(.text.usart_enable) for usart_enable
+    lto-llvm-a371a8.o(.text.wk_usart1_init) refers to lto-llvm-a371a8.o(.text.usart_interrupt_enable) for usart_interrupt_enable
+    lto-llvm-a371a8.o(.ARM.exidx.text.wk_usart1_init) refers to lto-llvm-a371a8.o(.text.wk_usart1_init) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.flash_2kb_write) refers to lto-llvm-a371a8.o(.bss.cmd_data_group_struct) for cmd_data_group_struct
+    lto-llvm-a371a8.o(.text.flash_2kb_write) refers to lto-llvm-a371a8.o(.text.flash_unlock) for flash_unlock
+    lto-llvm-a371a8.o(.text.flash_2kb_write) refers to lto-llvm-a371a8.o(.text.flash_sector_erase) for flash_sector_erase
+    lto-llvm-a371a8.o(.text.flash_2kb_write) refers to lto-llvm-a371a8.o(.text.flash_halfword_program) for flash_halfword_program
+    lto-llvm-a371a8.o(.text.flash_2kb_write) refers to lto-llvm-a371a8.o(.text.flash_lock) for flash_lock
+    lto-llvm-a371a8.o(.ARM.exidx.text.flash_2kb_write) refers to lto-llvm-a371a8.o(.text.flash_2kb_write) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.flash_upgrade_flag_read) refers to lto-llvm-a371a8.o(.text.flash_upgrade_flag_read) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.app_load) refers to lto-llvm-a371a8.o(.text.crm_periph_clock_enable) for crm_periph_clock_enable
+    lto-llvm-a371a8.o(.text.app_load) refers to lto-llvm-a371a8.o(.text.nvic_irq_disable) for nvic_irq_disable
+    lto-llvm-a371a8.o(.text.app_load) refers to lto-llvm-a371a8.o(.text.__NVIC_ClearPendingIRQ) for __NVIC_ClearPendingIRQ
+    lto-llvm-a371a8.o(.text.app_load) refers to lto-llvm-a371a8.o(.bss.jump_to_app) for jump_to_app
+    lto-llvm-a371a8.o(.ARM.exidx.text.app_load) refers to lto-llvm-a371a8.o(.text.app_load) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_ClearPendingIRQ) refers to lto-llvm-a371a8.o(.text.__NVIC_ClearPendingIRQ) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.data_take) refers to lto-llvm-a371a8.o(.text.usart_interrupt_enable) for usart_interrupt_enable
+    lto-llvm-a371a8.o(.text.data_take) refers to lto-llvm-a371a8.o(.bss.usart_group_struct) for usart_group_struct
+    lto-llvm-a371a8.o(.ARM.exidx.text.data_take) refers to lto-llvm-a371a8.o(.text.data_take) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.command_handle) refers to lto-llvm-a371a8.o(.bss.usart_group_struct) for usart_group_struct
+    lto-llvm-a371a8.o(.text.command_handle) refers to lto-llvm-a371a8.o(.text.data_take) for data_take
+    lto-llvm-a371a8.o(.text.command_handle) refers to lto-llvm-a371a8.o(.bss.update_status) for update_status
+    lto-llvm-a371a8.o(.text.command_handle) refers to lto-llvm-a371a8.o(.bss.cmd_ctr_step) for cmd_ctr_step
+    lto-llvm-a371a8.o(.text.command_handle) refers to lto-llvm-a371a8.o(.bss.cmd_data_step) for cmd_data_step
+    lto-llvm-a371a8.o(.text.command_handle) refers to lto-llvm-a371a8.o(.bss.cmd_addr_cnt) for cmd_addr_cnt
+    lto-llvm-a371a8.o(.text.command_handle) refers to lto-llvm-a371a8.o(.bss.cmd_data_cnt) for cmd_data_cnt
+    lto-llvm-a371a8.o(.text.command_handle) refers to lto-llvm-a371a8.o(.bss.cmd_data_group_struct) for cmd_data_group_struct
+    lto-llvm-a371a8.o(.ARM.exidx.text.command_handle) refers to lto-llvm-a371a8.o(.text.command_handle) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.back_ok) refers to lto-llvm-a371a8.o(.text.usart_data_transmit) for usart_data_transmit
+    lto-llvm-a371a8.o(.text.back_ok) refers to lto-llvm-a371a8.o(.text.usart_flag_get) for usart_flag_get
+    lto-llvm-a371a8.o(.ARM.exidx.text.back_ok) refers to lto-llvm-a371a8.o(.text.back_ok) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.back_err) refers to lto-llvm-a371a8.o(.text.usart_data_transmit) for usart_data_transmit
+    lto-llvm-a371a8.o(.text.back_err) refers to lto-llvm-a371a8.o(.text.usart_flag_get) for usart_flag_get
+    lto-llvm-a371a8.o(.text.back_err) refers to lto-llvm-a371a8.o(.bss.cmd_data_step) for cmd_data_step
+    lto-llvm-a371a8.o(.text.back_err) refers to lto-llvm-a371a8.o(.bss.cmd_ctr_step) for cmd_ctr_step
+    lto-llvm-a371a8.o(.text.back_err) refers to lto-llvm-a371a8.o(.bss.update_status) for update_status
+    lto-llvm-a371a8.o(.text.back_err) refers to lto-llvm-a371a8.o(.bss.cmd_addr_cnt) for cmd_addr_cnt
+    lto-llvm-a371a8.o(.text.back_err) refers to lto-llvm-a371a8.o(.bss.cmd_data_cnt) for cmd_data_cnt
+    lto-llvm-a371a8.o(.text.back_err) refers to lto-llvm-a371a8.o(.bss.time_ira_cnt) for time_ira_cnt
+    lto-llvm-a371a8.o(.text.back_err) refers to lto-llvm-a371a8.o(.bss.get_data_from_usart_flag) for get_data_from_usart_flag
+    lto-llvm-a371a8.o(.ARM.exidx.text.back_err) refers to lto-llvm-a371a8.o(.text.back_err) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.app_update_handle) refers to lto-llvm-a371a8.o(.bss.update_status) for update_status
+    lto-llvm-a371a8.o(.text.app_update_handle) refers to lto-llvm-a371a8.o(.bss.cmd_ctr_step) for cmd_ctr_step
+    lto-llvm-a371a8.o(.text.app_update_handle) refers to lto-llvm-a371a8.o(.text.back_ok) for back_ok
+    lto-llvm-a371a8.o(.text.app_update_handle) refers to lto-llvm-a371a8.o(.text.back_err) for back_err
+    lto-llvm-a371a8.o(.text.app_update_handle) refers to lto-llvm-a371a8.o(.bss.get_data_from_usart_flag) for get_data_from_usart_flag
+    lto-llvm-a371a8.o(.text.app_update_handle) refers to lto-llvm-a371a8.o(.bss.cmd_data_step) for cmd_data_step
+    lto-llvm-a371a8.o(.text.app_update_handle) refers to lto-llvm-a371a8.o(.bss.cmd_data_group_struct) for cmd_data_group_struct
+    lto-llvm-a371a8.o(.text.app_update_handle) refers to lto-llvm-a371a8.o(.text.flash_2kb_write) for flash_2kb_write
+    lto-llvm-a371a8.o(.text.app_update_handle) refers to lto-llvm-a371a8.o(.text.crm_reset) for crm_reset
+    lto-llvm-a371a8.o(.text.app_update_handle) refers to lto-llvm-a371a8.o(.text.app_load) for app_load
+    lto-llvm-a371a8.o(.ARM.exidx.text.app_update_handle) refers to lto-llvm-a371a8.o(.text.app_update_handle) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.iap_upgrade_app_handle) refers to lto-llvm-a371a8.o(.text.command_handle) for command_handle
+    lto-llvm-a371a8.o(.text.iap_upgrade_app_handle) refers to lto-llvm-a371a8.o(.text.app_update_handle) for app_update_handle
+    lto-llvm-a371a8.o(.ARM.exidx.text.iap_upgrade_app_handle) refers to lto-llvm-a371a8.o(.text.iap_upgrade_app_handle) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.crm_reset) refers to lto-llvm-a371a8.o(.text.crm_reset) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.crm_flag_get) refers to lto-llvm-a371a8.o(.text.crm_flag_get) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.crm_hext_stable_wait) refers to lto-llvm-a371a8.o(.text.crm_flag_get) for crm_flag_get
+    lto-llvm-a371a8.o(.ARM.exidx.text.crm_hext_stable_wait) refers to lto-llvm-a371a8.o(.text.crm_hext_stable_wait) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.crm_periph_clock_enable) refers to lto-llvm-a371a8.o(.text.crm_periph_clock_enable) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.crm_clock_source_enable) refers to lto-llvm-a371a8.o(.text.crm_clock_source_enable) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.crm_ahb_div_set) refers to lto-llvm-a371a8.o(.text.crm_ahb_div_set) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.crm_apb1_div_set) refers to lto-llvm-a371a8.o(.text.crm_apb1_div_set) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.crm_apb2_div_set) refers to lto-llvm-a371a8.o(.text.crm_apb2_div_set) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.crm_pll_config) refers to lto-llvm-a371a8.o(.text.crm_pll_config) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.crm_sysclk_switch) refers to lto-llvm-a371a8.o(.text.crm_sysclk_switch) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.crm_sysclk_switch_status_get) refers to lto-llvm-a371a8.o(.text.crm_sysclk_switch_status_get) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.crm_clocks_freq_get) refers to lto-llvm-a371a8.o(.text.crm_sysclk_switch_status_get) for crm_sysclk_switch_status_get
+    lto-llvm-a371a8.o(.text.crm_clocks_freq_get) refers to lludivv7m.o(.text) for __aeabi_uldivmod
+    lto-llvm-a371a8.o(.text.crm_clocks_freq_get) refers to lto-llvm-a371a8.o(.rodata.cst16) for system_core_clock_update.sys_ahb_div_table
+    lto-llvm-a371a8.o(.text.crm_clocks_freq_get) refers to lto-llvm-a371a8.o(.rodata.cst8) for crm_clocks_freq_get.ahb_apb2_div_table
+    lto-llvm-a371a8.o(.ARM.exidx.text.crm_clocks_freq_get) refers to lto-llvm-a371a8.o(.text.crm_clocks_freq_get) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.crm_auto_step_mode_enable) refers to lto-llvm-a371a8.o(.text.crm_auto_step_mode_enable) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.tmr_counter_enable) refers to lto-llvm-a371a8.o(.text.tmr_counter_enable) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.tmr_base_init) refers to lto-llvm-a371a8.o(.text.tmr_base_init) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.tmr_clock_source_div_set) refers to lto-llvm-a371a8.o(.text.tmr_clock_source_div_set) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.tmr_cnt_dir_set) refers to lto-llvm-a371a8.o(.text.tmr_cnt_dir_set) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.tmr_period_buffer_enable) refers to lto-llvm-a371a8.o(.text.tmr_period_buffer_enable) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.tmr_primary_mode_select) refers to lto-llvm-a371a8.o(.text.tmr_primary_mode_select) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.tmr_sub_sync_mode_set) refers to lto-llvm-a371a8.o(.text.tmr_sub_sync_mode_set) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.tmr_interrupt_flag_get) refers to lto-llvm-a371a8.o(.text.tmr_interrupt_flag_get) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.tmr_flag_clear) refers to lto-llvm-a371a8.o(.text.tmr_flag_clear) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.gpio_init) refers to lto-llvm-a371a8.o(.text.gpio_init) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.gpio_default_para_init) refers to lto-llvm-a371a8.o(.text.gpio_default_para_init) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.gpio_pin_mux_config) refers to lto-llvm-a371a8.o(.text.gpio_pin_mux_config) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.usart_init) refers to lto-llvm-a371a8.o(.text.crm_clocks_freq_get) for crm_clocks_freq_get
+    lto-llvm-a371a8.o(.ARM.exidx.text.usart_init) refers to lto-llvm-a371a8.o(.text.usart_init) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.usart_parity_selection_config) refers to lto-llvm-a371a8.o(.text.usart_parity_selection_config) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.usart_enable) refers to lto-llvm-a371a8.o(.text.usart_enable) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.usart_transmitter_enable) refers to lto-llvm-a371a8.o(.text.usart_transmitter_enable) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.usart_receiver_enable) refers to lto-llvm-a371a8.o(.text.usart_receiver_enable) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.usart_interrupt_enable) refers to lto-llvm-a371a8.o(.text.usart_interrupt_enable) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.usart_data_transmit) refers to lto-llvm-a371a8.o(.text.usart_data_transmit) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.usart_data_receive) refers to lto-llvm-a371a8.o(.text.usart_data_receive) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.usart_hardware_flow_control_set) refers to lto-llvm-a371a8.o(.text.usart_hardware_flow_control_set) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.usart_flag_get) refers to lto-llvm-a371a8.o(.text.usart_flag_get) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.usart_interrupt_flag_get) refers to lto-llvm-a371a8.o(.text.usart_interrupt_flag_get) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.flash_operation_status_get) refers to lto-llvm-a371a8.o(.text.flash_operation_status_get) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.flash_operation_wait_for) refers to lto-llvm-a371a8.o(.text.flash_operation_status_get) for flash_operation_status_get
+    lto-llvm-a371a8.o(.ARM.exidx.text.flash_operation_wait_for) refers to lto-llvm-a371a8.o(.text.flash_operation_wait_for) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.flash_unlock) refers to lto-llvm-a371a8.o(.text.flash_unlock) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.flash_lock) refers to lto-llvm-a371a8.o(.text.flash_lock) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.flash_sector_erase) refers to lto-llvm-a371a8.o(.text.flash_operation_wait_for) for flash_operation_wait_for
+    lto-llvm-a371a8.o(.ARM.exidx.text.flash_sector_erase) refers to lto-llvm-a371a8.o(.text.flash_sector_erase) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.flash_halfword_program) refers to lto-llvm-a371a8.o(.text.flash_operation_wait_for) for flash_operation_wait_for
+    lto-llvm-a371a8.o(.ARM.exidx.text.flash_halfword_program) refers to lto-llvm-a371a8.o(.text.flash_halfword_program) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.nvic_irq_enable) refers to lto-llvm-a371a8.o(.text.__NVIC_GetPriorityGrouping.101) for __NVIC_GetPriorityGrouping.101
+    lto-llvm-a371a8.o(.text.nvic_irq_enable) refers to lto-llvm-a371a8.o(.text.NVIC_EncodePriority.102) for NVIC_EncodePriority.102
+    lto-llvm-a371a8.o(.text.nvic_irq_enable) refers to lto-llvm-a371a8.o(.text.__NVIC_SetPriority.103) for __NVIC_SetPriority.103
+    lto-llvm-a371a8.o(.text.nvic_irq_enable) refers to lto-llvm-a371a8.o(.text.__NVIC_EnableIRQ) for __NVIC_EnableIRQ
+    lto-llvm-a371a8.o(.ARM.exidx.text.nvic_irq_enable) refers to lto-llvm-a371a8.o(.text.nvic_irq_enable) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_GetPriorityGrouping.101) refers to lto-llvm-a371a8.o(.text.__NVIC_GetPriorityGrouping.101) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.NVIC_EncodePriority.102) refers to lto-llvm-a371a8.o(.text.NVIC_EncodePriority.102) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_SetPriority.103) refers to lto-llvm-a371a8.o(.text.__NVIC_SetPriority.103) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_EnableIRQ) refers to lto-llvm-a371a8.o(.text.__NVIC_EnableIRQ) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.nvic_irq_disable) refers to lto-llvm-a371a8.o(.text.__NVIC_DisableIRQ) for __NVIC_DisableIRQ
+    lto-llvm-a371a8.o(.ARM.exidx.text.nvic_irq_disable) refers to lto-llvm-a371a8.o(.text.nvic_irq_disable) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_DisableIRQ) refers to lto-llvm-a371a8.o(.text.__NVIC_DisableIRQ) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.nvic_priority_group_config) refers to lto-llvm-a371a8.o(.text.__NVIC_SetPriorityGrouping) for __NVIC_SetPriorityGrouping
+    lto-llvm-a371a8.o(.ARM.exidx.text.nvic_priority_group_config) refers to lto-llvm-a371a8.o(.text.nvic_priority_group_config) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_SetPriorityGrouping) refers to lto-llvm-a371a8.o(.text.__NVIC_SetPriorityGrouping) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.ARM.exidx.text.SystemInit) refers to lto-llvm-a371a8.o(.text.SystemInit) for [Anonymous Symbol]
+    lto-llvm-a371a8.o(.text.system_core_clock_update) refers to lto-llvm-a371a8.o(.text.crm_sysclk_switch_status_get) for crm_sysclk_switch_status_get
+    lto-llvm-a371a8.o(.text.system_core_clock_update) refers to lto-llvm-a371a8.o(.data.system_core_clock) for system_core_clock
+    lto-llvm-a371a8.o(.text.system_core_clock_update) refers to lludivv7m.o(.text) for __aeabi_uldivmod
+    lto-llvm-a371a8.o(.text.system_core_clock_update) refers to lto-llvm-a371a8.o(.rodata.cst16) for system_core_clock_update.sys_ahb_div_table
+    lto-llvm-a371a8.o(.ARM.exidx.text.system_core_clock_update) refers to lto-llvm-a371a8.o(.text.system_core_clock_update) for [Anonymous Symbol]
+    aeabi_ldiv0_sigfpe.o(.text) refers to rt_div0.o(.text) for __rt_div0
+    rt_div0.o(.text) refers to defsig_fpe_outer.o(.text) for __rt_SIGFPE
+    defsig_fpe_outer.o(.text) refers to defsig_fpe_inner.o(.text) for __rt_SIGFPE_inner
+    defsig_fpe_outer.o(.text) refers to defsig_exit.o(.text) for __sig_exit
+    defsig_fpe_formal.o(.text) refers to rt_raise.o(.text) for __rt_raise
+
+
+==============================================================================
+
+Removing Unused input sections from the image.
+
+    Removing lto-llvm-a371a8.o(.text), (0 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.NMI_Handler), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.HardFault_Handler), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.MemManage_Handler), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.BusFault_Handler), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.UsageFault_Handler), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.SVC_Handler), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.DebugMon_Handler), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.PendSV_Handler), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.SysTick_Handler), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.TMR3_GLOBAL_IRQHandler), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.USART1_IRQHandler), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.wk_system_clock_config), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.wk_periph_clock_config), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.wk_nvic_config), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_GetPriorityGrouping), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.NVIC_EncodePriority), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_SetPriority), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.main), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.wk_tmr3_init), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.wk_usart1_init), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.flash_2kb_write), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.flash_upgrade_flag_read), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.app_load), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_ClearPendingIRQ), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.data_take), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.command_handle), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.back_ok), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.back_err), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.app_update_handle), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.iap_upgrade_app_handle), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.crm_reset), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.crm_flag_get), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.crm_hext_stable_wait), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.crm_periph_clock_enable), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.crm_clock_source_enable), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.crm_ahb_div_set), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.crm_apb1_div_set), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.crm_apb2_div_set), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.crm_pll_config), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.crm_sysclk_switch), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.crm_sysclk_switch_status_get), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.crm_clocks_freq_get), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.crm_auto_step_mode_enable), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.tmr_counter_enable), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.tmr_base_init), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.tmr_clock_source_div_set), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.tmr_cnt_dir_set), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.tmr_period_buffer_enable), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.tmr_primary_mode_select), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.tmr_sub_sync_mode_set), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.tmr_interrupt_flag_get), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.tmr_flag_clear), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.gpio_init), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.gpio_default_para_init), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.gpio_pin_mux_config), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.usart_init), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.usart_parity_selection_config), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.usart_enable), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.usart_transmitter_enable), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.usart_receiver_enable), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.usart_interrupt_enable), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.usart_data_transmit), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.usart_data_receive), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.usart_hardware_flow_control_set), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.usart_flag_get), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.usart_interrupt_flag_get), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.flash_operation_status_get), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.flash_operation_wait_for), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.flash_unlock), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.flash_lock), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.flash_sector_erase), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.flash_halfword_program), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.nvic_irq_enable), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_GetPriorityGrouping.101), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.NVIC_EncodePriority.102), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_SetPriority.103), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_EnableIRQ), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.nvic_irq_disable), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_DisableIRQ), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.nvic_priority_group_config), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.__NVIC_SetPriorityGrouping), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.SystemInit), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.exidx.text.system_core_clock_update), (8 bytes).
+    Removing lto-llvm-a371a8.o(.ARM.use_no_argv), (4 bytes).
+
+85 unused section(s) (total 668 bytes) removed from the image.
+
+==============================================================================
+
+Image Symbol Table
+
+    Local Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
+    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
+    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_ldiv0.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_ldiv0_sigfpe.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_div0.o ABSOLUTE
+    ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
+    ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit_hlt.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command_hlt.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch_hlt.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
+    ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
+    ../clib/longlong.s                       0x00000000   Number         0  lludivv7m.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_formal.o ABSOLUTE
+    ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
+    ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
+    ../fplib/fpinit.s                        0x00000000   Number         0  fpinit.o ABSOLUTE
+    ../fplib/fpinit_empty.s                  0x00000000   Number         0  fpinit_empty.o ABSOLUTE
+    dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
+    ld-temp.o                                0x00000000   Number         0  lto-llvm-a371a8.o ABSOLUTE
+    startup_at32f421.s                       0x00000000   Number         0  startup_at32f421.o ABSOLUTE
+    RESET                                    0x08000000   Section      204  startup_at32f421.o(RESET)
+    !!!main                                  0x080000cc   Section        8  __main.o(!!!main)
+    !!!scatter                               0x080000d4   Section       92  __scatter.o(!!!scatter)
+    !!handler_copy                           0x08000130   Section       26  __scatter_copy.o(!!handler_copy)
+    !!handler_null                           0x0800014c   Section        2  __scatter.o(!!handler_null)
+    !!handler_zi                             0x08000150   Section       28  __scatter_zi.o(!!handler_zi)
+    .ARM.Collect$$libinit$$00000000          0x0800016c   Section        2  libinit.o(.ARM.Collect$$libinit$$00000000)
+    .ARM.Collect$$libinit$$00000002          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000002)
+    .ARM.Collect$$libinit$$00000004          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000004)
+    .ARM.Collect$$libinit$$00000006          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000006)
+    .ARM.Collect$$libinit$$0000000C          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000000C)
+    .ARM.Collect$$libinit$$0000000E          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000000E)
+    .ARM.Collect$$libinit$$00000010          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000010)
+    .ARM.Collect$$libinit$$00000013          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000013)
+    .ARM.Collect$$libinit$$00000015          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000015)
+    .ARM.Collect$$libinit$$00000017          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000017)
+    .ARM.Collect$$libinit$$00000019          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000019)
+    .ARM.Collect$$libinit$$0000001B          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000001B)
+    .ARM.Collect$$libinit$$0000001D          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000001D)
+    .ARM.Collect$$libinit$$0000001F          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000001F)
+    .ARM.Collect$$libinit$$00000021          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000021)
+    .ARM.Collect$$libinit$$00000023          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000023)
+    .ARM.Collect$$libinit$$00000025          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000025)
+    .ARM.Collect$$libinit$$00000027          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000027)
+    .ARM.Collect$$libinit$$0000002E          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000002E)
+    .ARM.Collect$$libinit$$00000030          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000030)
+    .ARM.Collect$$libinit$$00000032          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000032)
+    .ARM.Collect$$libinit$$00000034          0x0800016e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000034)
+    .ARM.Collect$$libinit$$00000035          0x0800016e   Section        2  libinit2.o(.ARM.Collect$$libinit$$00000035)
+    .ARM.Collect$$libshutdown$$00000000      0x08000170   Section        2  libshutdown.o(.ARM.Collect$$libshutdown$$00000000)
+    .ARM.Collect$$libshutdown$$00000002      0x08000172   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000002)
+    .ARM.Collect$$libshutdown$$00000004      0x08000172   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000004)
+    .ARM.Collect$$libshutdown$$00000007      0x08000172   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000007)
+    .ARM.Collect$$libshutdown$$0000000A      0x08000172   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A)
+    .ARM.Collect$$libshutdown$$0000000C      0x08000172   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C)
+    .ARM.Collect$$libshutdown$$0000000F      0x08000172   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F)
+    .ARM.Collect$$libshutdown$$00000010      0x08000172   Section        2  libshutdown2.o(.ARM.Collect$$libshutdown$$00000010)
+    .ARM.Collect$$rtentry$$00000000          0x08000174   Section        0  __rtentry.o(.ARM.Collect$$rtentry$$00000000)
+    .ARM.Collect$$rtentry$$00000002          0x08000174   Section        0  __rtentry2.o(.ARM.Collect$$rtentry$$00000002)
+    .ARM.Collect$$rtentry$$00000004          0x08000174   Section        6  __rtentry4.o(.ARM.Collect$$rtentry$$00000004)
+    .ARM.Collect$$rtentry$$00000009          0x0800017a   Section        0  __rtentry2.o(.ARM.Collect$$rtentry$$00000009)
+    .ARM.Collect$$rtentry$$0000000A          0x0800017a   Section        4  __rtentry2.o(.ARM.Collect$$rtentry$$0000000A)
+    .ARM.Collect$$rtentry$$0000000C          0x0800017e   Section        0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000C)
+    .ARM.Collect$$rtentry$$0000000D          0x0800017e   Section        8  __rtentry2.o(.ARM.Collect$$rtentry$$0000000D)
+    .ARM.Collect$$rtexit$$00000000           0x08000186   Section        2  rtexit.o(.ARM.Collect$$rtexit$$00000000)
+    .ARM.Collect$$rtexit$$00000002           0x08000188   Section        0  rtexit2.o(.ARM.Collect$$rtexit$$00000002)
+    .ARM.Collect$$rtexit$$00000003           0x08000188   Section        4  rtexit2.o(.ARM.Collect$$rtexit$$00000003)
+    .ARM.Collect$$rtexit$$00000004           0x0800018c   Section        6  rtexit2.o(.ARM.Collect$$rtexit$$00000004)
+    .text                                    0x08000194   Section       64  startup_at32f421.o(.text)
+    .text                                    0x080001d4   Section        0  heapauxi.o(.text)
+    .text                                    0x080001da   Section       74  sys_stackheap_outer.o(.text)
+    .text                                    0x08000224   Section        0  exit.o(.text)
+    .text                                    0x08000238   Section        8  libspace.o(.text)
+    .text                                    0x08000240   Section        0  sys_exit.o(.text)
+    .text                                    0x0800024c   Section        2  use_no_semi.o(.text)
+    .text                                    0x0800024e   Section        0  indicate_semi.o(.text)
+    .text                                    0x0800024e   Section      240  lludivv7m.o(.text)
+    [Anonymous Symbol]                       0x08000340   Section        0  lto-llvm-a371a8.o(.text.BusFault_Handler)
+    [Anonymous Symbol]                       0x08000344   Section        0  lto-llvm-a371a8.o(.text.DebugMon_Handler)
+    [Anonymous Symbol]                       0x08000348   Section        0  lto-llvm-a371a8.o(.text.HardFault_Handler)
+    [Anonymous Symbol]                       0x0800034c   Section        0  lto-llvm-a371a8.o(.text.MemManage_Handler)
+    [Anonymous Symbol]                       0x08000350   Section        0  lto-llvm-a371a8.o(.text.NMI_Handler)
+    NVIC_EncodePriority                      0x08000355   Thumb Code   100  lto-llvm-a371a8.o(.text.NVIC_EncodePriority)
+    [Anonymous Symbol]                       0x08000354   Section        0  lto-llvm-a371a8.o(.text.NVIC_EncodePriority)
+    NVIC_EncodePriority.102                  0x080003b9   Thumb Code    98  lto-llvm-a371a8.o(.text.NVIC_EncodePriority.102)
+    [Anonymous Symbol]                       0x080003b8   Section        0  lto-llvm-a371a8.o(.text.NVIC_EncodePriority.102)
+    [Anonymous Symbol]                       0x0800041c   Section        0  lto-llvm-a371a8.o(.text.PendSV_Handler)
+    [Anonymous Symbol]                       0x08000420   Section        0  lto-llvm-a371a8.o(.text.SVC_Handler)
+    [Anonymous Symbol]                       0x08000424   Section        0  lto-llvm-a371a8.o(.text.SysTick_Handler)
+    [Anonymous Symbol]                       0x08000428   Section        0  lto-llvm-a371a8.o(.text.SystemInit)
+    [Anonymous Symbol]                       0x080004d4   Section        0  lto-llvm-a371a8.o(.text.TMR3_GLOBAL_IRQHandler)
+    [Anonymous Symbol]                       0x08000544   Section        0  lto-llvm-a371a8.o(.text.USART1_IRQHandler)
+    [Anonymous Symbol]                       0x080005d8   Section        0  lto-llvm-a371a8.o(.text.UsageFault_Handler)
+    __NVIC_ClearPendingIRQ                   0x080005dd   Thumb Code    50  lto-llvm-a371a8.o(.text.__NVIC_ClearPendingIRQ)
+    [Anonymous Symbol]                       0x080005dc   Section        0  lto-llvm-a371a8.o(.text.__NVIC_ClearPendingIRQ)
+    __NVIC_DisableIRQ                        0x08000611   Thumb Code    58  lto-llvm-a371a8.o(.text.__NVIC_DisableIRQ)
+    [Anonymous Symbol]                       0x08000610   Section        0  lto-llvm-a371a8.o(.text.__NVIC_DisableIRQ)
+    __NVIC_EnableIRQ                         0x0800064d   Thumb Code    50  lto-llvm-a371a8.o(.text.__NVIC_EnableIRQ)
+    [Anonymous Symbol]                       0x0800064c   Section        0  lto-llvm-a371a8.o(.text.__NVIC_EnableIRQ)
+    __NVIC_GetPriorityGrouping               0x08000681   Thumb Code    16  lto-llvm-a371a8.o(.text.__NVIC_GetPriorityGrouping)
+    [Anonymous Symbol]                       0x08000680   Section        0  lto-llvm-a371a8.o(.text.__NVIC_GetPriorityGrouping)
+    __NVIC_GetPriorityGrouping.101           0x08000691   Thumb Code    16  lto-llvm-a371a8.o(.text.__NVIC_GetPriorityGrouping.101)
+    [Anonymous Symbol]                       0x08000690   Section        0  lto-llvm-a371a8.o(.text.__NVIC_GetPriorityGrouping.101)
+    __NVIC_SetPriority                       0x080006a1   Thumb Code    66  lto-llvm-a371a8.o(.text.__NVIC_SetPriority)
+    [Anonymous Symbol]                       0x080006a0   Section        0  lto-llvm-a371a8.o(.text.__NVIC_SetPriority)
+    __NVIC_SetPriority.103                   0x080006e5   Thumb Code    66  lto-llvm-a371a8.o(.text.__NVIC_SetPriority.103)
+    [Anonymous Symbol]                       0x080006e4   Section        0  lto-llvm-a371a8.o(.text.__NVIC_SetPriority.103)
+    __NVIC_SetPriorityGrouping               0x08000729   Thumb Code    60  lto-llvm-a371a8.o(.text.__NVIC_SetPriorityGrouping)
+    [Anonymous Symbol]                       0x08000728   Section        0  lto-llvm-a371a8.o(.text.__NVIC_SetPriorityGrouping)
+    app_load                                 0x08000765   Thumb Code   126  lto-llvm-a371a8.o(.text.app_load)
+    [Anonymous Symbol]                       0x08000764   Section        0  lto-llvm-a371a8.o(.text.app_load)
+    app_update_handle                        0x080007e5   Thumb Code   498  lto-llvm-a371a8.o(.text.app_update_handle)
+    [Anonymous Symbol]                       0x080007e4   Section        0  lto-llvm-a371a8.o(.text.app_update_handle)
+    back_err                                 0x080009d9   Thumb Code   112  lto-llvm-a371a8.o(.text.back_err)
+    [Anonymous Symbol]                       0x080009d8   Section        0  lto-llvm-a371a8.o(.text.back_err)
+    back_ok                                  0x08000a49   Thumb Code    40  lto-llvm-a371a8.o(.text.back_ok)
+    [Anonymous Symbol]                       0x08000a48   Section        0  lto-llvm-a371a8.o(.text.back_ok)
+    command_handle                           0x08000a71   Thumb Code   750  lto-llvm-a371a8.o(.text.command_handle)
+    [Anonymous Symbol]                       0x08000a70   Section        0  lto-llvm-a371a8.o(.text.command_handle)
+    crm_ahb_div_set                          0x08000d61   Thumb Code    40  lto-llvm-a371a8.o(.text.crm_ahb_div_set)
+    [Anonymous Symbol]                       0x08000d60   Section        0  lto-llvm-a371a8.o(.text.crm_ahb_div_set)
+    crm_apb1_div_set                         0x08000d89   Thumb Code    40  lto-llvm-a371a8.o(.text.crm_apb1_div_set)
+    [Anonymous Symbol]                       0x08000d88   Section        0  lto-llvm-a371a8.o(.text.crm_apb1_div_set)
+    crm_apb2_div_set                         0x08000db1   Thumb Code    40  lto-llvm-a371a8.o(.text.crm_apb2_div_set)
+    [Anonymous Symbol]                       0x08000db0   Section        0  lto-llvm-a371a8.o(.text.crm_apb2_div_set)
+    crm_auto_step_mode_enable                0x08000dd9   Thumb Code    56  lto-llvm-a371a8.o(.text.crm_auto_step_mode_enable)
+    [Anonymous Symbol]                       0x08000dd8   Section        0  lto-llvm-a371a8.o(.text.crm_auto_step_mode_enable)
+    crm_clock_source_enable                  0x08000e11   Thumb Code   162  lto-llvm-a371a8.o(.text.crm_clock_source_enable)
+    [Anonymous Symbol]                       0x08000e10   Section        0  lto-llvm-a371a8.o(.text.crm_clock_source_enable)
+    crm_clocks_freq_get                      0x08000eb5   Thumb Code   610  lto-llvm-a371a8.o(.text.crm_clocks_freq_get)
+    [Anonymous Symbol]                       0x08000eb4   Section        0  lto-llvm-a371a8.o(.text.crm_clocks_freq_get)
+    crm_flag_get                             0x08001119   Thumb Code    62  lto-llvm-a371a8.o(.text.crm_flag_get)
+    [Anonymous Symbol]                       0x08001118   Section        0  lto-llvm-a371a8.o(.text.crm_flag_get)
+    crm_hext_stable_wait                     0x08001159   Thumb Code    92  lto-llvm-a371a8.o(.text.crm_hext_stable_wait)
+    [Anonymous Symbol]                       0x08001158   Section        0  lto-llvm-a371a8.o(.text.crm_hext_stable_wait)
+    crm_periph_clock_enable                  0x080011b5   Thumb Code    84  lto-llvm-a371a8.o(.text.crm_periph_clock_enable)
+    [Anonymous Symbol]                       0x080011b4   Section        0  lto-llvm-a371a8.o(.text.crm_periph_clock_enable)
+    crm_pll_config                           0x08001209   Thumb Code   486  lto-llvm-a371a8.o(.text.crm_pll_config)
+    [Anonymous Symbol]                       0x08001208   Section        0  lto-llvm-a371a8.o(.text.crm_pll_config)
+    crm_reset                                0x080013f1   Thumb Code   156  lto-llvm-a371a8.o(.text.crm_reset)
+    [Anonymous Symbol]                       0x080013f0   Section        0  lto-llvm-a371a8.o(.text.crm_reset)
+    crm_sysclk_switch                        0x0800148d   Thumb Code    72  lto-llvm-a371a8.o(.text.crm_sysclk_switch)
+    [Anonymous Symbol]                       0x0800148c   Section        0  lto-llvm-a371a8.o(.text.crm_sysclk_switch)
+    crm_sysclk_switch_status_get             0x080014d5   Thumb Code    16  lto-llvm-a371a8.o(.text.crm_sysclk_switch_status_get)
+    [Anonymous Symbol]                       0x080014d4   Section        0  lto-llvm-a371a8.o(.text.crm_sysclk_switch_status_get)
+    data_take                                0x080014e5   Thumb Code    88  lto-llvm-a371a8.o(.text.data_take)
+    [Anonymous Symbol]                       0x080014e4   Section        0  lto-llvm-a371a8.o(.text.data_take)
+    flash_2kb_write                          0x0800153d   Thumb Code   134  lto-llvm-a371a8.o(.text.flash_2kb_write)
+    [Anonymous Symbol]                       0x0800153c   Section        0  lto-llvm-a371a8.o(.text.flash_2kb_write)
+    flash_halfword_program                   0x080015c5   Thumb Code    64  lto-llvm-a371a8.o(.text.flash_halfword_program)
+    [Anonymous Symbol]                       0x080015c4   Section        0  lto-llvm-a371a8.o(.text.flash_halfword_program)
+    flash_lock                               0x08001605   Thumb Code    18  lto-llvm-a371a8.o(.text.flash_lock)
+    [Anonymous Symbol]                       0x08001604   Section        0  lto-llvm-a371a8.o(.text.flash_lock)
+    flash_operation_status_get               0x08001619   Thumb Code   104  lto-llvm-a371a8.o(.text.flash_operation_status_get)
+    [Anonymous Symbol]                       0x08001618   Section        0  lto-llvm-a371a8.o(.text.flash_operation_status_get)
+    flash_operation_wait_for                 0x08001681   Thumb Code    86  lto-llvm-a371a8.o(.text.flash_operation_wait_for)
+    [Anonymous Symbol]                       0x08001680   Section        0  lto-llvm-a371a8.o(.text.flash_operation_wait_for)
+    flash_sector_erase                       0x080016d9   Thumb Code    72  lto-llvm-a371a8.o(.text.flash_sector_erase)
+    [Anonymous Symbol]                       0x080016d8   Section        0  lto-llvm-a371a8.o(.text.flash_sector_erase)
+    flash_unlock                             0x08001721   Thumb Code    30  lto-llvm-a371a8.o(.text.flash_unlock)
+    [Anonymous Symbol]                       0x08001720   Section        0  lto-llvm-a371a8.o(.text.flash_unlock)
+    flash_upgrade_flag_read                  0x08001741   Thumb Code    50  lto-llvm-a371a8.o(.text.flash_upgrade_flag_read)
+    [Anonymous Symbol]                       0x08001740   Section        0  lto-llvm-a371a8.o(.text.flash_upgrade_flag_read)
+    gpio_default_para_init                   0x08001775   Thumb Code    36  lto-llvm-a371a8.o(.text.gpio_default_para_init)
+    [Anonymous Symbol]                       0x08001774   Section        0  lto-llvm-a371a8.o(.text.gpio_default_para_init)
+    gpio_init                                0x08001799   Thumb Code   234  lto-llvm-a371a8.o(.text.gpio_init)
+    [Anonymous Symbol]                       0x08001798   Section        0  lto-llvm-a371a8.o(.text.gpio_init)
+    gpio_pin_mux_config                      0x08001885   Thumb Code   146  lto-llvm-a371a8.o(.text.gpio_pin_mux_config)
+    [Anonymous Symbol]                       0x08001884   Section        0  lto-llvm-a371a8.o(.text.gpio_pin_mux_config)
+    iap_upgrade_app_handle                   0x08001919   Thumb Code    12  lto-llvm-a371a8.o(.text.iap_upgrade_app_handle)
+    [Anonymous Symbol]                       0x08001918   Section        0  lto-llvm-a371a8.o(.text.iap_upgrade_app_handle)
+    [Anonymous Symbol]                       0x08001924   Section        0  lto-llvm-a371a8.o(.text.main)
+    nvic_irq_disable                         0x0800197d   Thumb Code    20  lto-llvm-a371a8.o(.text.nvic_irq_disable)
+    [Anonymous Symbol]                       0x0800197c   Section        0  lto-llvm-a371a8.o(.text.nvic_irq_disable)
+    nvic_irq_enable                          0x08001991   Thumb Code    52  lto-llvm-a371a8.o(.text.nvic_irq_enable)
+    [Anonymous Symbol]                       0x08001990   Section        0  lto-llvm-a371a8.o(.text.nvic_irq_enable)
+    nvic_priority_group_config               0x080019c5   Thumb Code    22  lto-llvm-a371a8.o(.text.nvic_priority_group_config)
+    [Anonymous Symbol]                       0x080019c4   Section        0  lto-llvm-a371a8.o(.text.nvic_priority_group_config)
+    system_core_clock_update                 0x080019dd   Thumb Code   552  lto-llvm-a371a8.o(.text.system_core_clock_update)
+    [Anonymous Symbol]                       0x080019dc   Section        0  lto-llvm-a371a8.o(.text.system_core_clock_update)
+    tmr_base_init                            0x08001c05   Thumb Code    50  lto-llvm-a371a8.o(.text.tmr_base_init)
+    [Anonymous Symbol]                       0x08001c04   Section        0  lto-llvm-a371a8.o(.text.tmr_base_init)
+    tmr_clock_source_div_set                 0x08001c39   Thumb Code    44  lto-llvm-a371a8.o(.text.tmr_clock_source_div_set)
+    [Anonymous Symbol]                       0x08001c38   Section        0  lto-llvm-a371a8.o(.text.tmr_clock_source_div_set)
+    tmr_cnt_dir_set                          0x08001c65   Thumb Code    44  lto-llvm-a371a8.o(.text.tmr_cnt_dir_set)
+    [Anonymous Symbol]                       0x08001c64   Section        0  lto-llvm-a371a8.o(.text.tmr_cnt_dir_set)
+    tmr_counter_enable                       0x08001c91   Thumb Code    36  lto-llvm-a371a8.o(.text.tmr_counter_enable)
+    [Anonymous Symbol]                       0x08001c90   Section        0  lto-llvm-a371a8.o(.text.tmr_counter_enable)
+    tmr_flag_clear                           0x08001cb5   Thumb Code    28  lto-llvm-a371a8.o(.text.tmr_flag_clear)
+    [Anonymous Symbol]                       0x08001cb4   Section        0  lto-llvm-a371a8.o(.text.tmr_flag_clear)
+    tmr_interrupt_flag_get                   0x08001cd1   Thumb Code    70  lto-llvm-a371a8.o(.text.tmr_interrupt_flag_get)
+    [Anonymous Symbol]                       0x08001cd0   Section        0  lto-llvm-a371a8.o(.text.tmr_interrupt_flag_get)
+    tmr_period_buffer_enable                 0x08001d19   Thumb Code    44  lto-llvm-a371a8.o(.text.tmr_period_buffer_enable)
+    [Anonymous Symbol]                       0x08001d18   Section        0  lto-llvm-a371a8.o(.text.tmr_period_buffer_enable)
+    tmr_primary_mode_select                  0x08001d45   Thumb Code    44  lto-llvm-a371a8.o(.text.tmr_primary_mode_select)
+    [Anonymous Symbol]                       0x08001d44   Section        0  lto-llvm-a371a8.o(.text.tmr_primary_mode_select)
+    tmr_sub_sync_mode_set                    0x08001d71   Thumb Code    44  lto-llvm-a371a8.o(.text.tmr_sub_sync_mode_set)
+    [Anonymous Symbol]                       0x08001d70   Section        0  lto-llvm-a371a8.o(.text.tmr_sub_sync_mode_set)
+    usart_data_receive                       0x08001d9d   Thumb Code    22  lto-llvm-a371a8.o(.text.usart_data_receive)
+    [Anonymous Symbol]                       0x08001d9c   Section        0  lto-llvm-a371a8.o(.text.usart_data_receive)
+    usart_data_transmit                      0x08001db5   Thumb Code    32  lto-llvm-a371a8.o(.text.usart_data_transmit)
+    [Anonymous Symbol]                       0x08001db4   Section        0  lto-llvm-a371a8.o(.text.usart_data_transmit)
+    usart_enable                             0x08001dd5   Thumb Code    44  lto-llvm-a371a8.o(.text.usart_enable)
+    [Anonymous Symbol]                       0x08001dd4   Section        0  lto-llvm-a371a8.o(.text.usart_enable)
+    usart_flag_get                           0x08001e01   Thumb Code    52  lto-llvm-a371a8.o(.text.usart_flag_get)
+    [Anonymous Symbol]                       0x08001e00   Section        0  lto-llvm-a371a8.o(.text.usart_flag_get)
+    usart_hardware_flow_control_set          0x08001e35   Thumb Code   154  lto-llvm-a371a8.o(.text.usart_hardware_flow_control_set)
+    [Anonymous Symbol]                       0x08001e34   Section        0  lto-llvm-a371a8.o(.text.usart_hardware_flow_control_set)
+    usart_init                               0x08001ed1   Thumb Code   212  lto-llvm-a371a8.o(.text.usart_init)
+    [Anonymous Symbol]                       0x08001ed0   Section        0  lto-llvm-a371a8.o(.text.usart_init)
+    usart_interrupt_enable                   0x08001fa5   Thumb Code    88  lto-llvm-a371a8.o(.text.usart_interrupt_enable)
+    [Anonymous Symbol]                       0x08001fa4   Section        0  lto-llvm-a371a8.o(.text.usart_interrupt_enable)
+    usart_interrupt_flag_get                 0x08001ffd   Thumb Code   296  lto-llvm-a371a8.o(.text.usart_interrupt_flag_get)
+    [Anonymous Symbol]                       0x08001ffc   Section        0  lto-llvm-a371a8.o(.text.usart_interrupt_flag_get)
+    usart_parity_selection_config            0x08002125   Thumb Code   120  lto-llvm-a371a8.o(.text.usart_parity_selection_config)
+    [Anonymous Symbol]                       0x08002124   Section        0  lto-llvm-a371a8.o(.text.usart_parity_selection_config)
+    usart_receiver_enable                    0x0800219d   Thumb Code    44  lto-llvm-a371a8.o(.text.usart_receiver_enable)
+    [Anonymous Symbol]                       0x0800219c   Section        0  lto-llvm-a371a8.o(.text.usart_receiver_enable)
+    usart_transmitter_enable                 0x080021c9   Thumb Code    44  lto-llvm-a371a8.o(.text.usart_transmitter_enable)
+    [Anonymous Symbol]                       0x080021c8   Section        0  lto-llvm-a371a8.o(.text.usart_transmitter_enable)
+    wk_nvic_config                           0x080021f5   Thumb Code   164  lto-llvm-a371a8.o(.text.wk_nvic_config)
+    [Anonymous Symbol]                       0x080021f4   Section        0  lto-llvm-a371a8.o(.text.wk_nvic_config)
+    wk_periph_clock_config                   0x08002299   Thumb Code    52  lto-llvm-a371a8.o(.text.wk_periph_clock_config)
+    [Anonymous Symbol]                       0x08002298   Section        0  lto-llvm-a371a8.o(.text.wk_periph_clock_config)
+    wk_system_clock_config                   0x080022cd   Thumb Code   160  lto-llvm-a371a8.o(.text.wk_system_clock_config)
+    [Anonymous Symbol]                       0x080022cc   Section        0  lto-llvm-a371a8.o(.text.wk_system_clock_config)
+    wk_tmr3_init                             0x0800236d   Thumb Code    32  lto-llvm-a371a8.o(.text.wk_tmr3_init)
+    [Anonymous Symbol]                       0x0800236c   Section        0  lto-llvm-a371a8.o(.text.wk_tmr3_init)
+    wk_usart1_init                           0x0800238d   Thumb Code   118  lto-llvm-a371a8.o(.text.wk_usart1_init)
+    [Anonymous Symbol]                       0x0800238c   Section        0  lto-llvm-a371a8.o(.text.wk_usart1_init)
+    system_core_clock_update.sys_ahb_div_table 0x08002402   Data          16  lto-llvm-a371a8.o(.rodata.cst16)
+    [Anonymous Symbol]                       0x08002402   Section        0  lto-llvm-a371a8.o(.rodata.cst16)
+    crm_clocks_freq_get.ahb_apb2_div_table   0x08002412   Data           8  lto-llvm-a371a8.o(.rodata.cst8)
+    [Anonymous Symbol]                       0x08002412   Section        0  lto-llvm-a371a8.o(.rodata.cst8)
+    crm_clocks_freq_get.adc_div_table        0x0800241a   Data           8  lto-llvm-a371a8.o(.rodata.cst8)
+    system_core_clock                        0x20000000   Data           4  lto-llvm-a371a8.o(.data.system_core_clock)
+    [Anonymous Symbol]                       0x20000000   Section        0  lto-llvm-a371a8.o(.data.system_core_clock)
+    .bss                                     0x20000008   Section       96  libspace.o(.bss)
+    cmd_addr_cnt                             0x20000068   Data           1  lto-llvm-a371a8.o(.bss.cmd_addr_cnt)
+    [Anonymous Symbol]                       0x20000068   Section        0  lto-llvm-a371a8.o(.bss.cmd_addr_cnt)
+    cmd_ctr_step                             0x20000069   Data           1  lto-llvm-a371a8.o(.bss.cmd_ctr_step)
+    [Anonymous Symbol]                       0x20000069   Section        0  lto-llvm-a371a8.o(.bss.cmd_ctr_step)
+    cmd_data_cnt                             0x2000006c   Data           4  lto-llvm-a371a8.o(.bss.cmd_data_cnt)
+    [Anonymous Symbol]                       0x2000006c   Section        0  lto-llvm-a371a8.o(.bss.cmd_data_cnt)
+    cmd_data_group_struct                    0x20000070   Data        2054  lto-llvm-a371a8.o(.bss.cmd_data_group_struct)
+    [Anonymous Symbol]                       0x20000070   Section        0  lto-llvm-a371a8.o(.bss.cmd_data_group_struct)
+    cmd_data_step                            0x20000876   Data           1  lto-llvm-a371a8.o(.bss.cmd_data_step)
+    [Anonymous Symbol]                       0x20000876   Section        0  lto-llvm-a371a8.o(.bss.cmd_data_step)
+    get_data_from_usart_flag                 0x20000877   Data           1  lto-llvm-a371a8.o(.bss.get_data_from_usart_flag)
+    [Anonymous Symbol]                       0x20000877   Section        0  lto-llvm-a371a8.o(.bss.get_data_from_usart_flag)
+    jump_to_app                              0x20000878   Data           4  lto-llvm-a371a8.o(.bss.jump_to_app)
+    [Anonymous Symbol]                       0x20000878   Section        0  lto-llvm-a371a8.o(.bss.jump_to_app)
+    time_ira_cnt                             0x2000087c   Data           1  lto-llvm-a371a8.o(.bss.time_ira_cnt)
+    [Anonymous Symbol]                       0x2000087c   Section        0  lto-llvm-a371a8.o(.bss.time_ira_cnt)
+    update_status                            0x2000087d   Data           1  lto-llvm-a371a8.o(.bss.update_status)
+    [Anonymous Symbol]                       0x2000087d   Section        0  lto-llvm-a371a8.o(.bss.update_status)
+    usart_group_struct                       0x2000087e   Data        2054  lto-llvm-a371a8.o(.bss.usart_group_struct)
+    [Anonymous Symbol]                       0x2000087e   Section        0  lto-llvm-a371a8.o(.bss.usart_group_struct)
+    Heap_Mem                                 0x20001088   Data         512  startup_at32f421.o(HEAP)
+    HEAP                                     0x20001088   Section      512  startup_at32f421.o(HEAP)
+    Stack_Mem                                0x20001288   Data        1024  startup_at32f421.o(STACK)
+    STACK                                    0x20001288   Section     1024  startup_at32f421.o(STACK)
+    __initial_sp                             0x20001688   Data           0  startup_at32f421.o(STACK)
+
+    Global Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    BuildAttributes$$THM_ISAv4$E$P$D$K$B$S$7EM$PE$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$~IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$ROPI$IEEEF$EBA8$UX$STANDARDLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    __fp_init_empty                          0x00000000   Number         0  fpinit_empty.o ABSOLUTE
+    __ARM_exceptions_init                     - Undefined Weak Reference
+    __alloca_initialize                       - Undefined Weak Reference
+    __arm_preinit_                            - Undefined Weak Reference
+    __arm_relocate_pie_                       - Undefined Weak Reference
+    __cpp_initialize__aeabi_                  - Undefined Weak Reference
+    __cxa_finalize                            - Undefined Weak Reference
+    __rt_locale                               - Undefined Weak Reference
+    __sigvec_lookup                           - Undefined Weak Reference
+    _atexit_init                              - Undefined Weak Reference
+    _call_atexit_fns                          - Undefined Weak Reference
+    _clock_init                               - Undefined Weak Reference
+    _fp_trap_init                             - Undefined Weak Reference
+    _fp_trap_shutdown                         - Undefined Weak Reference
+    _get_lc_collate                           - Undefined Weak Reference
+    _get_lc_ctype                             - Undefined Weak Reference
+    _get_lc_monetary                          - Undefined Weak Reference
+    _get_lc_numeric                           - Undefined Weak Reference
+    _get_lc_time                              - Undefined Weak Reference
+    _getenv_init                              - Undefined Weak Reference
+    _handle_redirection                       - Undefined Weak Reference
+    _init_alloc                               - Undefined Weak Reference
+    _init_user_alloc                          - Undefined Weak Reference
+    _initio                                   - Undefined Weak Reference
+    _rand_init                                - Undefined Weak Reference
+    _signal_finish                            - Undefined Weak Reference
+    _signal_init                              - Undefined Weak Reference
+    _terminate_alloc                          - Undefined Weak Reference
+    _terminate_user_alloc                     - Undefined Weak Reference
+    _terminateio                              - Undefined Weak Reference
+    __Vectors_Size                           0x000000cc   Number         0  startup_at32f421.o ABSOLUTE
+    __Vectors                                0x08000000   Data           4  startup_at32f421.o(RESET)
+    __Vectors_End                            0x080000cc   Data           0  startup_at32f421.o(RESET)
+    __main                                   0x080000cd   Thumb Code     8  __main.o(!!!main)
+    __scatterload                            0x080000d5   Thumb Code     0  __scatter.o(!!!scatter)
+    __scatterload_rt2                        0x080000d5   Thumb Code    84  __scatter.o(!!!scatter)
+    __scatterload_rt2_thumb_only             0x080000d5   Thumb Code     0  __scatter.o(!!!scatter)
+    __scatterload_loop                       0x080000df   Thumb Code     0  __scatter.o(!!!scatter)
+    __scatterload_copy                       0x08000131   Thumb Code    26  __scatter_copy.o(!!handler_copy)
+    __scatterload_null                       0x0800014d   Thumb Code     2  __scatter.o(!!handler_null)
+    __scatterload_zeroinit                   0x08000151   Thumb Code    28  __scatter_zi.o(!!handler_zi)
+    __rt_lib_init                            0x0800016d   Thumb Code     0  libinit.o(.ARM.Collect$$libinit$$00000000)
+    __rt_lib_init_alloca_1                   0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000030)
+    __rt_lib_init_argv_1                     0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000002E)
+    __rt_lib_init_atexit_1                   0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000001D)
+    __rt_lib_init_clock_1                    0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000023)
+    __rt_lib_init_cpp_1                      0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000034)
+    __rt_lib_init_exceptions_1               0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000032)
+    __rt_lib_init_fp_1                       0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000002)
+    __rt_lib_init_fp_trap_1                  0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000021)
+    __rt_lib_init_getenv_1                   0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000025)
+    __rt_lib_init_heap_1                     0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000000C)
+    __rt_lib_init_lc_collate_1               0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000013)
+    __rt_lib_init_lc_ctype_1                 0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000015)
+    __rt_lib_init_lc_monetary_1              0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000017)
+    __rt_lib_init_lc_numeric_1               0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000019)
+    __rt_lib_init_lc_time_1                  0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000001B)
+    __rt_lib_init_preinit_1                  0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000006)
+    __rt_lib_init_rand_1                     0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000010)
+    __rt_lib_init_relocate_pie_1             0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000004)
+    __rt_lib_init_return                     0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000035)
+    __rt_lib_init_signal_1                   0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000001F)
+    __rt_lib_init_stdio_1                    0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000027)
+    __rt_lib_init_user_alloc_1               0x0800016f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000000E)
+    __rt_lib_shutdown                        0x08000171   Thumb Code     0  libshutdown.o(.ARM.Collect$$libshutdown$$00000000)
+    __rt_lib_shutdown_cpp_1                  0x08000173   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000002)
+    __rt_lib_shutdown_fp_trap_1              0x08000173   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000007)
+    __rt_lib_shutdown_heap_1                 0x08000173   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F)
+    __rt_lib_shutdown_return                 0x08000173   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000010)
+    __rt_lib_shutdown_signal_1               0x08000173   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A)
+    __rt_lib_shutdown_stdio_1                0x08000173   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000004)
+    __rt_lib_shutdown_user_alloc_1           0x08000173   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C)
+    __rt_entry                               0x08000175   Thumb Code     0  __rtentry.o(.ARM.Collect$$rtentry$$00000000)
+    __rt_entry_presh_1                       0x08000175   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$00000002)
+    __rt_entry_sh                            0x08000175   Thumb Code     0  __rtentry4.o(.ARM.Collect$$rtentry$$00000004)
+    __rt_entry_li                            0x0800017b   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000A)
+    __rt_entry_postsh_1                      0x0800017b   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$00000009)
+    __rt_entry_main                          0x0800017f   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000D)
+    __rt_entry_postli_1                      0x0800017f   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000C)
+    __rt_exit                                0x08000187   Thumb Code     0  rtexit.o(.ARM.Collect$$rtexit$$00000000)
+    __rt_exit_ls                             0x08000189   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000003)
+    __rt_exit_prels_1                        0x08000189   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000002)
+    __rt_exit_exit                           0x0800018d   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000004)
+    Reset_Handler                            0x08000195   Thumb Code     8  startup_at32f421.o(.text)
+    ADC1_CMP_IRQHandler                      0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    CRM_IRQHandler                           0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    DMA1_Channel1_IRQHandler                 0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    DMA1_Channel3_2_IRQHandler               0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    DMA1_Channel5_4_IRQHandler               0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    ERTC_IRQHandler                          0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    EXINT15_4_IRQHandler                     0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    EXINT1_0_IRQHandler                      0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    EXINT3_2_IRQHandler                      0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    FLASH_IRQHandler                         0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    I2C1_ERR_IRQHandler                      0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    I2C1_EVT_IRQHandler                      0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    I2C2_ERR_IRQHandler                      0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    I2C2_EVT_IRQHandler                      0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    PVM_IRQHandler                           0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    SPI1_IRQHandler                          0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    SPI2_IRQHandler                          0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    TMR14_GLOBAL_IRQHandler                  0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    TMR15_GLOBAL_IRQHandler                  0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    TMR16_GLOBAL_IRQHandler                  0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    TMR17_GLOBAL_IRQHandler                  0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    TMR1_BRK_OVF_TRG_HALL_IRQHandler         0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    TMR1_CH_IRQHandler                       0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    TMR6_GLOBAL_IRQHandler                   0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    USART2_IRQHandler                        0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    WWDT_IRQHandler                          0x080001af   Thumb Code     0  startup_at32f421.o(.text)
+    __user_initial_stackheap                 0x080001b1   Thumb Code     0  startup_at32f421.o(.text)
+    __use_two_region_memory                  0x080001d5   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_escrow$2region                 0x080001d7   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_expand$2region                 0x080001d9   Thumb Code     2  heapauxi.o(.text)
+    __user_setup_stackheap                   0x080001db   Thumb Code    74  sys_stackheap_outer.o(.text)
+    exit                                     0x08000225   Thumb Code    18  exit.o(.text)
+    __user_libspace                          0x08000239   Thumb Code     8  libspace.o(.text)
+    __user_perproc_libspace                  0x08000239   Thumb Code     0  libspace.o(.text)
+    __user_perthread_libspace                0x08000239   Thumb Code     0  libspace.o(.text)
+    _sys_exit                                0x08000241   Thumb Code     8  sys_exit.o(.text)
+    __I$use$semihosting                      0x0800024d   Thumb Code     0  use_no_semi.o(.text)
+    __use_no_semihosting_swi                 0x0800024d   Thumb Code     2  use_no_semi.o(.text)
+    __aeabi_uldivmod                         0x0800024f   Thumb Code     0  lludivv7m.o(.text)
+    __semihosting_library_function           0x0800024f   Thumb Code     0  indicate_semi.o(.text)
+    _ll_udiv                                 0x0800024f   Thumb Code   240  lludivv7m.o(.text)
+    BusFault_Handler                         0x08000341   Thumb Code     4  lto-llvm-a371a8.o(.text.BusFault_Handler)
+    DebugMon_Handler                         0x08000345   Thumb Code     2  lto-llvm-a371a8.o(.text.DebugMon_Handler)
+    HardFault_Handler                        0x08000349   Thumb Code     4  lto-llvm-a371a8.o(.text.HardFault_Handler)
+    MemManage_Handler                        0x0800034d   Thumb Code     4  lto-llvm-a371a8.o(.text.MemManage_Handler)
+    NMI_Handler                              0x08000351   Thumb Code     2  lto-llvm-a371a8.o(.text.NMI_Handler)
+    PendSV_Handler                           0x0800041d   Thumb Code     2  lto-llvm-a371a8.o(.text.PendSV_Handler)
+    SVC_Handler                              0x08000421   Thumb Code     2  lto-llvm-a371a8.o(.text.SVC_Handler)
+    SysTick_Handler                          0x08000425   Thumb Code     2  lto-llvm-a371a8.o(.text.SysTick_Handler)
+    SystemInit                               0x08000429   Thumb Code   170  lto-llvm-a371a8.o(.text.SystemInit)
+    TMR3_GLOBAL_IRQHandler                   0x080004d5   Thumb Code   112  lto-llvm-a371a8.o(.text.TMR3_GLOBAL_IRQHandler)
+    USART1_IRQHandler                        0x08000545   Thumb Code   148  lto-llvm-a371a8.o(.text.USART1_IRQHandler)
+    UsageFault_Handler                       0x080005d9   Thumb Code     4  lto-llvm-a371a8.o(.text.UsageFault_Handler)
+    main                                     0x08001925   Thumb Code    88  lto-llvm-a371a8.o(.text.main)
+    Region$$Table$$Base                      0x08002424   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08002444   Number         0  anon$$obj.o(Region$$Table)
+    __libspace_start                         0x20000008   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x20000068   Data           0  libspace.o(.bss)
+
+
+
+==============================================================================
+
+Memory Map of the image
+
+  Image Entry point : 0x080000cd
+
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00002450, Max: 0x00004000, ABSOLUTE)
+
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00002444, Max: 0x00004000, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x08000000   0x08000000   0x000000cc   Data   RO           19    RESET               startup_at32f421.o
+    0x080000cc   0x080000cc   0x00000008   Code   RO           31  * !!!main             c_w.l(__main.o)
+    0x080000d4   0x080000d4   0x0000005c   Code   RO          395    !!!scatter          c_w.l(__scatter.o)
+    0x08000130   0x08000130   0x0000001a   Code   RO          399    !!handler_copy      c_w.l(__scatter_copy.o)
+    0x0800014a   0x0800014a   0x00000002   PAD
+    0x0800014c   0x0800014c   0x00000002   Code   RO          396    !!handler_null      c_w.l(__scatter.o)
+    0x0800014e   0x0800014e   0x00000002   PAD
+    0x08000150   0x08000150   0x0000001c   Code   RO          401    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x0800016c   0x0800016c   0x00000002   Code   RO           58    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           65    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           67    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           69    .ARM.Collect$$libinit$$00000006  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           72    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           74    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           76    .ARM.Collect$$libinit$$00000010  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           79    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           81    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           83    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           85    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           87    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           89    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           91    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           93    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           95    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           97    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO           99    .ARM.Collect$$libinit$$00000027  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO          103    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO          105    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO          107    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000000   Code   RO          109    .ARM.Collect$$libinit$$00000034  c_w.l(libinit2.o)
+    0x0800016e   0x0800016e   0x00000002   Code   RO          110    .ARM.Collect$$libinit$$00000035  c_w.l(libinit2.o)
+    0x08000170   0x08000170   0x00000002   Code   RO          132    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x08000172   0x08000172   0x00000000   Code   RO          147    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
+    0x08000172   0x08000172   0x00000000   Code   RO          149    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
+    0x08000172   0x08000172   0x00000000   Code   RO          152    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
+    0x08000172   0x08000172   0x00000000   Code   RO          155    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
+    0x08000172   0x08000172   0x00000000   Code   RO          157    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
+    0x08000172   0x08000172   0x00000000   Code   RO          160    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x08000172   0x08000172   0x00000002   Code   RO          161    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
+    0x08000174   0x08000174   0x00000000   Code   RO           33    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
+    0x08000174   0x08000174   0x00000000   Code   RO           35    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
+    0x08000174   0x08000174   0x00000006   Code   RO           47    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
+    0x0800017a   0x0800017a   0x00000000   Code   RO           37    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
+    0x0800017a   0x0800017a   0x00000004   Code   RO           38    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
+    0x0800017e   0x0800017e   0x00000000   Code   RO           40    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
+    0x0800017e   0x0800017e   0x00000008   Code   RO           41    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
+    0x08000186   0x08000186   0x00000002   Code   RO           62    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x08000188   0x08000188   0x00000000   Code   RO          112    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x08000188   0x08000188   0x00000004   Code   RO          113    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x0800018c   0x0800018c   0x00000006   Code   RO          114    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x08000192   0x08000192   0x00000002   PAD
+    0x08000194   0x08000194   0x00000040   Code   RO           20    .text               startup_at32f421.o
+    0x080001d4   0x080001d4   0x00000006   Code   RO           29    .text               c_w.l(heapauxi.o)
+    0x080001da   0x080001da   0x0000004a   Code   RO           49    .text               c_w.l(sys_stackheap_outer.o)
+    0x08000224   0x08000224   0x00000012   Code   RO           51    .text               c_w.l(exit.o)
+    0x08000236   0x08000236   0x00000002   PAD
+    0x08000238   0x08000238   0x00000008   Code   RO           59    .text               c_w.l(libspace.o)
+    0x08000240   0x08000240   0x0000000c   Code   RO          122    .text               c_w.l(sys_exit.o)
+    0x0800024c   0x0800024c   0x00000002   Code   RO          137    .text               c_w.l(use_no_semi.o)
+    0x0800024e   0x0800024e   0x00000000   Code   RO          139    .text               c_w.l(indicate_semi.o)
+    0x0800024e   0x0800024e   0x000000f0   Code   RO          381    .text               c_w.l(lludivv7m.o)
+    0x0800033e   0x0800033e   0x00000002   PAD
+    0x08000340   0x08000340   0x00000004   Code   RO          201    .text.BusFault_Handler  lto-llvm-a371a8.o
+    0x08000344   0x08000344   0x00000002   Code   RO          207    .text.DebugMon_Handler  lto-llvm-a371a8.o
+    0x08000346   0x08000346   0x00000002   PAD
+    0x08000348   0x08000348   0x00000004   Code   RO          197    .text.HardFault_Handler  lto-llvm-a371a8.o
+    0x0800034c   0x0800034c   0x00000004   Code   RO          199    .text.MemManage_Handler  lto-llvm-a371a8.o
+    0x08000350   0x08000350   0x00000002   Code   RO          195    .text.NMI_Handler   lto-llvm-a371a8.o
+    0x08000352   0x08000352   0x00000002   PAD
+    0x08000354   0x08000354   0x00000064   Code   RO          225    .text.NVIC_EncodePriority  lto-llvm-a371a8.o
+    0x080003b8   0x080003b8   0x00000062   Code   RO          343    .text.NVIC_EncodePriority.102  lto-llvm-a371a8.o
+    0x0800041a   0x0800041a   0x00000002   PAD
+    0x0800041c   0x0800041c   0x00000002   Code   RO          209    .text.PendSV_Handler  lto-llvm-a371a8.o
+    0x0800041e   0x0800041e   0x00000002   PAD
+    0x08000420   0x08000420   0x00000002   Code   RO          205    .text.SVC_Handler   lto-llvm-a371a8.o
+    0x08000422   0x08000422   0x00000002   PAD
+    0x08000424   0x08000424   0x00000002   Code   RO          211    .text.SysTick_Handler  lto-llvm-a371a8.o
+    0x08000426   0x08000426   0x00000002   PAD
+    0x08000428   0x08000428   0x000000aa   Code   RO          357    .text.SystemInit    lto-llvm-a371a8.o
+    0x080004d2   0x080004d2   0x00000002   PAD
+    0x080004d4   0x080004d4   0x00000070   Code   RO          213    .text.TMR3_GLOBAL_IRQHandler  lto-llvm-a371a8.o
+    0x08000544   0x08000544   0x00000094   Code   RO          215    .text.USART1_IRQHandler  lto-llvm-a371a8.o
+    0x080005d8   0x080005d8   0x00000004   Code   RO          203    .text.UsageFault_Handler  lto-llvm-a371a8.o
+    0x080005dc   0x080005dc   0x00000032   Code   RO          241    .text.__NVIC_ClearPendingIRQ  lto-llvm-a371a8.o
+    0x0800060e   0x0800060e   0x00000002   PAD
+    0x08000610   0x08000610   0x0000003a   Code   RO          351    .text.__NVIC_DisableIRQ  lto-llvm-a371a8.o
+    0x0800064a   0x0800064a   0x00000002   PAD
+    0x0800064c   0x0800064c   0x00000032   Code   RO          347    .text.__NVIC_EnableIRQ  lto-llvm-a371a8.o
+    0x0800067e   0x0800067e   0x00000002   PAD
+    0x08000680   0x08000680   0x00000010   Code   RO          223    .text.__NVIC_GetPriorityGrouping  lto-llvm-a371a8.o
+    0x08000690   0x08000690   0x00000010   Code   RO          341    .text.__NVIC_GetPriorityGrouping.101  lto-llvm-a371a8.o
+    0x080006a0   0x080006a0   0x00000042   Code   RO          227    .text.__NVIC_SetPriority  lto-llvm-a371a8.o
+    0x080006e2   0x080006e2   0x00000002   PAD
+    0x080006e4   0x080006e4   0x00000042   Code   RO          345    .text.__NVIC_SetPriority.103  lto-llvm-a371a8.o
+    0x08000726   0x08000726   0x00000002   PAD
+    0x08000728   0x08000728   0x0000003c   Code   RO          355    .text.__NVIC_SetPriorityGrouping  lto-llvm-a371a8.o
+    0x08000764   0x08000764   0x0000007e   Code   RO          239    .text.app_load      lto-llvm-a371a8.o
+    0x080007e2   0x080007e2   0x00000002   PAD
+    0x080007e4   0x080007e4   0x000001f2   Code   RO          251    .text.app_update_handle  lto-llvm-a371a8.o
+    0x080009d6   0x080009d6   0x00000002   PAD
+    0x080009d8   0x080009d8   0x00000070   Code   RO          249    .text.back_err      lto-llvm-a371a8.o
+    0x08000a48   0x08000a48   0x00000028   Code   RO          247    .text.back_ok       lto-llvm-a371a8.o
+    0x08000a70   0x08000a70   0x000002ee   Code   RO          245    .text.command_handle  lto-llvm-a371a8.o
+    0x08000d5e   0x08000d5e   0x00000002   PAD
+    0x08000d60   0x08000d60   0x00000028   Code   RO          265    .text.crm_ahb_div_set  lto-llvm-a371a8.o
+    0x08000d88   0x08000d88   0x00000028   Code   RO          267    .text.crm_apb1_div_set  lto-llvm-a371a8.o
+    0x08000db0   0x08000db0   0x00000028   Code   RO          269    .text.crm_apb2_div_set  lto-llvm-a371a8.o
+    0x08000dd8   0x08000dd8   0x00000038   Code   RO          279    .text.crm_auto_step_mode_enable  lto-llvm-a371a8.o
+    0x08000e10   0x08000e10   0x000000a2   Code   RO          263    .text.crm_clock_source_enable  lto-llvm-a371a8.o
+    0x08000eb2   0x08000eb2   0x00000002   PAD
+    0x08000eb4   0x08000eb4   0x00000262   Code   RO          277    .text.crm_clocks_freq_get  lto-llvm-a371a8.o
+    0x08001116   0x08001116   0x00000002   PAD
+    0x08001118   0x08001118   0x0000003e   Code   RO          257    .text.crm_flag_get  lto-llvm-a371a8.o
+    0x08001156   0x08001156   0x00000002   PAD
+    0x08001158   0x08001158   0x0000005c   Code   RO          259    .text.crm_hext_stable_wait  lto-llvm-a371a8.o
+    0x080011b4   0x080011b4   0x00000054   Code   RO          261    .text.crm_periph_clock_enable  lto-llvm-a371a8.o
+    0x08001208   0x08001208   0x000001e6   Code   RO          271    .text.crm_pll_config  lto-llvm-a371a8.o
+    0x080013ee   0x080013ee   0x00000002   PAD
+    0x080013f0   0x080013f0   0x0000009c   Code   RO          255    .text.crm_reset     lto-llvm-a371a8.o
+    0x0800148c   0x0800148c   0x00000048   Code   RO          273    .text.crm_sysclk_switch  lto-llvm-a371a8.o
+    0x080014d4   0x080014d4   0x00000010   Code   RO          275    .text.crm_sysclk_switch_status_get  lto-llvm-a371a8.o
+    0x080014e4   0x080014e4   0x00000058   Code   RO          243    .text.data_take     lto-llvm-a371a8.o
+    0x0800153c   0x0800153c   0x00000086   Code   RO          235    .text.flash_2kb_write  lto-llvm-a371a8.o
+    0x080015c2   0x080015c2   0x00000002   PAD
+    0x080015c4   0x080015c4   0x00000040   Code   RO          337    .text.flash_halfword_program  lto-llvm-a371a8.o
+    0x08001604   0x08001604   0x00000012   Code   RO          333    .text.flash_lock    lto-llvm-a371a8.o
+    0x08001616   0x08001616   0x00000002   PAD
+    0x08001618   0x08001618   0x00000068   Code   RO          327    .text.flash_operation_status_get  lto-llvm-a371a8.o
+    0x08001680   0x08001680   0x00000056   Code   RO          329    .text.flash_operation_wait_for  lto-llvm-a371a8.o
+    0x080016d6   0x080016d6   0x00000002   PAD
+    0x080016d8   0x080016d8   0x00000048   Code   RO          335    .text.flash_sector_erase  lto-llvm-a371a8.o
+    0x08001720   0x08001720   0x0000001e   Code   RO          331    .text.flash_unlock  lto-llvm-a371a8.o
+    0x0800173e   0x0800173e   0x00000002   PAD
+    0x08001740   0x08001740   0x00000032   Code   RO          237    .text.flash_upgrade_flag_read  lto-llvm-a371a8.o
+    0x08001772   0x08001772   0x00000002   PAD
+    0x08001774   0x08001774   0x00000024   Code   RO          301    .text.gpio_default_para_init  lto-llvm-a371a8.o
+    0x08001798   0x08001798   0x000000ea   Code   RO          299    .text.gpio_init     lto-llvm-a371a8.o
+    0x08001882   0x08001882   0x00000002   PAD
+    0x08001884   0x08001884   0x00000092   Code   RO          303    .text.gpio_pin_mux_config  lto-llvm-a371a8.o
+    0x08001916   0x08001916   0x00000002   PAD
+    0x08001918   0x08001918   0x0000000c   Code   RO          253    .text.iap_upgrade_app_handle  lto-llvm-a371a8.o
+    0x08001924   0x08001924   0x00000058   Code   RO          229    .text.main          lto-llvm-a371a8.o
+    0x0800197c   0x0800197c   0x00000014   Code   RO          349    .text.nvic_irq_disable  lto-llvm-a371a8.o
+    0x08001990   0x08001990   0x00000034   Code   RO          339    .text.nvic_irq_enable  lto-llvm-a371a8.o
+    0x080019c4   0x080019c4   0x00000016   Code   RO          353    .text.nvic_priority_group_config  lto-llvm-a371a8.o
+    0x080019da   0x080019da   0x00000002   PAD
+    0x080019dc   0x080019dc   0x00000228   Code   RO          359    .text.system_core_clock_update  lto-llvm-a371a8.o
+    0x08001c04   0x08001c04   0x00000032   Code   RO          283    .text.tmr_base_init  lto-llvm-a371a8.o
+    0x08001c36   0x08001c36   0x00000002   PAD
+    0x08001c38   0x08001c38   0x0000002c   Code   RO          285    .text.tmr_clock_source_div_set  lto-llvm-a371a8.o
+    0x08001c64   0x08001c64   0x0000002c   Code   RO          287    .text.tmr_cnt_dir_set  lto-llvm-a371a8.o
+    0x08001c90   0x08001c90   0x00000024   Code   RO          281    .text.tmr_counter_enable  lto-llvm-a371a8.o
+    0x08001cb4   0x08001cb4   0x0000001c   Code   RO          297    .text.tmr_flag_clear  lto-llvm-a371a8.o
+    0x08001cd0   0x08001cd0   0x00000046   Code   RO          295    .text.tmr_interrupt_flag_get  lto-llvm-a371a8.o
+    0x08001d16   0x08001d16   0x00000002   PAD
+    0x08001d18   0x08001d18   0x0000002c   Code   RO          289    .text.tmr_period_buffer_enable  lto-llvm-a371a8.o
+    0x08001d44   0x08001d44   0x0000002c   Code   RO          291    .text.tmr_primary_mode_select  lto-llvm-a371a8.o
+    0x08001d70   0x08001d70   0x0000002c   Code   RO          293    .text.tmr_sub_sync_mode_set  lto-llvm-a371a8.o
+    0x08001d9c   0x08001d9c   0x00000016   Code   RO          319    .text.usart_data_receive  lto-llvm-a371a8.o
+    0x08001db2   0x08001db2   0x00000002   PAD
+    0x08001db4   0x08001db4   0x00000020   Code   RO          317    .text.usart_data_transmit  lto-llvm-a371a8.o
+    0x08001dd4   0x08001dd4   0x0000002c   Code   RO          309    .text.usart_enable  lto-llvm-a371a8.o
+    0x08001e00   0x08001e00   0x00000034   Code   RO          323    .text.usart_flag_get  lto-llvm-a371a8.o
+    0x08001e34   0x08001e34   0x0000009a   Code   RO          321    .text.usart_hardware_flow_control_set  lto-llvm-a371a8.o
+    0x08001ece   0x08001ece   0x00000002   PAD
+    0x08001ed0   0x08001ed0   0x000000d4   Code   RO          305    .text.usart_init    lto-llvm-a371a8.o
+    0x08001fa4   0x08001fa4   0x00000058   Code   RO          315    .text.usart_interrupt_enable  lto-llvm-a371a8.o
+    0x08001ffc   0x08001ffc   0x00000128   Code   RO          325    .text.usart_interrupt_flag_get  lto-llvm-a371a8.o
+    0x08002124   0x08002124   0x00000078   Code   RO          307    .text.usart_parity_selection_config  lto-llvm-a371a8.o
+    0x0800219c   0x0800219c   0x0000002c   Code   RO          313    .text.usart_receiver_enable  lto-llvm-a371a8.o
+    0x080021c8   0x080021c8   0x0000002c   Code   RO          311    .text.usart_transmitter_enable  lto-llvm-a371a8.o
+    0x080021f4   0x080021f4   0x000000a4   Code   RO          221    .text.wk_nvic_config  lto-llvm-a371a8.o
+    0x08002298   0x08002298   0x00000034   Code   RO          219    .text.wk_periph_clock_config  lto-llvm-a371a8.o
+    0x080022cc   0x080022cc   0x000000a0   Code   RO          217    .text.wk_system_clock_config  lto-llvm-a371a8.o
+    0x0800236c   0x0800236c   0x00000020   Code   RO          231    .text.wk_tmr3_init  lto-llvm-a371a8.o
+    0x0800238c   0x0800238c   0x00000076   Code   RO          233    .text.wk_usart1_init  lto-llvm-a371a8.o
+    0x08002402   0x08002402   0x00000010   Data   RO          374    .rodata.cst16       lto-llvm-a371a8.o
+    0x08002412   0x08002412   0x00000010   Data   RO          372    .rodata.cst8        lto-llvm-a371a8.o
+    0x08002422   0x08002422   0x00000002   PAD
+    0x08002424   0x08002424   0x00000020   Data   RO          394    Region$$Table       anon$$obj.o
+
+
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08002448, Size: 0x00001688, Max: 0x00004000, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x20000000   0x08002448   0x00000004   Data   RW          373    .data.system_core_clock  lto-llvm-a371a8.o
+    0x20000004   0x0800244c   0x00000004   PAD
+    0x20000008        -       0x00000060   Zero   RW           60    .bss                c_w.l(libspace.o)
+    0x20000068        -       0x00000001   Zero   RW          367    .bss.cmd_addr_cnt   lto-llvm-a371a8.o
+    0x20000069        -       0x00000001   Zero   RW          363    .bss.cmd_ctr_step   lto-llvm-a371a8.o
+    0x2000006a   0x0800244c   0x00000002   PAD
+    0x2000006c        -       0x00000004   Zero   RW          368    .bss.cmd_data_cnt   lto-llvm-a371a8.o
+    0x20000070        -       0x00000806   Zero   RW          369    .bss.cmd_data_group_struct  lto-llvm-a371a8.o
+    0x20000876        -       0x00000001   Zero   RW          362    .bss.cmd_data_step  lto-llvm-a371a8.o
+    0x20000877        -       0x00000001   Zero   RW          371    .bss.get_data_from_usart_flag  lto-llvm-a371a8.o
+    0x20000878        -       0x00000004   Zero   RW          365    .bss.jump_to_app    lto-llvm-a371a8.o
+    0x2000087c        -       0x00000001   Zero   RW          370    .bss.time_ira_cnt   lto-llvm-a371a8.o
+    0x2000087d        -       0x00000001   Zero   RW          364    .bss.update_status  lto-llvm-a371a8.o
+    0x2000087e        -       0x00000806   Zero   RW          366    .bss.usart_group_struct  lto-llvm-a371a8.o
+    0x20001084   0x0800244c   0x00000004   PAD
+    0x20001088        -       0x00000200   Zero   RW           18    HEAP                startup_at32f421.o
+    0x20001288        -       0x00000400   Zero   RW           17    STACK               startup_at32f421.o
+
+
+==============================================================================
+
+Image component sizes
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
+
+      8324         10         32          4       4122      78909   lto-llvm-a371a8.o
+        64         26        204          0       1536        816   startup_at32f421.o
+
+    ----------------------------------------------------------------------
+      8450         36        270          4       5668      79725   Object Totals
+         0          0         32          0          0          0   (incl. Generated)
+        62          0          2          0         10          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Member Name
+
+         8          0          0          0          0         68   __main.o
+         0          0          0          0          0          0   __rtentry.o
+        12          0          0          0          0          0   __rtentry2.o
+         6          0          0          0          0          0   __rtentry4.o
+        94          8          0          0          0          0   __scatter.o
+        26          0          0          0          0          0   __scatter_copy.o
+        28          0          0          0          0          0   __scatter_zi.o
+        18          0          0          0          0         80   exit.o
+         6          0          0          0          0        152   heapauxi.o
+         0          0          0          0          0          0   indicate_semi.o
+         2          0          0          0          0          0   libinit.o
+         2          0          0          0          0          0   libinit2.o
+         2          0          0          0          0          0   libshutdown.o
+         2          0          0          0          0          0   libshutdown2.o
+         8          4          0          0         96         68   libspace.o
+       240          0          0          0          0        100   lludivv7m.o
+         2          0          0          0          0          0   rtexit.o
+        10          0          0          0          0          0   rtexit2.o
+        12          4          0          0          0         68   sys_exit.o
+        74          0          0          0          0         80   sys_stackheap_outer.o
+         2          0          0          0          0         68   use_no_semi.o
+
+    ----------------------------------------------------------------------
+       564         16          0          0         96        684   Library Totals
+        10          0          0          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
+
+       554         16          0          0         96        684   c_w.l
+
+    ----------------------------------------------------------------------
+       564         16          0          0         96        684   Library Totals
+
+    ----------------------------------------------------------------------
+
+==============================================================================
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
+
+      9014         52        270          4       5764      80317   Grand Totals
+      9014         52        270          4       5764      80317   ELF Image Totals
+      9014         52        270          4          0          0   ROM Totals
+
+==============================================================================
+
+    Total RO  Size (Code + RO Data)                 9284 (   9.07kB)
+    Total RW  Size (RW Data + ZI Data)              5768 (   5.63kB)
+    Total ROM Size (Code + RO Data + RW Data)       9288 (   9.07kB)
+
+==============================================================================
+

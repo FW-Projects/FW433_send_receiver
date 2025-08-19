@@ -1,0 +1,12 @@
+".\Objects\STARTUP.obj",
+".\Objects\OPTIONS_SN8F5702.obj",
+".\Objects\delayms.obj",
+".\Objects\433send.obj",
+".\Objects\getkey.obj",
+".\Objects\gpio.obj",
+".\Objects\ISP.obj",
+".\Objects\tmr.obj",
+".\Objects\main.obj" 
+TO ".\Objects\RF433_send" 
+PRINT(".\Listings\RF433_send.m51") RAMSIZE(256) 
+CODE( 0X0000-0X0FF5 )
