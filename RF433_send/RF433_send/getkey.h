@@ -21,12 +21,12 @@
 #define key_temp_up 3
 #define key_ch3 4
 #define key_ch1 5
-#define key_confirm 6
+#define KEY_Switch_handle 6
 #define key_ch4 7
 #define key_ch2 8
 #define key_air_down 9
 #define key_clear 10
-
+#define key_reset 11
 extern volatile uint8_t inkey_number; // 保存按键代号值
 extern volatile uint8_t key_stat;
 extern volatile uint16_t key_time;

@@ -21,13 +21,12 @@ Target DLL:      SNLINK\SNLINK.dll V1, 0, 0, 4
 Dialog DLL:      TCore51.DLL V2.66.5.0
  
 <h2>Project:</h2>
-D:\433_send_receiver\433send_receiver\RF433_send\RF433_send\RF433_send.uvproj
-Project File Date:  08/18/2025
+D:\AT32_project\433_send_receiver\433send_receiver\RF433_send\RF433_send\RF433_send.uvproj
+Project File Date:  09/04/2025
 
 <h2>Output:</h2>
 Rebuild target 'Target 1'
 assembling STARTUP.A51...
-assembling OPTIONS_SN8F5702.A51...
 compiling delayms.c...
 compiling 433send.c...
 compiling getkey.c...
@@ -35,25 +34,17 @@ compiling gpio.c...
 compiling ISP.c...
 compiling tmr.c...
 compiling main.c...
+assembling OPTIONS_SN8F5702.A51...
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_DELAY_LONG_MS?433SEND
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_STARTSEND_433_LONG?433SEND
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  _DELAY_MS
-    MODULE:  .\Objects\433send.obj (433SEND)
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  _DELAY_MS
-    MODULE:  .\Objects\433send.obj (433SEND)
-    ADDRESS: 08F4H
-Program Size: data=132.7 xdata=0 code=2320
+Program Size: data=92.1 xdata=0 code=2074
 creating hex file from ".\Objects\RF433_send"...
-User command #1: HexConvert.exe SN8F5702 "D:\433_send_receiver\433send_receiver\RF433_send\RF433_send\Objects\RF433_send.HEX"
+User command #1: HexConvert.exe SN8F5702 "D:\AT32_project\433_send_receiver\433send_receiver\RF433_send\RF433_send\Objects\RF433_send.HEX"
 INI_Ver = V36
 EXE_Ver = V25
-CheckSum = 0x21A1
-".\Objects\RF433_send" - 0 Error(s), 4 Warning(s).
+CheckSum = 0xF1E8
+".\Objects\RF433_send" - 0 Error(s), 1 Warning(s).
 Build Time Elapsed:  00:00:01
 </pre>
 </body>

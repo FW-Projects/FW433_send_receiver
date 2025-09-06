@@ -3,7 +3,7 @@
 
 #include "at32f421.h"
 #include <stdbool.h>
-#define VOICE_HANDLE_TIME 10
+#define VOICE_HANDLE_TIME 5
 
 typedef struct
 {
@@ -25,6 +25,8 @@ typedef struct
     uint8_t DATA_VAL_6;
     uint8_t DATA_VAL_7;
     uint8_t DATA_VAL_8;
+	uint8_t DATA_NO_1;
+	uint8_t DATA_NO_2;
 
     uint8_t CHECKSUM_1;
     uint8_t CHECKSUM_2;
@@ -38,12 +40,12 @@ typedef struct
 union UNION_ASRPRO
 {
     UsartAsrproData asrpro_data;
-    uint8_t asrpro_buf[20];
+    uint8_t asrpro_buf[22];
     /* data */
 };
 extern uint16_t Asrpro_Rx_buffer[3];
 extern bool Rx_usart2_finish_flag ;
 
-void asrpro_handle(void);
+void asrpro_Handle(void);
 
 #endif

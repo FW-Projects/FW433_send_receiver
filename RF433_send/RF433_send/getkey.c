@@ -18,6 +18,8 @@ volatile uint16_t key_time = 0, last_temp;
 
 uint8_t key_scan(void)
 {
+	if(key_05 == 0 && key_04 == 0)
+		return (key_reset);
 	if(key_05 == 0 && key_08 == 0)
 		return (key_clear);
 	if (key_01 == 0)
@@ -31,7 +33,7 @@ uint8_t key_scan(void)
 	if (key_05 == 0)
 		return (key_ch1); 
 	if (key_06 == 0)
-		return (key_confirm);
+		return (KEY_Switch_handle);
 	if (key_07 == 0)
 		return (key_ch4);
 	if (key_08 == 0)

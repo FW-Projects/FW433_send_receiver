@@ -24,16 +24,20 @@
 
 #define KEY_AIR_UP 0x07
 #define KEY_AIR_DOWN 0x08
-#define KEY_CONFIRM 0x10
+#define KEY_SWITCH_HANDLE 0x09
+
 #define KEY_Right_Code 0xff
 #define KEY_CLEAR_CODE 0x0f
 
-volatile uint8_t key_out_time = 0, key_state = 0,key_n = 0,start_init_outtime = 0;
-//volatile uint8_t  key_state = 0,start_init_outtime = 0;
-volatile uint8_t send_data = 0,first_get_addr_complete_flag = 0,send_counter = 0;
+sbit SEND_LED = P2 ^ 4;
+sbit Battery_LED = P2 ^ 3;
+sbit charge_flag = P2 ^ 1; 
+
+volatile uint8_t key_out_time = 0, key_state = 0,key_n = 0,start_init_outtime = 0,reset_led_time = 0;
+volatile uint8_t send_data = 0,first_get_addr_complete_flag = 0,send_counter = 0,led_times = 0,while_n = 0x00;
 volatile uint16_t send_addr = 0;
-volatile bit key_ent_flag = 0,longkey_flag = 0,tmr_stop_flag = 0,start_init_flag = 0;
-volatile bit start_init_end_flag = 0,key_stop_tmr_flag = 0,send_finish_flag = 0;
+volatile bit key_ent_flag = 0,longkey_flag = 0,tmr_stop_flag = 0,start_init_flag = 0,reset_flag = 0;
+volatile bit start_init_end_flag = 0,key_stop_tmr_flag = 0,send_finish_flag = 0,open_led_flag = 0;
 
 void key_handle(void);
 void fisrt_get_addr_handle(void);
@@ -66,6 +70,19 @@ void T1Interrupt(void) interrupt ISRTimer1
 	if(key_out_time != 0x00)
 	{
 		key_out_time--;
+	}
+
+	if(reset_flag == true)
+	{
+		if(reset_led_time != 0x00)
+		{
+			reset_led_time--;
+		}
+		else
+		{
+			reset_led_time = 0x01;
+			SEND_LED = ~SEND_LED;
+		}
 	}
 	TH1 = (65536 - 10000) / 256;
 	TL1 = (65536 - 10000) % 256;
@@ -116,11 +133,41 @@ void main(void)
 		}
 		else 
 			Start_init_handle(); // 初始化处理
-		if (key_n  == 0)
+		switch(while_n)
 		{
-			key_handle(); // 按键识别
-			key_n  = 0x02;
+			case 1: 
+				if(reset_flag == false)
+				{
+					if(open_led_flag == true)
+					{
+						SEND_LED = true;
+						led_times++;
+						if(led_times > 10)
+						{
+							SEND_LED = false;
+							led_times = 0;
+						}
+					}
+				}
+				if(charge_flag == 0)
+					Battery_LED = true;
+				else 
+					Battery_LED = false;
+				break;
+			case 2:
+				if (key_n  == 0)
+				{
+					key_handle(); // 按键识别
+					key_n  = 0x02;
+				}
+				break;
+			default:
+				while_n = 0x00;
+				break;
+			
 		}
+		while_n++;
+		
 	}
 }
 
@@ -136,19 +183,22 @@ void send_handle(void)
 	{
 		StartSend_433(send_addr, send_data);
 		send_finish_flag = true;
+		open_led_flag = true;
 	}
 	else
 	{
 		if(send_finish_flag == false)
 		{
 			StartSend_433(send_addr, send_data);
-			send_counter++;
-			if(send_counter > 5)
-			{
-				key_state = KEY_NULL;
-				send_finish_flag = true;
-				send_counter = 0x00;
-			}
+			send_finish_flag = true;
+//			send_counter++;
+//			if(send_counter > 1)
+//			{
+//				key_state = KEY_NULL;
+//				send_finish_flag = true;
+//				send_counter = 0x00;
+//				open_led_flag = true;
+//			}
 		}
 		
 	}
@@ -249,6 +299,7 @@ void key_handle(void)
 			}
 			inkey_number = key_null;
 			longkey_flag = false;
+			key_out_time = 0x05;
 		}
 		break;
 		case (key_long):
@@ -261,6 +312,7 @@ void key_handle(void)
 				key_state = KEY_TEMP_UP;
 				send_finish_flag = false;
 				longkey_flag = true;
+				key_out_time = 0x05;
 			}
 		}
 		break;
@@ -284,6 +336,7 @@ void key_handle(void)
 			}
 			longkey_flag = false;
 			inkey_number = key_null;
+			key_out_time = 0x05;
 		}
 		break;
 		case (key_long):
@@ -296,6 +349,7 @@ void key_handle(void)
 				key_state = KEY_TEMP_DOWN;
 				send_finish_flag = false;
 				longkey_flag = true;
+				key_out_time = 0x05;
 			}
 		}
 		break;
@@ -319,6 +373,7 @@ void key_handle(void)
 			}
 			longkey_flag = false;
 			inkey_number = key_null;
+			key_out_time = 0x05;
 		}
 		break;
 		case (key_long):
@@ -331,6 +386,7 @@ void key_handle(void)
 				key_state = KEY_AIR_UP;
 				send_finish_flag = false;
 				longkey_flag = true;
+				key_out_time = 0x05;
 			}
 		}
 		break;
@@ -354,6 +410,7 @@ void key_handle(void)
 			}
 			longkey_flag = false;
 			inkey_number = key_null;
+			key_out_time = 0x05;
 		}
 		break;
 		case (key_long):
@@ -366,6 +423,7 @@ void key_handle(void)
 				key_state = KEY_AIR_DOWN;
 				send_finish_flag = false;
 				longkey_flag = true;
+				key_out_time = 0x05;
 			}
 		}
 		break;
@@ -385,6 +443,7 @@ void key_handle(void)
 			key_state = KEY_CH1;
 			send_finish_flag = false;
 			inkey_number = key_null;
+			key_out_time = 0x05;
 		}
 		break;
 		case (key_long):
@@ -411,6 +470,7 @@ void key_handle(void)
 			key_state = KEY_CH2;
 			send_finish_flag = false;
 			inkey_number = key_null;
+			key_out_time = 0x05;
 		}
 		break;
 		case (key_long):
@@ -437,6 +497,7 @@ void key_handle(void)
 			key_state = KEY_CH3;
 			send_finish_flag = false;
 			inkey_number = key_null;
+			key_out_time = 0x05;
 		}
 		break;
 		case (key_long):
@@ -463,6 +524,7 @@ void key_handle(void)
 			key_state = KEY_CH4;
 			send_finish_flag = false;
 			inkey_number = key_null;
+			key_out_time = 0x05;
 		}
 		break;
 		case (key_long):
@@ -477,7 +539,7 @@ void key_handle(void)
 			break;
 		}
 	}
-	else if (inkey_number == key_confirm)
+	else if (inkey_number == KEY_Switch_handle)
 	{
 		/* 确认按键  &  滚动码
 		 * 滚动码 ： 长按确认键 确定机器滚动码
@@ -488,9 +550,11 @@ void key_handle(void)
 		{
 			if(longkey_flag == 0)
 			{
-			key_ent_flag = true;
-			key_state = KEY_CONFIRM;
-			send_finish_flag = false;
+				//切换手柄
+				key_ent_flag = true;
+				key_state = KEY_SWITCH_HANDLE;
+				send_finish_flag = false;
+				key_out_time = 0x05;
 			}
 			longkey_flag = false;
 			inkey_number = key_null;
@@ -507,6 +571,7 @@ void key_handle(void)
 					key_state = KEY_Right_Code;
 				send_finish_flag = false;
 				longkey_flag = true;
+				key_out_time = 0x05;
 			}
 			
 		}
@@ -524,6 +589,7 @@ void key_handle(void)
 		case (keyup_ent):
 		{
 			inkey_number = key_null;
+			longkey_flag = false;
 		}
 		break;
 		case (key_continue):
@@ -531,9 +597,10 @@ void key_handle(void)
 			if(longkey_flag == 0)
 			{
 				key_ent_flag = true;
-				key_state = +;
+				key_state = KEY_CLEAR_CODE;
 				send_finish_flag = false;
 				longkey_flag = true;
+				key_out_time = 0x05;
 			}
 			
 		}
@@ -541,7 +608,48 @@ void key_handle(void)
 		default:
 			break;
 		}
-		
+	}
+	else if( inkey_number == key_reset)
+	{
+		/* 恢复出厂设置 需要重新获取滚动码  
+		 */
+		switch (key_value)
+		{
+		case (keyup_ent):
+		{
+			inkey_number = key_null;
+			longkey_flag = false;
+		}
+		break;
+		case (key_continue):
+		{
+			if(longkey_flag == 0)
+			{
+				key_ent_flag = true;
+				send_addr = 0x0000;
+				first_get_addr_complete_flag = false;
+				Rom_write(send_addr, 0);
+				key_stop_tmr_flag = false;
+				send_finish_flag = false;
+				send_data = 0x00;
+				key_state = send_data;
+				reset_flag = true;
+				longkey_flag = true;
+				key_out_time = 0x20;
+			}
+			
+		}
+		break;
+		default:
+			break;
+		}
+	}
+	else if(key_ent_flag == true && key_out_time == 0x00)
+	{
+		key_ent_flag = false;
+		longkey_flag = 0;
+		if(reset_flag == true)
+			reset_flag = false;
 	}
 }
 #endif

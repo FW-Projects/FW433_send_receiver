@@ -13,6 +13,7 @@ uint8_t FW433_Init(FW433_Handle *FW433)
 	FW433->buf[0] = 0x00;
 	FW433->buf[1] = 0x00;
 	FW433->buf[2] = 0x00;
+	FW433->Receiver_handle.led_times = 0x00;
 
 	return 0;
 }

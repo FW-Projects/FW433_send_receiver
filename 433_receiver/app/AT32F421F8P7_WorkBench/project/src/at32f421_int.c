@@ -64,9 +64,14 @@ uint8_t usart1_rx_counter = 0;
 uint8_t usart1_tx_buffer_size = 20;
 uint8_t usart1_rx_buffer_size = 20;
 
-uint16_t usart2_rx_buffer[3] = {0};
+
+//uint8_t usart2_rx_buffer[22] = {0};
+//uint8_t usart2_rx_buffer_size = 22;
 uint8_t usart2_rx_counter = 0;
+uint16_t usart2_rx_buffer[3] = {0};
 uint8_t usart2_rx_buffer_size = 3;
+
+
 /* add user code end private macro */
 
 /* private variables ---------------------------------------------------------*/
@@ -265,13 +270,14 @@ void TMR3_GLOBAL_IRQHandler(void)
   {
   case 0:
   {
-    if (de == 1)
+//    if (de == 1)
       state = 1; // 如果是高电平，那么是上升沿
   }
   break;
   case 1:
   {
-    if (de == 0 && holdTime >= StartLevelTime_H_MIN && holdTime <= StartLevelTime_H_MAX)
+//    if (de == 0 && holdTime >= StartLevelTime_H_MIN && holdTime <= StartLevelTime_H_MAX)
+	   if (de == 0 )
     {
       // 检测到下降沿，起始信号高电平维持时间
       state = 2;
@@ -318,6 +324,7 @@ void TMR3_GLOBAL_IRQHandler(void)
         data_433_buffer[0] = valueTmp >> 16;
         data_433_buffer[1] = valueTmp >> 8;
         data_433_buffer[2] = valueTmp;
+
         state = 1;
       }
     }
@@ -401,9 +408,12 @@ void USART2_IRQHandler(void)
       Asrpro_Rx_buffer[0] = usart2_rx_buffer[0];
       Asrpro_Rx_buffer[1] = usart2_rx_buffer[1];
       Asrpro_Rx_buffer[2] = usart2_rx_buffer[2];
+//		Asrpro_Rx_buffer[0] = usart2_rx_buffer[1];
+//      Asrpro_Rx_buffer[1] = usart2_rx_buffer[2];
+//      Asrpro_Rx_buffer[2] = usart2_rx_buffer[3];
       usart2_rx_counter = 0;                    // reset counter
       usart_flag_clear(USART2, USART_RDBF_INT); // clear interrupt flag
-      Rx_usart2_finish_flag = true;
+		Rx_usart2_finish_flag = true;
     }
   }
   /* add user code end USART2_IRQ 0 */

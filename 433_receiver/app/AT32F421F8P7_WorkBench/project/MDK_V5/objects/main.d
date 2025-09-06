@@ -16,4 +16,5 @@
   ..\inc\wk_tmr.h ..\inc\wk_usart.h ..\inc\wk_wdt.h ..\inc\wk_gpio.h \
   ..\inc\wk_system.h ..\device\tmt.h ..\app\433_receiver.h ..\app\iap.h \
   ..\app\FW433_handle.h ..\app\flash_handle.h ..\device\flash.h \
-  ..\app\asrpro_handle.h ..\app\usart_send_handle.h
+  ..\app\asrpro_handle.h ..\app\usart_send_handle.h \
+  ..\inc\at32f421_int.h

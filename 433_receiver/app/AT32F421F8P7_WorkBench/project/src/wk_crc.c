@@ -50,7 +50,7 @@ void wk_crc_init(void)
   crc_data_reset();
 
   /* add user code begin crc_init 1 */
-
+	crm_periph_clock_enable(CRM_CRC_PERIPH_CLOCK, TRUE);
   /* add user code end crc_init 1 */
 }
 

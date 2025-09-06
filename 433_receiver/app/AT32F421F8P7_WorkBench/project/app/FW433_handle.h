@@ -3,35 +3,58 @@
 #include "at32f421.h"
 #include "stdbool.h"
 
+///* 10ms - 15ms     test_time = 14ms */
+//#define StartLevelTime_H_MAX 45000
+//#define StartLevelTime_H_MIN 30000
+
+//#define StartLevelTime_L_MAX 45000
+//#define StartLevelTime_L_MIN 30000
+
+
+///* 0.4ms - 0.8ms   test_time = 0.6ms */ 
+//#define ZeroLevelTime_H_MAX 2400
+//#define ZeroLevelTime_H_MIN 1200
+
+///* 1ms - 1.6ms     test_time = 1.4ms */
+//#define ZeroLevelTime_L_MAX 4800
+//#define ZeroLevelTime_L_MIN 3000
+
+///* 1ms - 1.6ms     test_time = 1.4ms */
+//#define OneLevelTime_H_MAX 4800
+//#define OneLevelTime_H_MIN 3000
+
+///* 0.4ms - 0.8ms   test_time = 0.6ms */
+//#define OneLevelTime_L_MAX 2400
+//#define OneLevelTime_L_MIN 1200
+
+
 /* 10ms - 15ms     test_time = 14ms */
-#define StartLevelTime_H_MAX 45000
-#define StartLevelTime_H_MIN 30000
-#define StartLevelTime_L_MAX 45000
-#define StartLevelTime_L_MIN 30000
+#define StartLevelTime_H_MAX 22500
+#define StartLevelTime_H_MIN 15000
+//#define StartLevelTime_H_MAX 60000
+//#define StartLevelTime_H_MIN 0
+
+#define StartLevelTime_L_MAX 22500
+#define StartLevelTime_L_MIN 15000
+
 
 /* 0.4ms - 0.8ms   test_time = 0.6ms */ 
-#define ZeroLevelTime_H_MAX 2400
-#define ZeroLevelTime_H_MIN 1200
+#define ZeroLevelTime_H_MAX 1200
+#define ZeroLevelTime_H_MIN 600
 
 /* 1ms - 1.6ms     test_time = 1.4ms */
-#define ZeroLevelTime_L_MAX 4800
-#define ZeroLevelTime_L_MIN 3000
+#define ZeroLevelTime_L_MAX 2400
+#define ZeroLevelTime_L_MIN 1400
 
 /* 1ms - 1.6ms     test_time = 1.4ms */
-#define OneLevelTime_H_MAX 4800
-#define OneLevelTime_H_MIN 3000
+#define OneLevelTime_H_MAX 2400
+#define OneLevelTime_H_MIN 1400
 
 /* 0.4ms - 0.8ms   test_time = 0.6ms */
-#define OneLevelTime_L_MAX 2400
-#define OneLevelTime_L_MIN 1200
+#define OneLevelTime_L_MAX 1200
+#define OneLevelTime_L_MIN 600
 
 
-//static uint32_t  valueTmp = 0;    //接收的数据
-//static uint16_t  bitNums  = 0;    //接收数据的位数
-//static uint8_t   state = 0;       //接收步骤
-//static uint8_t   u8_value[3];     //存储接收的数据：3个8bit
-//static bool receive_flag = 0;      //数据接收完毕标志
-//static uint16_t holdTime = 0;
 typedef enum
 {
     NO_CODE = 0x00,
@@ -45,12 +68,12 @@ typedef enum
     AIR_DOWN = 0x08,
     COLD_AIR_MODE = 0x09,
     NORMAL_AIR_MODE = 0x0a,
-    SLEEP_STAND = 0x0b,
-    CURVE_INTERFACE = 0x0c,
-    NUMERICAL_INTERFACE = 0x0d,
-    FAHRENHEIT = 0x0e,
-    CELSIUS = 0x0f,
-    CONFIRM = 0x10,
+    CURVE_INTERFACE = 0x0e,
+    NUMERICAL_INTERFACE = 0x0f,
+    FAHRENHEIT = 0x10,
+    CELSIUS = 0x11,
+	SWITCH_HANDLE = 0x12,
+	SWITCH_HANDLE_433 = 0x09,
     RIGHT_CODE = 0xff,
 	CLEAR_CODE = 0x0f,
 
@@ -64,7 +87,7 @@ typedef struct
     uint8_t Command_code;  // 8bit按键码
     bool usart_send_finish_433_flag;
 	bool usart_send_ready_433_flag;
-	
+	uint8_t led_times;
 
 } receiver_433_e;
 

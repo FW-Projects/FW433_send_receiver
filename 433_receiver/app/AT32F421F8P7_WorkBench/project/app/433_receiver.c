@@ -11,6 +11,9 @@
  * de = P2 ^ 2;	    //433M DO接口 ： 外部中断接口
  */
 
+static uint8_t send_times = 0;
+
+
 void right_code_handle(uint8_t *in_u8_code);
 void decode_handle(uint8_t *in_u8code);
 /*
@@ -25,6 +28,7 @@ void decode_handle(uint8_t *in_u8code);
  */
 void recevier_handle(void)
 {
+
 	if (sFW433_t.Receiver_handle.Right_code_flag == false)
 	{
 		/* 对码处理 */
@@ -37,6 +41,7 @@ void recevier_handle(void)
 
 		decode_handle(data_433_buffer);
 	}
+	
 }
 
 void right_code_handle(uint8_t *in_u8_code)
@@ -50,6 +55,10 @@ void right_code_handle(uint8_t *in_u8_code)
 			right_code_time = 0;
 			sFW433_t.Receiver_handle.Right_code_flag = TRUE;							  // 对码成功
 			sFW433_t.Receiver_handle.Address_code = (in_u8_code[0] << 8) | in_u8_code[1]; // 保存地址码
+			sFW433_t.Receiver_handle.led_times = 0x20;
+			data_433_buffer[0] = 0x00;
+			data_433_buffer[1] = 0x00;
+			data_433_buffer[2] = 0x00;
 		}
 	}
 }
@@ -62,11 +71,15 @@ void decode_handle(uint8_t *in_u8code)
 	{
 		// 清除对码 以至于重新匹配遥控
 		sFW433_t.Receiver_handle.Right_code_flag = false;
-		sFW433_t.Receiver_handle.Address_code = 0x00;
+		sFW433_t.Receiver_handle.Address_code = 0x0000;
+		data_433_buffer[0] = 0x00;
+		data_433_buffer[1] = 0x00;
+		data_433_buffer[2] = 0x00;
 	}
 	else
 	{
-		if (sFW433_t.Receiver_handle.Address_code == ((in_u8code[0] << 8) | in_u8code[1])) // 查询地址码
+//		if (sFW433_t.Receiver_handle.Address_code == ((in_u8code[0] << 8) | in_u8code[1])) // 查询地址码
+		if (sFW433_t.Receiver_handle.Address_code == (uint16_t)((in_u8code[0] << 8) | in_u8code[1]))
 		{
 
 			switch (sFW433_t.Receiver_handle.Command_code)
@@ -94,6 +107,7 @@ void decode_handle(uint8_t *in_u8code)
 				dat_433.usart433_data.DATA_VAL_6_433 = 0x00;
 				dat_433.usart433_data.DATA_VAL_7_433 = 0x00;
 				dat_433.usart433_data.DATA_VAL_8_433 = 0x02;
+			
 				break;
 			case CH3:
 				// 处理CH3指令
@@ -167,10 +181,10 @@ void decode_handle(uint8_t *in_u8code)
 				dat_433.usart433_data.DATA_VAL_7_433 = 0x00;
 				dat_433.usart433_data.DATA_VAL_8_433 = 0x08;
 				break;
-			case COLD_AIR_MODE:
-				// 处理冷风模式指令
-				// 00 00 00 00 00 00 00 09
-				dat_433.usart433_data.DATA_VAL_1_433 = 0x00;
+			case SWITCH_HANDLE_433:
+				// 切换手柄指令
+				// 0A 00 00 00 00 00 00 09
+				dat_433.usart433_data.DATA_VAL_1_433 = 0x0A;
 				dat_433.usart433_data.DATA_VAL_2_433 = 0x00;
 				dat_433.usart433_data.DATA_VAL_3_433 = 0x00;
 				dat_433.usart433_data.DATA_VAL_4_433 = 0x00;
@@ -179,106 +193,13 @@ void decode_handle(uint8_t *in_u8code)
 				dat_433.usart433_data.DATA_VAL_7_433 = 0x00;
 				dat_433.usart433_data.DATA_VAL_8_433 = 0x09;
 				break;
-			case NORMAL_AIR_MODE:
-				// 处理普通风模式指令
-				// 00 00 00 00 00 00 00 0A
-				dat_433.usart433_data.DATA_VAL_1_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_2_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_3_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_4_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_5_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_6_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_7_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_8_433 = 0x0A;
-				break;
-			case SLEEP_STAND:
-				// 处理睡眠状态指令
-				// 00 00 00 00 00 00 00 0B
-				dat_433.usart433_data.DATA_VAL_1_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_2_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_3_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_4_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_5_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_6_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_7_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_8_433 = 0x0B;
-				break;
-			case CURVE_INTERFACE:
-				// 处理曲线界面指令
-				// 00 00 00 00 00 00 00 0E
-				dat_433.usart433_data.DATA_VAL_1_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_2_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_3_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_4_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_5_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_6_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_7_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_8_433 = 0x0E;
-				break;
-			case NUMERICAL_INTERFACE:
-				// 处理数字界面指令
-				// 00 00 00 00 00 00 00 0F
-				dat_433.usart433_data.DATA_VAL_1_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_2_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_3_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_4_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_5_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_6_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_7_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_8_433 = 0x0F;
-				break;
-			case FAHRENHEIT:
-				// 处理华氏温度指令
-				// 00 00 00 00 00 00 00 10
-				dat_433.usart433_data.DATA_VAL_1_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_2_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_3_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_4_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_5_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_6_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_7_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_8_433 = 0x10;
-				break;
-			case CELSIUS:
-				// 处理摄氏温度指令
-				// 00 00 00 00 00 00 00 11
-				dat_433.usart433_data.DATA_VAL_1_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_2_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_3_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_4_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_5_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_6_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_7_433 = 0x00;
-				dat_433.usart433_data.DATA_VAL_8_433 = 0x11;
-				break;
-			case CONFIRM:
-				break;
 			default:
 				break;
-			}
+			}	
 			data_433_buffer[0] = 0x00;
 			data_433_buffer[1] = 0x00;
 			data_433_buffer[2] = 0x00;
-			uint32_t checksum_sum[8] = {
-				dat_433.usart433_data.DATA_VAL_1_433,
-				dat_433.usart433_data.DATA_VAL_2_433,
-				dat_433.usart433_data.DATA_VAL_3_433,
-				dat_433.usart433_data.DATA_VAL_4_433,
-				dat_433.usart433_data.DATA_VAL_5_433,
-				dat_433.usart433_data.DATA_VAL_6_433,
-				dat_433.usart433_data.DATA_VAL_7_433,
-				dat_433.usart433_data.DATA_VAL_8_433};
-
-			// 计算校验和
-			uint32_t crc_433 = crc_block_calculate(checksum_sum, 8);
-			crc_data_reset();
-
-			// 将CRC32校验码分成4个字节
-			dat_433.usart433_data.CHECKSUM_1_433 = (crc_433 >> 24) & 0xFF;
-			dat_433.usart433_data.CHECKSUM_2_433 = (crc_433 >> 16) & 0xFF;
-			dat_433.usart433_data.CHECKSUM_3_433 = (crc_433 >> 8) & 0xFF;
-			dat_433.usart433_data.CHECKSUM_4_433 = crc_433 & 0xFF;
-
+			
 			// 填充包头
 			dat_433.usart433_data.DATAHEAD_433 = 0xD1; // 包头
 			// 填充通用指令和指令使用
@@ -289,14 +210,38 @@ void decode_handle(uint8_t *in_u8code)
 			dat_433.usart433_data.ADDR_L_433 = 0x07; // 地址低字节
 			// 填充数据长度
 			dat_433.usart433_data.DATA_LENGTH_H_433 = 0x00; // 数据长度高字节
-			dat_433.usart433_data.DATA_LENGTH_L_433 = 0x08; // 数据长度低字节
+			dat_433.usart433_data.DATA_LENGTH_L_433 = 0x0A; // 数据长度低字节
+			//填充无用数据
+			dat_433.usart433_data.DATA_NO_1_433 = 0x00; 
+			dat_433.usart433_data.DATA_NO_2_433 = 0x00; 
 			// 填充包尾
 			dat_433.usart433_data.DATAEND_433 = 0xF0; // 包尾2105
+			
+			
+			uint32_t checksum_sum[4];
+		 checksum_sum[0] = (uint32_t)((dat_433.usart433_data.UNIVERSAL_COMMAND_433 << 24) | (dat_433.usart433_data.COMMAND_USE_433 << 16) | (dat_433.usart433_data.ADDR_H_433 << 8) | (dat_433.usart433_data.ADDR_L_433));
+		 checksum_sum[1] = (uint32_t)((dat_433.usart433_data.DATA_LENGTH_H_433 << 24) | (dat_433.usart433_data.DATA_LENGTH_L_433 << 16) | (dat_433.usart433_data.DATA_VAL_1_433 << 8) | (dat_433.usart433_data.DATA_VAL_2_433));
+         checksum_sum[2] = (uint32_t)((dat_433.usart433_data.DATA_VAL_3_433 << 24) | (dat_433.usart433_data.DATA_VAL_4_433 << 16) | (dat_433.usart433_data.DATA_VAL_5_433 << 8) | (dat_433.usart433_data.DATA_VAL_6_433));
+		 checksum_sum[3] = (uint32_t)((dat_433.usart433_data.DATA_VAL_7_433 << 24) | (dat_433.usart433_data.DATA_VAL_8_433 << 16) | (0x00 << 8) | (0x00));
+			
 
+			// 计算校验和
+			uint32_t crc_433 = crc_block_calculate(checksum_sum, 4);
+			crc_data_reset();
+
+			// 将CRC32校验码分成4个字节
+			dat_433.usart433_data.CHECKSUM_1_433 = (crc_433 >> 24) & 0xFF;
+			dat_433.usart433_data.CHECKSUM_2_433 = (crc_433 >> 16) & 0xFF;
+			dat_433.usart433_data.CHECKSUM_3_433 = (crc_433 >> 8) & 0xFF;
+			dat_433.usart433_data.CHECKSUM_4_433 = crc_433 & 0xFF;
+
+		
 			sFW433_t.Receiver_handle.usart_send_ready_433_flag = true; // 数据准备好，可以发送
 			sFW433_t.Receiver_handle.usart_send_finish_433_flag = false;
 
-			usart1_send_byte(dat_433.usart433_buf, sizeof(dat_433.usart433_buf));
+
+			sFW433_t.Receiver_handle.led_times = 0x0a;
+ 			usart1_send_byte(dat_433.usart433_buf, sizeof(dat_433.usart433_buf));
 		}
 		else
 		{

@@ -107,7 +107,7 @@
     </PINInfo>
     <ProjectInfomation>
         <ProjectName>AT32F421F8P7_WorkBench</ProjectName>
-        <ProjectLocation>D:/433_send_receiver/433send_receiver/433_receiver/app</ProjectLocation>
+        <ProjectLocation>D:/AT32_project/433_send_receiver/433send_receiver/433_receiver/app</ProjectLocation>
         <ToolchainIDE>MDK_V5</ToolchainIDE>
         <ARMCompiler>0</ARMCompiler>
         <KeepUserCode>true</KeepUserCode>

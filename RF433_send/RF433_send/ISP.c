@@ -1,6 +1,7 @@
 #include "ISP.h"
 #include <intrins.h>                            					 // for _nop_
 #include <absacc.h>																				 // for CBYTE
+#include <SN8F5702.H>
 #define  L_ISP_ADDR 	0xfc0
 
 idata uint16_t r_read_rom_addr = L_ISP_ADDR ;

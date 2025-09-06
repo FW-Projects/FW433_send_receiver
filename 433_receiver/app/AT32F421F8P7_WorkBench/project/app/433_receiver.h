@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 
-#define TASK_433_TIME 10
+#define TASK_433_TIME 5
 
 //static uint32_t  valueTmp = 0;    //接收的数据
 //static bool receive_flag = 0;      //数据接收完毕标志
@@ -31,7 +31,8 @@ typedef struct
     uint8_t DATA_VAL_6_433;
     uint8_t DATA_VAL_7_433;
     uint8_t DATA_VAL_8_433;
-
+	uint8_t DATA_NO_1_433;
+	uint8_t DATA_NO_2_433;
     uint8_t CHECKSUM_1_433;
     uint8_t CHECKSUM_2_433;
     uint8_t CHECKSUM_3_433;
@@ -44,7 +45,7 @@ typedef struct
 union UNION_433
 {
     Usart433Data usart433_data;
-    uint8_t usart433_buf[20];
+    uint8_t usart433_buf[22];
     /* data */
 };
 

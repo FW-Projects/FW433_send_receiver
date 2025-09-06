@@ -7,14 +7,14 @@
 
 uint16_t Asrpro_Rx_buffer[3] = {0, 0, 0};
 bool Rx_usart2_finish_flag = 0;
-void asrpro_handle(void)
+void asrpro_Handle(void)
 {
    union UNION_ASRPRO dat;
    uint32_t data_valH = 0;
    uint32_t data_valL = 0;
-   if (Rx_usart2_finish_flag == true)
-   {
-      Rx_usart2_finish_flag = false;
+//   if (Rx_usart2_finish_flag == true)
+//   {
+//      Rx_usart2_finish_flag = false;
       // 判断指令
       if (Asrpro_Rx_buffer[0] == 0x00 && Asrpro_Rx_buffer[1] == 0x01) // 播放语音
       {
@@ -138,17 +138,6 @@ void asrpro_handle(void)
             dat.asrpro_data.DATA_VAL_7 = 0x00;
             dat.asrpro_data.DATA_VAL_8 = 0x0A;
             break;
-         case SLEEP_STAND:
-            // 00 00 00 00 00 00 00 0B 睡眠状态
-            dat.asrpro_data.DATA_VAL_1 = 0x00;
-            dat.asrpro_data.DATA_VAL_2 = 0x00;
-            dat.asrpro_data.DATA_VAL_3 = 0x00;
-            dat.asrpro_data.DATA_VAL_4 = 0x00;
-            dat.asrpro_data.DATA_VAL_5 = 0x00;
-            dat.asrpro_data.DATA_VAL_6 = 0x00;
-            dat.asrpro_data.DATA_VAL_7 = 0x00;
-            dat.asrpro_data.DATA_VAL_8 = 0x0B;
-            break;
          case CURVE_INTERFACE:
             // 00 00 00 00 00 00 00 0E 曲线界面
             dat.asrpro_data.DATA_VAL_1 = 0x00;
@@ -193,6 +182,17 @@ void asrpro_handle(void)
             dat.asrpro_data.DATA_VAL_7 = 0x00;
             dat.asrpro_data.DATA_VAL_8 = 0x11;
             break;
+		 case SWITCH_HANDLE:
+			 // 00 00 00 00 00 00 00 12 切换手柄
+            dat.asrpro_data.DATA_VAL_1 = 0x00;
+            dat.asrpro_data.DATA_VAL_2 = 0x00;
+            dat.asrpro_data.DATA_VAL_3 = 0x00;
+            dat.asrpro_data.DATA_VAL_4 = 0x00;
+            dat.asrpro_data.DATA_VAL_5 = 0x00;
+            dat.asrpro_data.DATA_VAL_6 = 0x00;
+            dat.asrpro_data.DATA_VAL_7 = 0x00;
+            dat.asrpro_data.DATA_VAL_8 = 0x12;
+            break;
          default:
             break;
          }
@@ -200,24 +200,8 @@ void asrpro_handle(void)
          Asrpro_Rx_buffer[0] = 0x00;
          Asrpro_Rx_buffer[1] = 0x00;
          Asrpro_Rx_buffer[2] = 0x00;
-         // 计算CRC32校验码
-         uint32_t checksum[8] = {
-             dat.asrpro_data.DATA_VAL_1,
-             dat.asrpro_data.DATA_VAL_2,
-             dat.asrpro_data.DATA_VAL_3,
-             dat.asrpro_data.DATA_VAL_4,
-             dat.asrpro_data.DATA_VAL_5,
-             dat.asrpro_data.DATA_VAL_6,
-             dat.asrpro_data.DATA_VAL_7,
-             dat.asrpro_data.DATA_VAL_8};
-         uint32_t crc = crc_block_calculate(checksum, 8);
-         crc_data_reset();
-         // 将CRC32校验码分成4个字节
-         dat.asrpro_data.CHECKSUM_1 = (crc >> 24) & 0xFF;
-         dat.asrpro_data.CHECKSUM_2 = (crc >> 16) & 0xFF;
-         dat.asrpro_data.CHECKSUM_3 = (crc >> 8) & 0xFF;
-         dat.asrpro_data.CHECKSUM_4 = crc & 0xFF;
-         // 填充包头
+		 
+		 // 填充包头
          dat.asrpro_data.DATAHEAD = 0xD1; // 包头
          // 填充通用指令和指令使用
          dat.asrpro_data.UNIVERSAL_COMMAND = 0x01; // 通用指令
@@ -227,10 +211,33 @@ void asrpro_handle(void)
          dat.asrpro_data.ADDR_L = 0x06; // 地址低字节
          // 填充数据长度
          dat.asrpro_data.DATA_LENGTH_H = 0x00; // 数据长度高字节
-         dat.asrpro_data.DATA_LENGTH_L = 0x08; // 数据长度低字节
+         dat.asrpro_data.DATA_LENGTH_L = 0x0A; // 数据长度低字节
+		 //填充无用数据
+		dat.asrpro_data.DATA_NO_1 = 0x00; 
+		dat.asrpro_data.DATA_NO_2 = 0x00; 
          // 填充包尾
          dat.asrpro_data.DATAEND = 0xF0; // 包尾
-         usart1_send_byte(dat.asrpro_buf, sizeof(dat.asrpro_buf));
+		 
+         // 计算CRC32校验码
+		 
+		 uint32_t checksum[4];
+		 checksum[0] = (uint32_t)((dat.asrpro_data.UNIVERSAL_COMMAND << 24) | (dat.asrpro_data.COMMAND_USE << 16) | (dat.asrpro_data.ADDR_H << 8) | (dat.asrpro_data.ADDR_L));
+		 checksum[1] = (uint32_t)((dat.asrpro_data.DATA_LENGTH_H << 24) | (dat.asrpro_data.DATA_LENGTH_L << 16) | (dat.asrpro_data.DATA_VAL_1 << 8) | (dat.asrpro_data.DATA_VAL_2));
+         checksum[2] = (uint32_t)((dat.asrpro_data.DATA_VAL_3 << 24) | (dat.asrpro_data.DATA_VAL_4 << 16) | (dat.asrpro_data.DATA_VAL_5 << 8) | (dat.asrpro_data.DATA_VAL_6));
+		 checksum[3] = (uint32_t)((dat.asrpro_data.DATA_VAL_7 << 24) | (dat.asrpro_data.DATA_VAL_8 << 16) | (0x00 << 8) | (0x00));
+
+		 
+         uint32_t crc = crc_block_calculate(checksum, 4);
+         crc_data_reset();
+         // 将CRC32校验码分成4个字节
+         dat.asrpro_data.CHECKSUM_1 = (crc >> 24) & 0xFF;
+         dat.asrpro_data.CHECKSUM_2 = (crc >> 16) & 0xFF;
+         dat.asrpro_data.CHECKSUM_3 = (crc >> 8) & 0xFF;
+         dat.asrpro_data.CHECKSUM_4 = crc & 0xFF;
+         
+		 sFW433_t.Receiver_handle.led_times = 0x0a;
+		 
+          usart1_send_byte(dat.asrpro_buf, sizeof(dat.asrpro_buf));
       }
-   }
+//   }
 }

@@ -145,8 +145,8 @@ void wk_usart2_init(void)
    */
 
   /* add user code begin usart2_init 2 */
-
-	usart_interrupt_enable(USART2, USART_RDBF_INT, TRUE);
+	usart_flag_clear(USART2, USART_RDBF_FLAG); // clear interrupt flag
+//	usart_interrupt_enable(USART2, USART_RDBF_INT, TRUE);
 
   /* add user code end usart2_init 2 */
   

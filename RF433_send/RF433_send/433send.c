@@ -20,6 +20,8 @@ static Witty433 witty433;
 
 
 uint16_t set_433time_buf[] = {120, 120, 12,   4,    4,    12,   4,    13}; // 设置433发送电平时间
+//uint16_t set_433time_buf[] = {240, 240, 24,   8,    8,    24,   8,    26}; // 设置433发送电平时间
+
                             /*12ms 12ms 1.2ms 0.4ms 0.4ms 1.2ms 0.4ms 1.3ms
 
 //uint16_t set_433time_buf[] = {120, 120, 120, 120,120,120,120,120}; // 设置433发送电平时间
@@ -36,10 +38,10 @@ void delay_long_us(unsigned int long_us)
 
         delay_us(long_us);
 }
-void delay_long_ms(unsigned int long_ms)
-{
-        delay_ms(long_ms);
-}
+//void delay_long_ms(unsigned int long_ms)
+//{
+//        delay_ms(long_ms);
+//}
 
 void Witty433_Init(unsigned int set_level_buf[8]) // 这个set_level_buf[8]数组保存的是各个电平时间，单位是us
 {

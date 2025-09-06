@@ -21,4 +21,8 @@ void gpio_init(void)
 	/* 433send  output gpio */
 	P1UR &= ~(1 << 0);
 	P1M |= 1 << 0;
+	
+	//LED
+	P2UR &= ~(3 << 3);
+	P2M |= 3 << 3;
 }

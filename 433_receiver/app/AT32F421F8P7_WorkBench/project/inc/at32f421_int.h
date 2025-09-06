@@ -52,6 +52,7 @@ extern uint8_t usart1_rx_buffer_size;
 	
 	
 extern uint16_t usart2_rx_buffer[3];
+//extern uint8_t usart2_rx_buffer[22];
 extern uint8_t usart2_rx_counter;
 extern uint8_t usart2_rx_buffer_size;
 /* add user code end exported types */

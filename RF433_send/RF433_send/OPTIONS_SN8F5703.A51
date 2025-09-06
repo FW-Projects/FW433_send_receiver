@@ -2,7 +2,7 @@ $NOMOD51
 ;------------------------------------------------------------------------------
 ;
 ;  Copyright (c) 2015 SONiX Technology Co., Ltd.
-;  Version 2.0 - SN8F5702, SN8F57021, SN8F57022, SN8F57023, SN8F57024
+;  Version 2.0 - SN8F5703, SN8F57031, SN8F57032
 ;
 ;  *** <<< Use Configuration Wizard in Context Menu >>> ***
 ;------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ $NOMOD51
 ;   <o> Program Memory Security <0x01=> Disable <0x00=> Enable
 ;   <i> The debug interface cannot read program memory if this security option is enable.
 ;   <i> Erase Full Chip can be proformmed to erase original code/data and unlock security.
-    SECURITY_SET    EQU     0x00
+    SECURITY_SET    EQU     0x01
 ;
 ;   <o.1..3> CPU Clock Source <0x07=> IHRC 32 MHz <0x03=> IHRC 32 MHz with RTC <0x01=> X'tal 12 MHz <0x00=> X'tal 4 MHz <0x02=> External Clock
 ;   <i> IHRC 32 MHz: on-chip internal clock with or without Timer 0 real time clock.
@@ -41,7 +41,7 @@ $NOMOD51
 ;       <i> Reset without De-bounce: Triggers reset immediately if this pin is pulled low.
 ;       <i> GPIO: The shared pin is reserved for general purpose input/output.
 ;       <i> The de-bounce period is based on Internal Low R-C Clock which has a gentle inaccuracy.
-        RESETPIN_SET    EQU     0x30
+        RESETPIN_SET    EQU     0x00
 ;
 ;       <o.4..7> Watchdog Reset <0x00=> Always <0x05=> Enable <0x0A=> Disable
 ;       <i> Always: Trun on watchdog function including Normal, IDLE, and SLEEP mode.
@@ -55,7 +55,7 @@ $NOMOD51
 ;   </h>
 
 
-    CSEG    AT      0x0FF6
+    CSEG    AT      0x1FF6
     DB      0xFF
     DB      0xFF
     DB      0xFF
