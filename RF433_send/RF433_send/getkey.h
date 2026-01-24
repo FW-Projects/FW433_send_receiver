@@ -8,8 +8,8 @@
 #define keylong_stat 4         // 长按键起始代号
 #define key_long_on 5          // 长按键连发代号
 #define key_period 6           // 按键释放代号
-#define keylong_pepione 20    // 长按键时间常数代号
-#define key_continue_period 10 // 按键连发周期常数代号
+#define keylong_pepione 1000    // 长按键时间常数代号
+#define key_continue_period 50 // 按键连发周期常数代号
 #define keydown_ent 1          // 单击
 #define keyup_ent 2
 #define key_long 3

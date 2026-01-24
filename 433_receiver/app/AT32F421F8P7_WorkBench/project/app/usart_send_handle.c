@@ -44,5 +44,3 @@ void usart1_send_byte(u8 *p, u16 length)
     usart_data_transmit(USART1, *p++); // 发一个字节
   }
 }
-
-

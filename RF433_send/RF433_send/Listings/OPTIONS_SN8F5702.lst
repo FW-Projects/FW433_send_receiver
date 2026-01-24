@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  OPTIONS_SN8F5702                                                     09/06/2025 13:36:20 PAGE     1
+A51 MACRO ASSEMBLER  OPTIONS_SN8F5702                                                     09/08/2025 10:49:55 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -65,7 +65,7 @@ LOC  OBJ            LINE     SOURCE
                       51     ;
                       52     ;       <o.6..7> Watchdog Overflow Period <0x00=> 64 ms <0x01=> 128 ms <0x02=> 256 ms <0x03
                              => 512 ms
-A51 MACRO ASSEMBLER  OPTIONS_SN8F5702                                                     09/06/2025 13:36:20 PAGE     2
+A51 MACRO ASSEMBLER  OPTIONS_SN8F5702                                                     09/08/2025 10:49:55 PAGE     2
 
                       53     ;       <i> The watchdog overflow period is based on Internal Low R-C Clock which has a gen
                              tle inaccuracy.
@@ -85,7 +85,7 @@ LOC  OBJ            LINE     SOURCE
 0FFE A5               67         DB      0xA5
 0FFF AE               68         DB      WATCHDOG_SET + CLOCKSRC_SET + SECURITY_SET
                       69         END
-A51 MACRO ASSEMBLER  OPTIONS_SN8F5702                                                     09/06/2025 13:36:20 PAGE     3
+A51 MACRO ASSEMBLER  OPTIONS_SN8F5702                                                     09/08/2025 10:49:55 PAGE     3
 
 SYMBOL TABLE LISTING
 ------ ----- -------

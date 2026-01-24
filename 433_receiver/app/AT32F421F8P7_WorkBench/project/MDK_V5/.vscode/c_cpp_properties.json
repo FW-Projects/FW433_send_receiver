@@ -3,19 +3,19 @@
         {
             "name": "AT32F421F8P7_WorkBench",
             "includePath": [
-                "d:\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\libraries\\drivers\\inc",
-                "d:\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\libraries\\cmsis\\cm4\\core_support",
-                "d:\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\libraries\\cmsis\\cm4\\device_support",
-                "d:\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\project\\app",
-                "d:\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\project\\device",
-                "d:\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\project\\inc",
-                "d:\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\project\\src",
+                "d:\\AT32_project\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\libraries\\drivers\\inc",
+                "d:\\AT32_project\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\libraries\\cmsis\\cm4\\core_support",
+                "d:\\AT32_project\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\libraries\\cmsis\\cm4\\device_support",
+                "d:\\AT32_project\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\project\\app",
+                "d:\\AT32_project\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\project\\device",
+                "d:\\AT32_project\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\project\\inc",
+                "d:\\AT32_project\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\project\\src",
                 "D:\\keil5.42\\ARM\\ARMCLANG\\include",
                 "D:\\keil5.42\\ARM\\ARMCLANG\\include\\arm_linux",
                 "D:\\keil5.42\\ARM\\ARMCLANG\\include\\arm_linux_compat",
                 "D:\\keil5.42\\ARM\\ARMCLANG\\include\\libcxx",
-                "d:\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\libraries\\drivers\\src",
-                "d:\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\project\\MDK_V5"
+                "d:\\AT32_project\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\libraries\\drivers\\src",
+                "d:\\AT32_project\\433_send_receiver\\433send_receiver\\433_receiver\\app\\AT32F421F8P7_WorkBench\\project\\MDK_V5"
             ],
             "defines": [
                 "AT32F421F8P7",

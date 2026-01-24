@@ -1,4 +1,4 @@
-#include "SN8F5702.H"
+#include "SN8F5703.H"
 #include "intrins.h"
 #include "delayms.h"
 #include "433send.h"
@@ -32,12 +32,13 @@
 sbit SEND_LED = P2 ^ 4;
 sbit Battery_LED = P2 ^ 3;
 sbit charge_flag = P2 ^ 1; 
+sbit Full_Battery = P2 ^ 2;
 
-volatile uint8_t key_out_time = 0, key_state = 0,key_n = 0,start_init_outtime = 0,reset_led_time = 0;
+volatile uint8_t key_out_time = 0, key_state = 0,key_n = 0,start_init_outtime = 0,reset_led_time = 0,led_time1 = 0x00,led_times1 = 0x00;
 volatile uint8_t send_data = 0,first_get_addr_complete_flag = 0,send_counter = 0,led_times = 0,while_n = 0x00;
 volatile uint16_t send_addr = 0;
 volatile bit key_ent_flag = 0,longkey_flag = 0,tmr_stop_flag = 0,start_init_flag = 0,reset_flag = 0;
-volatile bit start_init_end_flag = 0,key_stop_tmr_flag = 0,send_finish_flag = 0,open_led_flag = 0;
+volatile bit start_init_end_flag = 0,key_stop_tmr_flag = 0,send_finish_flag = 0,open_led_flag = 0,get_addr_led_flag = 0;
 
 void key_handle(void);
 void fisrt_get_addr_handle(void);
@@ -71,21 +72,54 @@ void T1Interrupt(void) interrupt ISRTimer1
 	{
 		key_out_time--;
 	}
-
-	if(reset_flag == true)
+	if(get_addr_led_flag == true)  //获取滚动码
 	{
-		if(reset_led_time != 0x00)
-		{
-			reset_led_time--;
-		}
+		if(led_time1 != 0x00)
+			led_time1--;
 		else
 		{
-			reset_led_time = 0x01;
+			led_time1 = 0x01;
 			SEND_LED = ~SEND_LED;
+			Battery_LED = ~Battery_LED;
+			led_times1++;
+		}
+		if(led_times1 > 10)
+		{
+			led_times1 = 0x00;
+			get_addr_led_flag = false;
+			SEND_LED = true;
+			Battery_LED = true;
 		}
 	}
-	TH1 = (65536 - 10000) / 256;
-	TL1 = (65536 - 10000) % 256;
+	else
+	{
+		if(reset_flag == true || open_led_flag == true) //恢复出厂设置 / 433发送 / 对码
+		{
+			if(reset_led_time != 0x00)
+				reset_led_time--;
+			else
+			{
+				reset_led_time = 0x01;
+				SEND_LED = ~SEND_LED;
+				led_times++;
+			}
+			if(reset_flag == true && led_times > 16)
+			{
+				led_times = 0x00;
+				SEND_LED = 1;
+				reset_flag = false;
+			}
+			if(open_led_flag == true && led_times > 6)
+			{
+				led_times = 0x00;
+				SEND_LED = 1;
+				open_led_flag = false;
+			}
+		}
+	}
+	
+	TH1 = (65536 - 50000) / 256;
+	TL1 = (65536 - 50000) % 256;
 	ET1 = 1; 
 	TR1 = 1; 
 	TF1 = 0;
@@ -116,7 +150,8 @@ void main(void)
 					// 出厂首次获取滚动码
 					first_get_addr_complete_flag = true; // 设置首次获取地址码完成标志位
 					key_stop_tmr_flag = false;			
-					start_init_flag = true;				// 设置开始标志位
+//					start_init_flag = true;				// 设置开始标志位
+					get_addr_led_flag = true;
 					fisrt_get_addr_handle();	
 				}
 				else
@@ -136,29 +171,21 @@ void main(void)
 		switch(while_n)
 		{
 			case 1: 
-				if(reset_flag == false)
-				{
-					if(open_led_flag == true)
-					{
-						SEND_LED = true;
-						led_times++;
-						if(led_times > 10)
-						{
-							SEND_LED = false;
-							led_times = 0;
-						}
-					}
-				}
 				if(charge_flag == 0)
-					Battery_LED = true;
+				{
+					if(Full_Battery == 0)
+						Battery_LED = true;
+					else
+						Battery_LED = false;
+				}
 				else 
-					Battery_LED = false;
+					Battery_LED = true;
 				break;
 			case 2:
 				if (key_n  == 0)
 				{
 					key_handle(); // 按键识别
-					key_n  = 0x02;
+					key_n  = 0;
 				}
 				break;
 			default:
@@ -191,8 +218,9 @@ void send_handle(void)
 		{
 			StartSend_433(send_addr, send_data);
 			send_finish_flag = true;
+			open_led_flag = true;
 //			send_counter++;
-//			if(send_counter > 1)
+//			if(send_counter > 5)
 //			{
 //				key_state = KEY_NULL;
 //				send_finish_flag = true;
@@ -236,7 +264,7 @@ void Start_init_handle(void)
 		send_addr = data_8bit_to_16bit(0); // ROM地址
 
 		first_get_addr_complete_flag = u8_data[2]; // 首次获取地址码完成标志位
-		if(first_get_addr_complete_flag > 1)
+		if(first_get_addr_complete_flag != 0)
 			first_get_addr_complete_flag = 0;
 		if (first_get_addr_complete_flag == false)
 		{
@@ -291,31 +319,16 @@ void key_handle(void)
 			break;
 		case (keyup_ent):
 		{
-			if(longkey_flag == 0)
-			{
-				key_ent_flag = true;
-				key_state = KEY_TEMP_UP;
-				send_finish_flag = false;
-			}
+			key_ent_flag = true;
+			key_state = KEY_TEMP_UP;
+			send_finish_flag = false;
 			inkey_number = key_null;
-			longkey_flag = false;
 			key_out_time = 0x05;
 		}
 		break;
 		case (key_long):
 			break;
-		case (key_continue):
-		{
-			if(longkey_flag == 0)
-			{
-				key_ent_flag = true;
-				key_state = KEY_TEMP_UP;
-				send_finish_flag = false;
-				longkey_flag = true;
-				key_out_time = 0x05;
-			}
-		}
-		break;
+		case (key_continue):break;
 		default:
 			break;
 		}
@@ -328,13 +341,9 @@ void key_handle(void)
 			break;
 		case (keyup_ent):
 		{
-			if(longkey_flag == 0)
-			{
-				key_ent_flag = true;
-				key_state = KEY_TEMP_DOWN;
-				send_finish_flag = false;
-			}
-			longkey_flag = false;
+			key_ent_flag = true;
+			key_state = KEY_TEMP_DOWN;
+			send_finish_flag = false;
 			inkey_number = key_null;
 			key_out_time = 0x05;
 		}
@@ -342,16 +351,6 @@ void key_handle(void)
 		case (key_long):
 			break;
 		case (key_continue):
-		{
-			if(longkey_flag == 0)
-			{
-				key_ent_flag = true;
-				key_state = KEY_TEMP_DOWN;
-				send_finish_flag = false;
-				longkey_flag = true;
-				key_out_time = 0x05;
-			}
-		}
 		break;
 		default:
 			break;
@@ -365,13 +364,9 @@ void key_handle(void)
 			break;
 		case (keyup_ent):
 		{
-			if(longkey_flag == 0)
-			{
-				key_ent_flag = true;
-				key_state = KEY_AIR_UP;
-				send_finish_flag = false;
-			}
-			longkey_flag = false;
+			key_ent_flag = true;
+			key_state = KEY_AIR_UP;
+			send_finish_flag = false;
 			inkey_number = key_null;
 			key_out_time = 0x05;
 		}
@@ -379,16 +374,6 @@ void key_handle(void)
 		case (key_long):
 			break;
 		case (key_continue):
-		{
-			if(longkey_flag == 0)
-			{
-				key_ent_flag = true;
-				key_state = KEY_AIR_UP;
-				send_finish_flag = false;
-				longkey_flag = true;
-				key_out_time = 0x05;
-			}
-		}
 		break;
 		default:
 			break;
@@ -402,13 +387,9 @@ void key_handle(void)
 			break;
 		case (keyup_ent):
 		{
-			if(longkey_flag == 0)
-			{
 			key_ent_flag = true;
 			key_state = KEY_AIR_DOWN;
 			send_finish_flag = false;
-			}
-			longkey_flag = false;
 			inkey_number = key_null;
 			key_out_time = 0x05;
 		}
@@ -416,16 +397,6 @@ void key_handle(void)
 		case (key_long):
 			break;
 		case (key_continue):
-		{
-			if(longkey_flag == 0)
-			{
-				key_ent_flag = true;
-				key_state = KEY_AIR_DOWN;
-				send_finish_flag = false;
-				longkey_flag = true;
-				key_out_time = 0x05;
-			}
-		}
 		break;
 		default:
 			break;
@@ -449,10 +420,6 @@ void key_handle(void)
 		case (key_long):
 			break;
 		case (key_continue):
-		{
-			key_ent_flag = true;
-			longkey_flag = true;
-		}
 		break;
 		default:
 			break;
@@ -476,10 +443,6 @@ void key_handle(void)
 		case (key_long):
 			break;
 		case (key_continue):
-		{
-			key_ent_flag = true;
-			longkey_flag = true;
-		}
 		break;
 		default:
 			break;
@@ -503,10 +466,6 @@ void key_handle(void)
 		case (key_long):
 			break;
 		case (key_continue):
-		{
-			key_ent_flag = true;
-			longkey_flag = true;
-		}
 		break;
 		default:
 			break;
@@ -530,10 +489,6 @@ void key_handle(void)
 		case (key_long):
 			break;
 		case (key_continue):
-		{
-			key_ent_flag = true;
-			longkey_flag = true;
-		}
 		break;
 		default:
 			break;

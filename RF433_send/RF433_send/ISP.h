@@ -2,7 +2,7 @@
 #define _ISP_h_
 #include <intrins.h>                            					 // for _nop_
 #include <absacc.h>		
-#include <SN8F5702.H>
+#include <SN8F5703.H>
 
 extern idata uint16_t  r_read_rom_addr ;
 extern idata uint8_t   u8_data[3];	

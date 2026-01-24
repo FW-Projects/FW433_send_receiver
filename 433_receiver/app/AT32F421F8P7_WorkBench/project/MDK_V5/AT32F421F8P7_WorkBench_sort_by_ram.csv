@@ -1,3 +1,3 @@
 File_name,ram_percent,ram,flash,Code,RO_data,RW_data,ZI_data
 startup_at32f421.o,82.248993%,1024,240,36,204,0,1024
-lto-llvm-8064e3.o,17.751003%,221,13148,13112,32,4,217
+lto-llvm-45ec65.o,17.751003%,221,13162,13126,32,4,217

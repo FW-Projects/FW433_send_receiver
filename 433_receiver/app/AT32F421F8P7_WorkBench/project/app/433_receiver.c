@@ -13,7 +13,6 @@
 
 static uint8_t send_times = 0;
 
-
 void right_code_handle(uint8_t *in_u8_code);
 void decode_handle(uint8_t *in_u8code);
 /*
@@ -41,7 +40,6 @@ void recevier_handle(void)
 
 		decode_handle(data_433_buffer);
 	}
-	
 }
 
 void right_code_handle(uint8_t *in_u8_code)
@@ -78,7 +76,7 @@ void decode_handle(uint8_t *in_u8code)
 	}
 	else
 	{
-//		if (sFW433_t.Receiver_handle.Address_code == ((in_u8code[0] << 8) | in_u8code[1])) // 查询地址码
+		//		if (sFW433_t.Receiver_handle.Address_code == ((in_u8code[0] << 8) | in_u8code[1])) // 查询地址码
 		if (sFW433_t.Receiver_handle.Address_code == (uint16_t)((in_u8code[0] << 8) | in_u8code[1]))
 		{
 
@@ -107,7 +105,7 @@ void decode_handle(uint8_t *in_u8code)
 				dat_433.usart433_data.DATA_VAL_6_433 = 0x00;
 				dat_433.usart433_data.DATA_VAL_7_433 = 0x00;
 				dat_433.usart433_data.DATA_VAL_8_433 = 0x02;
-			
+
 				break;
 			case CH3:
 				// 处理CH3指令
@@ -195,11 +193,11 @@ void decode_handle(uint8_t *in_u8code)
 				break;
 			default:
 				break;
-			}	
+			}
 			data_433_buffer[0] = 0x00;
 			data_433_buffer[1] = 0x00;
 			data_433_buffer[2] = 0x00;
-			
+
 			// 填充包头
 			dat_433.usart433_data.DATAHEAD_433 = 0xD1; // 包头
 			// 填充通用指令和指令使用
@@ -211,19 +209,17 @@ void decode_handle(uint8_t *in_u8code)
 			// 填充数据长度
 			dat_433.usart433_data.DATA_LENGTH_H_433 = 0x00; // 数据长度高字节
 			dat_433.usart433_data.DATA_LENGTH_L_433 = 0x0A; // 数据长度低字节
-			//填充无用数据
-			dat_433.usart433_data.DATA_NO_1_433 = 0x00; 
-			dat_433.usart433_data.DATA_NO_2_433 = 0x00; 
+			// 填充无用数据
+			dat_433.usart433_data.DATA_NO_1_433 = 0x00;
+			dat_433.usart433_data.DATA_NO_2_433 = 0x00;
 			// 填充包尾
 			dat_433.usart433_data.DATAEND_433 = 0xF0; // 包尾2105
-			
-			
+
 			uint32_t checksum_sum[4];
-		 checksum_sum[0] = (uint32_t)((dat_433.usart433_data.UNIVERSAL_COMMAND_433 << 24) | (dat_433.usart433_data.COMMAND_USE_433 << 16) | (dat_433.usart433_data.ADDR_H_433 << 8) | (dat_433.usart433_data.ADDR_L_433));
-		 checksum_sum[1] = (uint32_t)((dat_433.usart433_data.DATA_LENGTH_H_433 << 24) | (dat_433.usart433_data.DATA_LENGTH_L_433 << 16) | (dat_433.usart433_data.DATA_VAL_1_433 << 8) | (dat_433.usart433_data.DATA_VAL_2_433));
-         checksum_sum[2] = (uint32_t)((dat_433.usart433_data.DATA_VAL_3_433 << 24) | (dat_433.usart433_data.DATA_VAL_4_433 << 16) | (dat_433.usart433_data.DATA_VAL_5_433 << 8) | (dat_433.usart433_data.DATA_VAL_6_433));
-		 checksum_sum[3] = (uint32_t)((dat_433.usart433_data.DATA_VAL_7_433 << 24) | (dat_433.usart433_data.DATA_VAL_8_433 << 16) | (0x00 << 8) | (0x00));
-			
+			checksum_sum[0] = (uint32_t)((dat_433.usart433_data.UNIVERSAL_COMMAND_433 << 24) | (dat_433.usart433_data.COMMAND_USE_433 << 16) | (dat_433.usart433_data.ADDR_H_433 << 8) | (dat_433.usart433_data.ADDR_L_433));
+			checksum_sum[1] = (uint32_t)((dat_433.usart433_data.DATA_LENGTH_H_433 << 24) | (dat_433.usart433_data.DATA_LENGTH_L_433 << 16) | (dat_433.usart433_data.DATA_VAL_1_433 << 8) | (dat_433.usart433_data.DATA_VAL_2_433));
+			checksum_sum[2] = (uint32_t)((dat_433.usart433_data.DATA_VAL_3_433 << 24) | (dat_433.usart433_data.DATA_VAL_4_433 << 16) | (dat_433.usart433_data.DATA_VAL_5_433 << 8) | (dat_433.usart433_data.DATA_VAL_6_433));
+			checksum_sum[3] = (uint32_t)((dat_433.usart433_data.DATA_VAL_7_433 << 24) | (dat_433.usart433_data.DATA_VAL_8_433 << 16) | (0x00 << 8) | (0x00));
 
 			// 计算校验和
 			uint32_t crc_433 = crc_block_calculate(checksum_sum, 4);
@@ -235,13 +231,11 @@ void decode_handle(uint8_t *in_u8code)
 			dat_433.usart433_data.CHECKSUM_3_433 = (crc_433 >> 8) & 0xFF;
 			dat_433.usart433_data.CHECKSUM_4_433 = crc_433 & 0xFF;
 
-		
 			sFW433_t.Receiver_handle.usart_send_ready_433_flag = true; // 数据准备好，可以发送
 			sFW433_t.Receiver_handle.usart_send_finish_433_flag = false;
 
-
 			sFW433_t.Receiver_handle.led_times = 0x0a;
- 			usart1_send_byte(dat_433.usart433_buf, sizeof(dat_433.usart433_buf));
+			usart1_send_byte(dat_433.usart433_buf, sizeof(dat_433.usart433_buf));
 		}
 		else
 		{

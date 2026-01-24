@@ -1,6 +1,6 @@
 #ifndef _TMR_H_
 #define _TMR_H_
-#include "SN8F5702.H"
+#include "SN8F5703.H"
 
 void InitT0(void);
 void InitT1(void);

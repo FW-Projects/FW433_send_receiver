@@ -1,14 +1,14 @@
-C51 COMPILER V9.60.7.0   433SEND                                                           09/06/2025 13:36:19 PAGE 1   
+C51 COMPILER V9.60.7.0   433SEND                                                           09/15/2025 15:22:47 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE 433SEND
 OBJECT MODULE PLACED IN .\Objects\433send.obj
-COMPILER INVOKED BY: D:\keil5C51\C51\BIN\C51.EXE 433send.c ROM(COMPACT) OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRIN
-                    -T(.\Listings\433send.lst) OBJECT(.\Objects\433send.obj)
+COMPILER INVOKED BY: D:\keil5C51\C51\BIN\C51.EXE 433send.c COMPACT ROM(COMPACT) OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXT
+                    -END PRINT(.\Listings\433send.lst) OBJECT(.\Objects\433send.obj)
 
 line level    source
 
-   1          #include "SN8F5702.H"
+   1          #include "SN8F5703.H"
    2          #include "intrins.h"
    3          #include "delayms.h"
    4          #include "433send.h"
@@ -25,238 +25,237 @@ line level    source
   14          #define Data_Send_H 1
   15          #define Data_Send_L 0
   16          
-  17          sbit data_send = P1 ^ 0;
+  17          sbit data_send = P2 ^ 0;
   18          
   19          static Witty433 witty433;
   20          
   21          
-  22          uint16_t set_433time_buf[] = {120, 120, 12,   4,    4,    12,   4,    13}; // ÉèÖÃ433·¢ËÍµçÆ½Ê±¼ä
-  23          //uint16_t set_433time_buf[] = {240, 240, 24,   8,    8,    24,   8,    26}; // ÉèÖÃ433·¢ËÍµçÆ½Ê±¼ä
-  24          
-  25                                      /*12ms 12ms 1.2ms 0.4ms 0.4ms 1.2ms 0.4ms 1.3ms
-  26          
-  27          //uint16_t set_433time_buf[] = {120, 120, 120, 120,120,120,120,120}; // ÉèÖÃ433·¢ËÍµçÆ½Ê±¼ä
+  22          uint16_t set_433time_buf[] = {60, 60, 12,   4,    4,    12,   4,    12}; // ÉèÖÃ433·¢ËÍµçÆ½Ê±¼ä
+  23          
+  24                                      /*12ms 12ms 1.2ms 0.4ms 0.4ms 1.2ms 0.4ms 1.3ms
+  25          
+  26          //uint16_t set_433time_buf[] = {120, 120, 120, 120,120,120,120,120}; // ÉèÖÃ433·¢ËÍµçÆ½Ê±¼ä
+  27          
   28          
-  29          
-  30          /**********************************µçÆ½Ê±¼ä²ÎÊıÉèÖÃ³õÊ¼»¯£¨×Ô¶¨Òå²¿·Ö£©***********************************
+  29          /**********************************µçÆ½Ê±¼ä²ÎÊıÉèÖÃ³õÊ¼»¯£¨×Ô¶¨Òå²¿·Ö£©***********************************
              -*/
-  31          // #define delay_us_433 delay_us(1)                                                  // ÉèÖÃ433Î¢ÃëÑÓÊ±º¯Ê
+  30          // #define delay_us_433 delay_us(1)                                                  // ÉèÖÃ433Î¢ÃëÑÓÊ±º¯Ê
              -ı£¨×Ô¶¨Òå²¿·Ö£©
-  32          // #define delay_ms_433 delay_ms(1)                                                  // ÉèÖÃ433ºÁÃëÑÓÊ±º¯Ê
+  31          // #define delay_ms_433 delay_ms(1)                                                  // ÉèÖÃ433ºÁÃëÑÓÊ±º¯Ê
              -ı£¨×Ô¶¨Òå²¿·Ö£©
-  33          // #define delay_long_us delay_us(10)                                                // ÉèÖÃ433³¤ÑÓÊ±º¯Êı£
+  32          // #define delay_long_us delay_us(10)                                                // ÉèÖÃ433³¤ÑÓÊ±º¯Êı£
              -¨×Ô¶¨Òå²¿·Ö£©
+  33          
   34          
-  35          
-  36          void delay_long_us(unsigned int long_us)
-  37          {
-  38   1      
-  39   1              delay_us(long_us);
-  40   1      }
-  41          //void delay_long_ms(unsigned int long_ms)
-  42          //{
-  43          //        delay_ms(long_ms);
-  44          //}
-  45          
-  46          void Witty433_Init(unsigned int set_level_buf[8]) // Õâ¸öset_level_buf[8]Êı×é±£´æµÄÊÇ¸÷¸öµçÆ½Ê±¼ä£¬µ¥Î»ÊÇu
+  35          void delay_long_us(unsigned int long_us)
+  36          {
+  37   1      
+  38   1              delay_us(long_us);
+  39   1      }
+  40          //void delay_long_ms(unsigned int long_ms)
+  41          //{
+  42          //        delay_ms(long_ms);
+  43          //}
+  44          
+  45          void Witty433_Init(unsigned int set_level_buf[8]) // Õâ¸öset_level_buf[8]Êı×é±£´æµÄÊÇ¸÷¸öµçÆ½Ê±¼ä£¬µ¥Î»ÊÇu
              -s
-  47          {
-  48   1              SetStartLevelTime_433(set_level_buf[0], set_level_buf[1]); // ÉèÖÃÆğÊ¼Âë ¸ß µÍ µçÆ½Ê±¼ä
-C51 COMPILER V9.60.7.0   433SEND                                                           09/06/2025 13:36:19 PAGE 2   
+  46          {
+  47   1              SetStartLevelTime_433(set_level_buf[0], set_level_buf[1]); // ÉèÖÃÆğÊ¼Âë ¸ß µÍ µçÆ½Ê±¼ä
+  48   1              SetOneLevelTime_433(set_level_buf[2], set_level_buf[3]);   // ÉèÖÃbit1   ¸ß µÍ µçÆ½Ê±¼ä
+C51 COMPILER V9.60.7.0   433SEND                                                           09/15/2025 15:22:47 PAGE 2   
 
-  49   1              SetOneLevelTime_433(set_level_buf[2], set_level_buf[3]);   // ÉèÖÃbit1   ¸ß µÍ µçÆ½Ê±¼ä
-  50   1              SetZeroLevelTime_433(set_level_buf[4], set_level_buf[5]);  // ÉèÖÃbit0   ¸ß µÍ µçÆ½Ê±¼ä
-  51   1              SetEndLevelTime_433(set_level_buf[6], set_level_buf[7]);   // ÉèÖÃ½áÊøÂë ¸ß µÍ µçÆ½Ê±¼ä
-  52   1      
-  53   1              witty433.delay_433 = delay_long_us;
-  54   1      }
-  55          
-  56          /************************************* 433µçÆ½Ê±¼ä²ÎÊıÉèÖÃº¯Êı ****************************************/
-  57          
-  58          /* ÉèÖÃÆğÊ¼ÂëµçÆ½Ê±¼ä */
-  59          void SetStartLevelTime_433(unsigned int time_H, unsigned int time_L)
-  60          {
-  61   1              witty433.StartLevelTime_H = time_H;
-  62   1              witty433.StartLevelTime_L = time_L;
-  63   1      }
-  64          
-  65          /* ÉèÖÃ½áÊøÂëµçÆ½Ê±¼ä */
-  66          void SetEndLevelTime_433(unsigned int time_H, unsigned int time_L)
-  67          {
-  68   1              witty433.EndLevelTime_H = time_H;
-  69   1              witty433.EndLevelTime_L = time_L;
-  70   1      }
-  71          
-  72          /* ÉèÖÃbit0µçÆ½Ê±¼ä */
-  73          void SetZeroLevelTime_433(unsigned int time_H, unsigned int time_L)
-  74          {
-  75   1              witty433.ZeroLevelTime_H = time_H;
-  76   1              witty433.ZeroLevelTime_L = time_L;
-  77   1      }
-  78          
-  79          /* ÉèÖÃbit1µçÆ½Ê±¼ä */
-  80          void SetOneLevelTime_433(unsigned int time_H, unsigned int time_L)
-  81          {
-  82   1              witty433.OneLevelTime_H = time_H;
-  83   1              witty433.OneLevelTime_L = time_L;
-  84   1      }
-  85          
-  86          /******************************* 433·¢ËÍ²ÎÊıÉèÖÃº¯Êı ****************************************/
-  87          
-  88          /* ÉèÖÃµØÖ·Âë */
-  89          //void SetAddr_433(unsigned char *addr, unsigned int addrBitNum)
-  90          //{
-  91          //        witty433.Addr = addr;
-  92          //        witty433.AddrBitNum = addrBitNum;
-  93          //}
-  94          
-  95          ///* ÉèÖÃÊı¾İÓò */
-  96          //void SetSendData_433(unsigned char *sendData, unsigned int sendDataBitNum)
-  97          //{
-  98          //        witty433.SendData = sendData;
-  99          //        witty433.SendDataBitNum = sendDataBitNum;
- 100          //}
- 101          
- 102          ///* ÉèÖÃÁ¬Ğø·¢ËÍ´ÎÊı */
- 103          //void SetSendNumber_433(unsigned char sendNumber)
- 104          //{
- 105          //        witty433.SendNumber = sendNumber;
- 106          //}
- 107          
- 108          /******************************* ·¢ËÍ³õÊ¼»¯º¯Êı ****************************************/
- 109          
- 110          /* ´«Èë·¢ËÍ²ÎÊıÄÚÈİ--Êı¾İÓò¼°·¢ËÍ´ÎÊı */
-C51 COMPILER V9.60.7.0   433SEND                                                           09/06/2025 13:36:19 PAGE 3   
+  49   1              SetZeroLevelTime_433(set_level_buf[4], set_level_buf[5]);  // ÉèÖÃbit0   ¸ß µÍ µçÆ½Ê±¼ä
+  50   1              SetEndLevelTime_433(set_level_buf[6], set_level_buf[7]);   // ÉèÖÃ½áÊøÂë ¸ß µÍ µçÆ½Ê±¼ä
+  51   1      
+  52   1              witty433.delay_433 = delay_long_us;
+  53   1      }
+  54          
+  55          /************************************* 433µçÆ½Ê±¼ä²ÎÊıÉèÖÃº¯Êı ****************************************/
+  56          
+  57          /* ÉèÖÃÆğÊ¼ÂëµçÆ½Ê±¼ä */
+  58          void SetStartLevelTime_433(unsigned int time_H, unsigned int time_L)
+  59          {
+  60   1              witty433.StartLevelTime_H = time_H;
+  61   1              witty433.StartLevelTime_L = time_L;
+  62   1      }
+  63          
+  64          /* ÉèÖÃ½áÊøÂëµçÆ½Ê±¼ä */
+  65          void SetEndLevelTime_433(unsigned int time_H, unsigned int time_L)
+  66          {
+  67   1              witty433.EndLevelTime_H = time_H;
+  68   1              witty433.EndLevelTime_L = time_L;
+  69   1      }
+  70          
+  71          /* ÉèÖÃbit0µçÆ½Ê±¼ä */
+  72          void SetZeroLevelTime_433(unsigned int time_H, unsigned int time_L)
+  73          {
+  74   1              witty433.ZeroLevelTime_H = time_H;
+  75   1              witty433.ZeroLevelTime_L = time_L;
+  76   1      }
+  77          
+  78          /* ÉèÖÃbit1µçÆ½Ê±¼ä */
+  79          void SetOneLevelTime_433(unsigned int time_H, unsigned int time_L)
+  80          {
+  81   1              witty433.OneLevelTime_H = time_H;
+  82   1              witty433.OneLevelTime_L = time_L;
+  83   1      }
+  84          
+  85          /******************************* 433·¢ËÍ²ÎÊıÉèÖÃº¯Êı ****************************************/
+  86          
+  87          /* ÉèÖÃµØÖ·Âë */
+  88          //void SetAddr_433(unsigned char *addr, unsigned int addrBitNum)
+  89          //{
+  90          //        witty433.Addr = addr;
+  91          //        witty433.AddrBitNum = addrBitNum;
+  92          //}
+  93          
+  94          ///* ÉèÖÃÊı¾İÓò */
+  95          //void SetSendData_433(unsigned char *sendData, unsigned int sendDataBitNum)
+  96          //{
+  97          //        witty433.SendData = sendData;
+  98          //        witty433.SendDataBitNum = sendDataBitNum;
+  99          //}
+ 100          
+ 101          ///* ÉèÖÃÁ¬Ğø·¢ËÍ´ÎÊı */
+ 102          //void SetSendNumber_433(unsigned char sendNumber)
+ 103          //{
+ 104          //        witty433.SendNumber = sendNumber;
+ 105          //}
+ 106          
+ 107          /******************************* ·¢ËÍ³õÊ¼»¯º¯Êı ****************************************/
+ 108          
+ 109          /* ´«Èë·¢ËÍ²ÎÊıÄÚÈİ--Êı¾İÓò¼°·¢ËÍ´ÎÊı */
+ 110          //void SendInput_433(unsigned char *data, unsigned int dataBitNum, unsigned char sendNum)
+C51 COMPILER V9.60.7.0   433SEND                                                           09/15/2025 15:22:47 PAGE 3   
 
- 111          //void SendInput_433(unsigned char *data, unsigned int dataBitNum, unsigned char sendNum)
- 112          //{
- 113          //        SetSendNumber_433(sendNum);        // ÉèÖÃsendNumÁ¬Ğø·¢ËÍ´ÎÊı,²»Í¬³§ÉÌµÄ¿ÉÄÜ²»Ò»Ñù£¬ĞèÒª×¢Òâ
- 114          //        SetSendData_433(data, dataBitNum); // dataÊı×éÊÇ¾ßÌåµÄ¿ØÖÆÊı¾İ,dataBitNumÊÇÊı¾İµÄÎ»Êı
- 115          //}
+ 111          //{
+ 112          //        SetSendNumber_433(sendNum);        // ÉèÖÃsendNumÁ¬Ğø·¢ËÍ´ÎÊı,²»Í¬³§ÉÌµÄ¿ÉÄÜ²»Ò»Ñù£¬ĞèÒª×¢Òâ
+ 113          //        SetSendData_433(data, dataBitNum); // dataÊı×éÊÇ¾ßÌåµÄ¿ØÖÆÊı¾İ,dataBitNumÊÇÊı¾İµÄÎ»Êı
+ 114          //}
+ 115          
  116          
  117          
- 118          
- 119          /************************************************************************************/
- 120          
- 121          /* ·¢ËÍÆğÊ¼Âë */
- 122          void SendStart_433()
- 123          {
- 124   1              data_send = Data_Send_H;
- 125   1              witty433.delay_433(witty433.StartLevelTime_H);
- 126   1      
- 127   1              data_send = Data_Send_L;
- 128   1              witty433.delay_433(witty433.StartLevelTime_L);
- 129   1      }
- 130          
- 131          /* ·¢ËÍµØÖ·Âë */
- 132          void SendAddr(uint16_t in_addr1)
- 133          {
- 134   1              uint8_t addr_h = (in_addr1 >> 8) & 0xFF; // »ñÈ¡µØÖ·Âë¸ßÎ»
- 135   1              uint8_t addr_l = in_addr1 & 0xFF;        // »ñÈ¡µØÖ·ÂëµÍÎ»
- 136   1      
- 137   1              SendBit_433(addr_h, 8); // ÏÈĞ´¸ßÎ»
- 138   1              SendBit_433(addr_l, 8); // ÏÈĞ´µØÎ»
- 139   1      }
- 140          
- 141          /* ·¢ËÍÊı¾İÓò */
- 142          void SendData(uint8_t in_dat1)
- 143          {
- 144   1              SendBit_433(in_dat1, 8);
- 145   1      }
- 146          
- 147          /* ·¢ËÍ½áÊøÂë */
- 148          void SendEnd_433()
- 149          {
- 150   1              data_send = Data_Send_H;
- 151   1              witty433.delay_433(witty433.EndLevelTime_H);
- 152   1      
- 153   1              data_send = Data_Send_L;
- 154   1              witty433.delay_433(witty433.EndLevelTime_L);
- 155   1      }
- 156          
- 157          /* ·¢ËÍbit0 */
- 158          void SendBit0_433()
- 159          {
- 160   1              data_send = Data_Send_H;
- 161   1              witty433.delay_433(witty433.ZeroLevelTime_H);
- 162   1      
- 163   1              data_send = Data_Send_L;
- 164   1              witty433.delay_433(witty433.ZeroLevelTime_L);
- 165   1      }
- 166          
- 167          /* ·¢ËÍbit1 */
- 168          void SendBit1_433()
- 169          {
- 170   1              data_send = Data_Send_H;
- 171   1              witty433.delay_433(witty433.OneLevelTime_H);
- 172   1      
-C51 COMPILER V9.60.7.0   433SEND                                                           09/06/2025 13:36:19 PAGE 4   
+ 118          /************************************************************************************/
+ 119          
+ 120          /* ·¢ËÍÆğÊ¼Âë */
+ 121          void SendStart_433()
+ 122          {
+ 123   1              data_send = Data_Send_H;
+ 124   1              witty433.delay_433(witty433.StartLevelTime_H);
+ 125   1      
+ 126   1              data_send = Data_Send_L;
+ 127   1              witty433.delay_433(witty433.StartLevelTime_L);
+ 128   1      }
+ 129          
+ 130          /* ·¢ËÍµØÖ·Âë */
+ 131          void SendAddr(uint16_t in_addr1)
+ 132          {
+ 133   1              uint8_t addr_h = (in_addr1 >> 8) & 0xFF; // »ñÈ¡µØÖ·Âë¸ßÎ»
+ 134   1              uint8_t addr_l = in_addr1 & 0xFF;        // »ñÈ¡µØÖ·ÂëµÍÎ»
+ 135   1      
+ 136   1              SendBit_433(addr_h, 8); // ÏÈĞ´¸ßÎ»
+ 137   1              SendBit_433(addr_l, 8); // ÏÈĞ´µØÎ»
+ 138   1      }
+ 139          
+ 140          /* ·¢ËÍÊı¾İÓò */
+ 141          void SendData(uint8_t in_dat1)
+ 142          {
+ 143   1              SendBit_433(in_dat1, 8);
+ 144   1      }
+ 145          
+ 146          /* ·¢ËÍ½áÊøÂë */
+ 147          void SendEnd_433()
+ 148          {
+ 149   1              data_send = Data_Send_H;
+ 150   1              witty433.delay_433(witty433.EndLevelTime_H);
+ 151   1      
+ 152   1              data_send = Data_Send_L;
+ 153   1              witty433.delay_433(witty433.EndLevelTime_L);
+ 154   1      }
+ 155          
+ 156          /* ·¢ËÍbit0 */
+ 157          void SendBit0_433()
+ 158          {
+ 159   1              data_send = Data_Send_H;
+ 160   1              witty433.delay_433(witty433.ZeroLevelTime_H);
+ 161   1      
+ 162   1              data_send = Data_Send_L;
+ 163   1              witty433.delay_433(witty433.ZeroLevelTime_L);
+ 164   1      }
+ 165          
+ 166          /* ·¢ËÍbit1 */
+ 167          void SendBit1_433()
+ 168          {
+ 169   1              data_send = Data_Send_H;
+ 170   1              witty433.delay_433(witty433.OneLevelTime_H);
+ 171   1      
+ 172   1              data_send = Data_Send_L;
+C51 COMPILER V9.60.7.0   433SEND                                                           09/15/2025 15:22:47 PAGE 4   
 
- 173   1              data_send = Data_Send_L;
- 174   1              witty433.delay_433(witty433.OneLevelTime_L);
- 175   1      }
- 176          
- 177          /* ·¢ËÍ16½øÖÆÊı¾İ--1Byte */
- 178          //void SendHex_433(unsigned char byte)
- 179          //{
- 180          //        SendBit_433(byte, 8);
- 181          //}
- 182          
- 183          /* ·¢ËÍbitÊı¾İ--´ı·¢ËÍÊı¾İ¼°´ı·¢ËÍÊı¾İbitÊı0~8 */
- 184          
- 185          void SendBit_433(unsigned char byte, unsigned char bitNum)
- 186          {
- 187   1             uint8_t a = 0;
- 188   1              for (a = 0; a < bitNum; a++)
- 189   1              {
- 190   2                      if (byte & 0x80)
- 191   2                      {
- 192   3                              SendBit1_433();
- 193   3                      }
- 194   2                      else
- 195   2                      {
- 196   3                              SendBit0_433();
- 197   3                      }
- 198   2                      byte <<= 1;
- 199   2                                      _nop_();
- 200   2              }
- 201   1      }
+ 173   1              witty433.delay_433(witty433.OneLevelTime_L);
+ 174   1      }
+ 175          
+ 176          /* ·¢ËÍ16½øÖÆÊı¾İ--1Byte */
+ 177          //void SendHex_433(unsigned char byte)
+ 178          //{
+ 179          //        SendBit_433(byte, 8);
+ 180          //}
+ 181          
+ 182          /* ·¢ËÍbitÊı¾İ--´ı·¢ËÍÊı¾İ¼°´ı·¢ËÍÊı¾İbitÊı0~8 */
+ 183          
+ 184          void SendBit_433(unsigned char byte, unsigned char bitNum)
+ 185          {
+ 186   1             uint8_t a = 0;
+ 187   1              for (a = 0; a < bitNum; a++)
+ 188   1              {
+ 189   2                      if (byte & 0x80)
+ 190   2                      {
+ 191   3                              SendBit1_433();
+ 192   3                      }
+ 193   2                      else
+ 194   2                      {
+ 195   3                              SendBit0_433();
+ 196   3                      }
+ 197   2                      byte <<= 1;
+ 198   2                                      _nop_();
+ 199   2              }
+ 200   1      }
+ 201          
  202          
- 203          
- 204          /*******************************·¢ËÍÒ»´Î433ĞÅºÅ***************************************/
- 205          
- 206          void StartSend_433(uint16_t in_addr2, uint8_t in_dat) // ÏÈ´«Èë·¢ËÍ²ÎÊı£¬ÔÙ·¢ËÍ
- 207          {
- 208   1              SendStart_433();
- 209   1              SendAddr(in_addr2);
- 210   1              SendData(in_dat);
- 211   1              SendEnd_433();
- 212   1      }
- 213          
- 214          /*******************************·¢ËÍ¶à´Î433ĞÅºÅ***************************************/
- 215          
- 216          void StartSend_433_long(uint16_t in_addr3, uint8_t in_dat,uint8_t in_num) // ·¢ËÍ¶à´Î433ĞÅºÅ
- 217          {
- 218   1              uint8_t b = 0;
- 219   1              for (b = 0; b < in_num; b++)
- 220   1              {
- 221   2                              SendStart_433();
- 222   2                              SendAddr(in_addr3);// ·¢ËÍµØÖ·Âë
- 223   2                              SendData(in_dat);// ·¢ËÍÊı¾İÓò
- 224   2              }
- 225   1              SendEnd_433();
- 226   1      }
+ 203          /*******************************·¢ËÍÒ»´Î433ĞÅºÅ***************************************/
+ 204          
+ 205          void StartSend_433(uint16_t in_addr2, uint8_t in_dat) // ÏÈ´«Èë·¢ËÍ²ÎÊı£¬ÔÙ·¢ËÍ
+ 206          {
+ 207   1              SendStart_433();
+ 208   1              SendAddr(in_addr2);
+ 209   1              SendData(in_dat);
+ 210   1              SendEnd_433();
+ 211   1      }
+ 212          
+ 213          /*******************************·¢ËÍ¶à´Î433ĞÅºÅ***************************************/
+ 214          
+ 215          void StartSend_433_long(uint16_t in_addr3, uint8_t in_dat,uint8_t in_num) // ·¢ËÍ¶à´Î433ĞÅºÅ
+ 216          {
+ 217   1              uint8_t b = 0;
+ 218   1              for (b = 0; b < in_num; b++)
+ 219   1              {
+ 220   2                              SendStart_433();
+ 221   2                              SendAddr(in_addr3);// ·¢ËÍµØÖ·Âë
+ 222   2                              SendData(in_dat);// ·¢ËÍÊı¾İÓò
+ 223   2              }
+ 224   1              SendEnd_433();
+ 225   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    407    ----
+   CODE SIZE        =    812    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =     46      15
-C51 COMPILER V9.60.7.0   433SEND                                                           09/06/2025 13:36:19 PAGE 5   
-
+   PDATA SIZE       =     83    ----
+   DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
+C51 COMPILER V9.60.7.0   433SEND                                                           09/15/2025 15:22:47 PAGE 5   
+
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 

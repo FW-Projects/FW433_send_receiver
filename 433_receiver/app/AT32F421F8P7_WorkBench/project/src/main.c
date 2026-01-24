@@ -136,9 +136,9 @@ int main(void)
   gpio_bits_reset(GPIOB, GPIO_PINS_1);
 
   FW433_Init(&sFW433_t);
-	wk_delay_ms(2000);
-	usart_flag_clear(USART2, USART_RDBF_FLAG); // clear interrupt flag
-	usart_interrupt_enable(USART2, USART_RDBF_INT, TRUE);
+  wk_delay_ms(2000);
+  usart_flag_clear(USART2, USART_RDBF_FLAG); // clear interrupt flag
+  usart_interrupt_enable(USART2, USART_RDBF_INT, TRUE);
   /* add user code end 2 */
 
   while (1)
@@ -208,21 +208,19 @@ void usart_send_task(void)
  */
 void led_task(void)
 {
-	if(sFW433_t.Receiver_handle.led_times != 0x00)
-	{
-		sFW433_t.Receiver_handle.led_times--;
-		if(gpio_output_data_bit_read(GPIOA,GPIO_PINS_5) == false)
-			gpio_bits_set(GPIOA,GPIO_PINS_5);
-		else if(gpio_output_data_bit_read(GPIOA,GPIO_PINS_5) == true)
-			gpio_bits_reset(GPIOA,GPIO_PINS_5);
-	}
-	else
-	{
-		sFW433_t.Receiver_handle.led_times = 0x00;
-		gpio_bits_reset(GPIOA,GPIO_PINS_5);
-	}
+  if (sFW433_t.Receiver_handle.led_times != 0x00)
+  {
+    sFW433_t.Receiver_handle.led_times--;
+    if (gpio_output_data_bit_read(GPIOA, GPIO_PINS_5) == false)
+      gpio_bits_set(GPIOA, GPIO_PINS_5);
+    else if (gpio_output_data_bit_read(GPIOA, GPIO_PINS_5) == true)
+      gpio_bits_reset(GPIOA, GPIO_PINS_5);
+  }
+  else
+  {
+    sFW433_t.Receiver_handle.led_times = 0x00;
+    gpio_bits_reset(GPIOA, GPIO_PINS_5);
+  }
 }
-
-
 
 /* add user code end 4 */

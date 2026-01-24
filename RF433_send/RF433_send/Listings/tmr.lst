@@ -1,14 +1,14 @@
-C51 COMPILER V9.60.7.0   TMR                                                               09/06/2025 13:36:19 PAGE 1   
+C51 COMPILER V9.60.7.0   TMR                                                               09/15/2025 15:22:47 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TMR
 OBJECT MODULE PLACED IN .\Objects\tmr.obj
-COMPILER INVOKED BY: D:\keil5C51\C51\BIN\C51.EXE tmr.c ROM(COMPACT) OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\
-                    -Listings\tmr.lst) OBJECT(.\Objects\tmr.obj)
+COMPILER INVOKED BY: D:\keil5C51\C51\BIN\C51.EXE tmr.c COMPACT ROM(COMPACT) OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND 
+                    -PRINT(.\Listings\tmr.lst) OBJECT(.\Objects\tmr.obj)
 
 line level    source
 
-   1          #include "SN8F5702.H"
+   1          #include "SN8F5703.H"
    2          #include "tmr.h"
    3          
    4          /*  T0 tmr  */
@@ -62,7 +62,7 @@ line level    source
   52   1              TR1 = 1;
   53   1              TF1 = 0;
   54   1      
-C51 COMPILER V9.60.7.0   TMR                                                               09/06/2025 13:36:19 PAGE 2   
+C51 COMPILER V9.60.7.0   TMR                                                               09/15/2025 15:22:47 PAGE 2   
 
   55   1              //从初值55536开始计数
   56   1              TH1 = (65536 - 10000) / 256;
@@ -95,7 +95,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     51    ----
+   CODE SIZE        =     52    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

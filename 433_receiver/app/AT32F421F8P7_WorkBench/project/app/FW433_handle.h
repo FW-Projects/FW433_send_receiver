@@ -28,31 +28,31 @@
 //#define OneLevelTime_L_MIN 1200
 
 
-/* 10ms - 15ms     test_time = 14ms */
-#define StartLevelTime_H_MAX 22500
-#define StartLevelTime_H_MIN 15000
+/* 10ms - 14ms     test_time = 12ms */
+#define StartLevelTime_H_MAX 42000
+#define StartLevelTime_H_MIN 30000
 //#define StartLevelTime_H_MAX 60000
 //#define StartLevelTime_H_MIN 0
 
-#define StartLevelTime_L_MAX 22500
-#define StartLevelTime_L_MIN 15000
+#define StartLevelTime_L_MAX 42000
+#define StartLevelTime_L_MIN 30000
 
 
-/* 0.4ms - 0.8ms   test_time = 0.6ms */ 
-#define ZeroLevelTime_H_MAX 1200
-#define ZeroLevelTime_H_MIN 600
+/* 0.6ms - 1ms   test_time = 0.8ms */ 
+#define ZeroLevelTime_H_MAX 3000
+#define ZeroLevelTime_H_MIN 1800
 
-/* 1ms - 1.6ms     test_time = 1.4ms */
-#define ZeroLevelTime_L_MAX 2400
-#define ZeroLevelTime_L_MIN 1400
+/* 2.3ms - 2.7ms     test_time = 2.5ms */
+#define ZeroLevelTime_L_MAX 8100
+#define ZeroLevelTime_L_MIN 6900
 
-/* 1ms - 1.6ms     test_time = 1.4ms */
-#define OneLevelTime_H_MAX 2400
-#define OneLevelTime_H_MIN 1400
+/* 2.3ms - 2.7ms     test_time = 2.5ms */
+#define OneLevelTime_H_MAX 8100
+#define OneLevelTime_H_MIN 6900
 
-/* 0.4ms - 0.8ms   test_time = 0.6ms */
-#define OneLevelTime_L_MAX 1200
-#define OneLevelTime_L_MIN 600
+/* 0.6ms - 1ms   test_time = 0.8ms */ 
+#define OneLevelTime_L_MAX 3000
+#define OneLevelTime_L_MIN 1800
 
 
 typedef enum

@@ -1,16 +1,16 @@
-#include <SN8F5702.H>
+#include <SN8F5703.H>
 #include "getkey.h"
 #define uchar unsigned char
 #define uint unsigned int
 sbit key_01 = P0 ^ 2;
-sbit key_02 = P0 ^ 7;
-sbit key_03 = P1 ^ 3;
+sbit key_02 = P1 ^ 1;
+sbit key_03 = P1 ^ 5;
 sbit key_04 = P1 ^ 4;
-sbit key_05 = P2 ^ 0;
-sbit key_06 = P0 ^ 6;
+sbit key_05 = P1 ^ 3;
+sbit key_06 = P1 ^ 0;
 sbit key_07 = P0 ^ 1;
 sbit key_08 = P0 ^ 0;
-sbit key_09 = P0 ^ 5;
+sbit key_09 = P0 ^ 7;
 uint8_t key_stat = 1;
 
 volatile uint8_t inkey_number = 0; // 保存按键代号值

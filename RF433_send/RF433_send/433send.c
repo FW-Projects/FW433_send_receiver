@@ -1,4 +1,4 @@
-#include "SN8F5702.H"
+#include "SN8F5703.H"
 #include "intrins.h"
 #include "delayms.h"
 #include "433send.h"
@@ -14,15 +14,14 @@
 #define Data_Send_H 1
 #define Data_Send_L 0
 
-sbit data_send = P1 ^ 0;
+sbit data_send = P2 ^ 0;
 
 static Witty433 witty433;
 
 
-uint16_t set_433time_buf[] = {120, 120, 12,   4,    4,    12,   4,    13}; // 设置433发送电平时间
-//uint16_t set_433time_buf[] = {240, 240, 24,   8,    8,    24,   8,    26}; // 设置433发送电平时间
+uint16_t set_433time_buf[] = {60,   60,  12,   4,    4,    12,   4,    12}; // 设置433发送电平时间
 
-                            /*12ms 12ms 1.2ms 0.4ms 0.4ms 1.2ms 0.4ms 1.3ms
+                            /*12ms 12ms 2.5ms 0.8ms 0.8ms 2.5ms 0.8ms 2.5ms
 
 //uint16_t set_433time_buf[] = {120, 120, 120, 120,120,120,120,120}; // 设置433发送电平时间
 

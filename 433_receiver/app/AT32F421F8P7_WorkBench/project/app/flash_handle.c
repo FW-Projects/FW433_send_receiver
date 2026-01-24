@@ -39,7 +39,7 @@ void FlashProc(void)
 #if 1
     static flash_handle_t sflash;
     static uint16_t last_address_code;
-	static bool last_Right_code_flag;
+    static bool last_Right_code_flag;
     static uint16_t flash_version = 0;
     static uint8_t flash_count = 0;
     static uint8_t first_start_flag = FALSE;
@@ -61,47 +61,43 @@ void FlashProc(void)
                 if (a_ver > b_ver)
                 {
                     sFW433_t.Receiver_handle.Address_code = flash_wred_halfword(A_LAST_ADDRESS_CODE_ADDRESS);
-					sFW433_t.Receiver_handle.Right_code_flag = flash_wred_halfword(A_LAST_RIGHT_CODE_FLAG_ADDRESS);
-
+                    sFW433_t.Receiver_handle.Right_code_flag = flash_wred_halfword(A_LAST_RIGHT_CODE_FLAG_ADDRESS);
                 }
                 else
                 {
-                   sFW433_t.Receiver_handle.Address_code = flash_wred_halfword(B_LAST_ADDRESS_CODE_ADDRESS);     
-					sFW433_t.Receiver_handle.Right_code_flag = flash_wred_halfword(B_LAST_RIGHT_CODE_FLAG_ADDRESS);
-				}
+                    sFW433_t.Receiver_handle.Address_code = flash_wred_halfword(B_LAST_ADDRESS_CODE_ADDRESS);
+                    sFW433_t.Receiver_handle.Right_code_flag = flash_wred_halfword(B_LAST_RIGHT_CODE_FLAG_ADDRESS);
+                }
             }
             /* check area a data  */
             else if (data_check_len(A_LAST_ADDRESS_CODE_ADDRESS, FLASH_MENBER) != 0xFFFF)
             {
                 sFW433_t.Receiver_handle.Address_code = flash_wred_halfword(A_LAST_ADDRESS_CODE_ADDRESS);
-				sFW433_t.Receiver_handle.Right_code_flag = flash_wred_halfword(A_LAST_RIGHT_CODE_FLAG_ADDRESS);
+                sFW433_t.Receiver_handle.Right_code_flag = flash_wred_halfword(A_LAST_RIGHT_CODE_FLAG_ADDRESS);
             }
             /* check area b data  */
             else if (data_check_len(B_LAST_ADDRESS_CODE_ADDRESS, FLASH_MENBER) != 0xFFFF)
             {
                 sFW433_t.Receiver_handle.Address_code = flash_wred_halfword(B_LAST_ADDRESS_CODE_ADDRESS);
-				sFW433_t.Receiver_handle.Right_code_flag = flash_wred_halfword(B_LAST_RIGHT_CODE_FLAG_ADDRESS);
-
+                sFW433_t.Receiver_handle.Right_code_flag = flash_wred_halfword(B_LAST_RIGHT_CODE_FLAG_ADDRESS);
             }
             else
             {
                 sFW433_t.Receiver_handle.Address_code = 0x0000;
-				sFW433_t.Receiver_handle.Right_code_flag = 0;
+                sFW433_t.Receiver_handle.Right_code_flag = 0;
             }
 
-            if ( sFW433_t.Receiver_handle.Address_code >= 0xffff ||  sFW433_t.Receiver_handle.Address_code < 0x0000)
+            if (sFW433_t.Receiver_handle.Address_code >= 0xffff || sFW433_t.Receiver_handle.Address_code < 0x0000)
             {
-                 sFW433_t.Receiver_handle.Address_code = 0x0000;
+                sFW433_t.Receiver_handle.Address_code = 0x0000;
             }
-			
-			if(sFW433_t.Receiver_handle.Right_code_flag != 1 && sFW433_t.Receiver_handle.Right_code_flag != 0)
-				sFW433_t.Receiver_handle.Right_code_flag = 0;
-			
-            
-            last_address_code =  sFW433_t.Receiver_handle.Address_code;
-			last_Right_code_flag = sFW433_t.Receiver_handle.Right_code_flag;
-            first_start_flag = TRUE;
 
+            if (sFW433_t.Receiver_handle.Right_code_flag != 1 && sFW433_t.Receiver_handle.Right_code_flag != 0)
+                sFW433_t.Receiver_handle.Right_code_flag = 0;
+
+            last_address_code = sFW433_t.Receiver_handle.Address_code;
+            last_Right_code_flag = sFW433_t.Receiver_handle.Right_code_flag;
+            first_start_flag = TRUE;
         }
         else
         {
@@ -112,35 +108,35 @@ void FlashProc(void)
         break;
 
     case FLASH_DIRECT_DATA:
-        if (last_address_code != sFW433_t.Receiver_handle.Address_code ||\
-			last_Right_code_flag != sFW433_t.Receiver_handle.Right_code_flag)
+        if (last_address_code != sFW433_t.Receiver_handle.Address_code ||
+            last_Right_code_flag != sFW433_t.Receiver_handle.Right_code_flag)
         {
             flash_unlock();
 
             if (flash_count % 2 != FALSE)
             {
                 flash_sector_erase(A_LAST_ADDRESS_CODE_ADDRESS);
-				
+
                 flash_halfword_program(A_LAST_ADDRESS_CODE_ADDRESS, sFW433_t.Receiver_handle.Address_code);
-				flash_halfword_program(A_LAST_RIGHT_CODE_FLAG_ADDRESS, sFW433_t.Receiver_handle.Right_code_flag);
+                flash_halfword_program(A_LAST_RIGHT_CODE_FLAG_ADDRESS, sFW433_t.Receiver_handle.Right_code_flag);
             }
             else
             {
                 flash_sector_erase(B_LAST_ADDRESS_CODE_ADDRESS);
-				
-                flash_halfword_program(B_LAST_ADDRESS_CODE_ADDRESS,  sFW433_t.Receiver_handle.Address_code);
-				flash_halfword_program(B_LAST_RIGHT_CODE_FLAG_ADDRESS, sFW433_t.Receiver_handle.Right_code_flag);
+
+                flash_halfword_program(B_LAST_ADDRESS_CODE_ADDRESS, sFW433_t.Receiver_handle.Address_code);
+                flash_halfword_program(B_LAST_RIGHT_CODE_FLAG_ADDRESS, sFW433_t.Receiver_handle.Right_code_flag);
             }
 
-            last_address_code =  sFW433_t.Receiver_handle.Address_code;
-			last_Right_code_flag = sFW433_t.Receiver_handle.Right_code_flag;
+            last_address_code = sFW433_t.Receiver_handle.Address_code;
+            last_Right_code_flag = sFW433_t.Receiver_handle.Right_code_flag;
             sflash.state++;
             break;
         }
 
         break;
     case FLASH_FINSH:
-		if (flash_count % 2 != FALSE)
+        if (flash_count % 2 != FALSE)
         {
             flash_halfword_program(A_FLASH_VERSION_ADDRESS, flash_version);
         }
