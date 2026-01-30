@@ -79,9 +79,28 @@ typedef enum
 
 } command_code_e;
 
+
+typedef enum
+{
+    MOD1 = 0x01,
+    MOD2 = 0x02,
+    MOD3 = 0x03,
+    MOD4 = 0x04,
+	POWER = 0X05,
+    COLD = 0x06,
+    NORMAL = 0x07,
+    CURVE = 0x08,
+    NUMERICAL = 0x09,
+    F = 0x0A,
+    C = 0x0B,
+	CHANGE_HANDLE = 0x0C,
+
+} command_code_e_asrpro;
+
 typedef struct
 {
     command_code_e COMMAND_CODE;
+	
     bool Right_code_flag;
     uint16_t Address_code; // 16bitµØÖ·Âë
     uint8_t Command_code;  // 8bit°´¼üÂë

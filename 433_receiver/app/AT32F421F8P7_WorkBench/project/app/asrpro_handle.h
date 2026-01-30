@@ -43,7 +43,7 @@ union UNION_ASRPRO
     uint8_t asrpro_buf[22];
     /* data */
 };
-extern uint16_t Asrpro_Rx_buffer[3];
+extern uint16_t Asrpro_Rx_buffer[4];
 extern bool Rx_usart2_finish_flag ;
 
 void asrpro_Handle(void);

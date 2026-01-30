@@ -65,11 +65,9 @@ uint8_t usart1_tx_buffer_size = 20;
 uint8_t usart1_rx_buffer_size = 20;
 
 
-//uint8_t usart2_rx_buffer[22] = {0};
-//uint8_t usart2_rx_buffer_size = 22;
 uint8_t usart2_rx_counter = 0;
-uint16_t usart2_rx_buffer[3] = {0};
-uint8_t usart2_rx_buffer_size = 3;
+uint16_t usart2_rx_buffer[4] = {0};
+uint8_t usart2_rx_buffer_size = 4;
 
 
 /* add user code end private macro */
@@ -408,6 +406,7 @@ void USART2_IRQHandler(void)
       Asrpro_Rx_buffer[0] = usart2_rx_buffer[0];
       Asrpro_Rx_buffer[1] = usart2_rx_buffer[1];
       Asrpro_Rx_buffer[2] = usart2_rx_buffer[2];
+	  Asrpro_Rx_buffer[3] = usart2_rx_buffer[3];
 //		Asrpro_Rx_buffer[0] = usart2_rx_buffer[1];
 //      Asrpro_Rx_buffer[1] = usart2_rx_buffer[2];
 //      Asrpro_Rx_buffer[2] = usart2_rx_buffer[3];
