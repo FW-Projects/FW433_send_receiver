@@ -1,7 +1,7 @@
 Dependencies for Project 'AT32F421F8P7_WorkBench', Target 'AT32F421F8P7_WorkBench': (DO NOT MODIFY !)
 CompilerVersion: 6230000::V6.23::ARMCLANG
-F (..\src\at32f421_int.c)(0x6976CF07)(-xc -std=gnu99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=none -mfloat-abi=soft -c-fno-rtti -flto -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../../libraries/drivers/inc -I ../../libraries/cmsis/cm4/core_support -I ../../libraries/cmsis/cm4/device_support -I ../app -I ../device -I ../inc -I ../src-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8/Device/Include-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8-D__UVISION_VERSION="542" -DAT32F421F8P7 -DAT32F421F8P7 -DUSE_STDPERIPH_DRIVER -DAT_START_F421_V1-o ./objects/at32f421_int.o -MMD)
-I (..\inc\at32f421_int.h)(0x69746B9D)
+F (..\src\at32f421_int.c)(0x6986FDE3)(-xc -std=gnu99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=none -mfloat-abi=soft -c-fno-rtti -flto -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../../libraries/drivers/inc -I ../../libraries/cmsis/cm4/core_support -I ../../libraries/cmsis/cm4/device_support -I ../app -I ../device -I ../inc -I ../src-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8/Device/Include-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8-D__UVISION_VERSION="542" -DAT32F421F8P7 -DAT32F421F8P7 -DUSE_STDPERIPH_DRIVER -DAT_START_F421_V1-o ./objects/at32f421_int.o -MMD)
+I (..\inc\at32f421_int.h)(0x6986FDE3)
 I (..\..\libraries\cmsis\cm4\device_support\at32f421.h)(0x686C70DB)
 I (..\..\libraries\cmsis\cm4\core_support\core_cm4.h)(0x686C70DB)
 I (..\..\libraries\cmsis\cm4\device_support\system_at32f421.h)(0x686C70DB)
@@ -23,7 +23,7 @@ I (..\app\iap.h)(0x686E315A)
 I (..\device\tmt.h)(0x688DD3DD)
 I (..\device\iap_usart.h)(0x6871FBFB)
 I (..\app\FW433_Handle.h)(0x6974708B)
-I (..\app\asrpro_handle.h)(0x69746BA5)
+I (..\app\asrpro_handle.h)(0x6986FDE3)
 I (..\app\usart_send_handle.h)(0x68A3DB24)
 F (..\src\at32f421_wk_config.c)(0x68A3CFE2)(-xc -std=gnu99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=none -mfloat-abi=soft -c-fno-rtti -flto -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../../libraries/drivers/inc -I ../../libraries/cmsis/cm4/core_support -I ../../libraries/cmsis/cm4/device_support -I ../app -I ../device -I ../inc -I ../src-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8/Device/Include-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8-D__UVISION_VERSION="542" -DAT32F421F8P7 -DAT32F421F8P7 -DUSE_STDPERIPH_DRIVER -DAT_START_F421_V1-o ./objects/at32f421_wk_config.o -MMD)
 I (..\inc\at32f421_wk_config.h)(0x68A3CFE2)
@@ -71,9 +71,9 @@ I (..\app\iap.h)(0x686E315A)
 I (..\app\FW433_handle.h)(0x6974708B)
 I (..\app\flash_handle.h)(0x68BBE08D)
 I (..\device\flash.h)(0x68661446)
-I (..\app\asrpro_handle.h)(0x69746BA5)
+I (..\app\asrpro_handle.h)(0x6986FDE3)
 I (..\app\usart_send_handle.h)(0x68A3DB24)
-I (..\inc\at32f421_int.h)(0x69746B9D)
+I (..\inc\at32f421_int.h)(0x6986FDE3)
 F (..\src\wk_system.c)(0x68A3CFE2)(-xc -std=gnu99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=none -mfloat-abi=soft -c-fno-rtti -flto -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../../libraries/drivers/inc -I ../../libraries/cmsis/cm4/core_support -I ../../libraries/cmsis/cm4/device_support -I ../app -I ../device -I ../inc -I ../src-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8/Device/Include-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8-D__UVISION_VERSION="542" -DAT32F421F8P7 -DAT32F421F8P7 -DUSE_STDPERIPH_DRIVER -DAT_START_F421_V1-o ./objects/wk_system.o -MMD)
 I (..\inc\wk_system.h)(0x68A3CFE2)
 I (..\..\libraries\cmsis\cm4\device_support\at32f421.h)(0x686C70DB)
@@ -447,7 +447,7 @@ I (..\..\libraries\drivers\inc\at32f421_wdt.h)(0x686C70DC)
 I (..\..\libraries\drivers\inc\at32f421_misc.h)(0x686C70DC)
 I (..\app\433_receiver.h)(0x68BAB39B)
 I (..\app\FW433_handle.h)(0x6974708B)
-I (..\inc\at32f421_int.h)(0x69746B9D)
+I (..\inc\at32f421_int.h)(0x6986FDE3)
 I (..\app\usart_send_handle.h)(0x68A3DB24)
 F (..\app\iap.c)(0x684F8547)(-xc -std=gnu99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=none -mfloat-abi=soft -c-fno-rtti -flto -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../../libraries/drivers/inc -I ../../libraries/cmsis/cm4/core_support -I ../../libraries/cmsis/cm4/device_support -I ../app -I ../device -I ../inc -I ../src-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8/Device/Include-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8-D__UVISION_VERSION="542" -DAT32F421F8P7 -DAT32F421F8P7 -DUSE_STDPERIPH_DRIVER -DAT_START_F421_V1-o ./objects/iap.o -MMD)
 I (..\app\iap.h)(0x686E315A)
@@ -467,7 +467,7 @@ I (..\..\libraries\drivers\inc\at32f421_crc.h)(0x686C70DC)
 I (..\..\libraries\drivers\inc\at32f421_wdt.h)(0x686C70DC)
 I (..\..\libraries\drivers\inc\at32f421_misc.h)(0x686C70DC)
 I (..\device\iap_usart.h)(0x6871FBFB)
-F (..\app\asrpro_handle.c)(0x6976DF58)(-xc -std=gnu99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=none -mfloat-abi=soft -c-fno-rtti -flto -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../../libraries/drivers/inc -I ../../libraries/cmsis/cm4/core_support -I ../../libraries/cmsis/cm4/device_support -I ../app -I ../device -I ../inc -I ../src-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8/Device/Include-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8-D__UVISION_VERSION="542" -DAT32F421F8P7 -DAT32F421F8P7 -DUSE_STDPERIPH_DRIVER -DAT_START_F421_V1-o ./objects/asrpro_handle.o -MMD)
+F (..\app\asrpro_handle.c)(0x6986FDE3)(-xc -std=gnu99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=none -mfloat-abi=soft -c-fno-rtti -flto -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../../libraries/drivers/inc -I ../../libraries/cmsis/cm4/core_support -I ../../libraries/cmsis/cm4/device_support -I ../app -I ../device -I ../inc -I ../src-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8/Device/Include-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8-D__UVISION_VERSION="542" -DAT32F421F8P7 -DAT32F421F8P7 -DUSE_STDPERIPH_DRIVER -DAT_START_F421_V1-o ./objects/asrpro_handle.o -MMD)
 I (..\inc\wk_system.h)(0x68A3CFE2)
 I (..\..\libraries\cmsis\cm4\device_support\at32f421.h)(0x686C70DB)
 I (..\..\libraries\cmsis\cm4\core_support\core_cm4.h)(0x686C70DB)
@@ -485,7 +485,7 @@ I (..\..\libraries\drivers\inc\at32f421_crc.h)(0x686C70DC)
 I (..\..\libraries\drivers\inc\at32f421_wdt.h)(0x686C70DC)
 I (..\..\libraries\drivers\inc\at32f421_misc.h)(0x686C70DC)
 I (..\app\FW433_handle.h)(0x6974708B)
-I (..\app\asrpro_handle.h)(0x69746BA5)
+I (..\app\asrpro_handle.h)(0x6986FDE3)
 I (..\app\usart_send_handle.h)(0x68A3DB24)
 F (..\app\usart_send_handle.c)(0x68BC005D)(-xc -std=gnu99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=none -mfloat-abi=soft -c-fno-rtti -flto -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../../libraries/drivers/inc -I ../../libraries/cmsis/cm4/core_support -I ../../libraries/cmsis/cm4/device_support -I ../app -I ../device -I ../inc -I ../src-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8/Device/Include-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8-D__UVISION_VERSION="542" -DAT32F421F8P7 -DAT32F421F8P7 -DUSE_STDPERIPH_DRIVER -DAT_START_F421_V1-o ./objects/usart_send_handle.o -MMD)
 I (..\app\usart_send_handle.h)(0x68A3DB24)
@@ -506,7 +506,7 @@ I (..\..\libraries\drivers\inc\at32f421_wdt.h)(0x686C70DC)
 I (..\..\libraries\drivers\inc\at32f421_misc.h)(0x686C70DC)
 I (..\app\433_receiver.h)(0x68BAB39B)
 I (..\app\FW433_handle.h)(0x6974708B)
-I (..\app\asrpro_handle.h)(0x69746BA5)
+I (..\app\asrpro_handle.h)(0x6986FDE3)
 F (..\app\FW433_handle.c)(0x68BBC8E6)(-xc -std=gnu99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=none -mfloat-abi=soft -c-fno-rtti -flto -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../../libraries/drivers/inc -I ../../libraries/cmsis/cm4/core_support -I ../../libraries/cmsis/cm4/device_support -I ../app -I ../device -I ../inc -I ../src-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8/Device/Include-ID:/keil5.42/ArteryTek/AT32F421_DFP/2.1.8-D__UVISION_VERSION="542" -DAT32F421F8P7 -DAT32F421F8P7 -DUSE_STDPERIPH_DRIVER -DAT_START_F421_V1-o ./objects/fw433_handle.o -MMD)
 I (..\app\FW433_handle.h)(0x6974708B)
 I (..\..\libraries\cmsis\cm4\device_support\at32f421.h)(0x686C70DB)

@@ -406,10 +406,8 @@ void USART2_IRQHandler(void)
       Asrpro_Rx_buffer[0] = usart2_rx_buffer[0];
       Asrpro_Rx_buffer[1] = usart2_rx_buffer[1];
       Asrpro_Rx_buffer[2] = usart2_rx_buffer[2];
-	  Asrpro_Rx_buffer[3] = usart2_rx_buffer[3];
-//		Asrpro_Rx_buffer[0] = usart2_rx_buffer[1];
-//      Asrpro_Rx_buffer[1] = usart2_rx_buffer[2];
-//      Asrpro_Rx_buffer[2] = usart2_rx_buffer[3];
+	  Asrpro_Rx_buffer[3] = usart2_rx_buffer[3];	
+	
       usart2_rx_counter = 0;                    // reset counter
       usart_flag_clear(USART2, USART_RDBF_INT); // clear interrupt flag
 		Rx_usart2_finish_flag = true;
